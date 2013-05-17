@@ -14,13 +14,13 @@ class DashboardController < ApplicationController
       lojas = Loja.do_mesmo_estado(@loja)
       irmaos = @loja.membros
       eventos = @loja.eventos
+      dependentes = Dependente.find_by_sql "select pessoas.id, dependentes.dependente_id, pessoas.nome, pessoas.data_nascimento from pessoas inner join dependentes on dependentes.pessoa_id = pessoas.id where dependentes.pessoa_id IN (#{irmaos.map(&:pessoa_id).join(", ")}) AND pessoas.data_nascimento <> 'NULL'"
     else
       lojas = []
       irmaos = []
       eventos = []
+      dependentes = []
     end
-
-    dependentes = Dependente.find_by_sql "select pessoas.id, dependentes.dependente_id, pessoas.nome, pessoas.data_nascimento from pessoas inner join dependentes on dependentes.pessoa_id = pessoas.id where dependentes.pessoa_id IN (#{irmaos.map(&:pessoa_id).join(", ")}) AND pessoas.data_nascimento <> 'NULL'"
 
     lojas.each do |loja|
       @eventos << Struct::Evento.new(nil, gerar_data_evento(loja.fundacao), DateTime.now, "Aniversário da loja #{loja.nome}", :aniversario_loja, [Visibilidade::MACONS], loja)
