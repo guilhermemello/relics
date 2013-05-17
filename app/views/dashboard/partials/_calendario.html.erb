@@ -57,15 +57,15 @@
 								<%= @loja.membros_ids.include?(current_user.pessoa.id) %>
 								<%= current_user.has_role?(:master) %>
 							
-								<% if (evento.visibilidades.include?(Visibilidade::MEMBROS_DA_LOJA) and @loja.membros_ids.include?(current_user.pessoa.id)) or current_user.has_role?(:master) %>
+								<% if (evento.visibilidades.include?(Visibilidade::MEMBROS_DA_LOJA) and @loja.membros_ids.include?(current_user.pessoa.id)) or current_user.has_role?(:admin_master) %>
 									<%= render "/dashboard/partials/evento", :evento => evento, :tipo => evento.tipo %>
 								<% else %>
-									<% if evento.visibilidades.include?(Visibilidade::MACONS) or current_user.has_role?(:master) %>
+									<% if evento.visibilidades.include?(Visibilidade::MACONS) or current_user.has_role?(:admin_master) %>
 										<%= render "/dashboard/partials/evento", :evento => evento, :tipo => evento.tipo %>
 									<% end %>
 								<% end %>
 							<% else %>
-								<% if evento.visibilidades.include?(Visibilidade::MACONS) or current_user.has_role?(:master) %>
+								<% if evento.visibilidades.include?(Visibilidade::MACONS) or current_user.has_role?(:admin_master) %>
 									<%= render "/dashboard/partials/evento", :evento => evento, :tipo => evento.tipo, :objeto => evento.objeto %>
 								<% end %>
 							<% end %>
