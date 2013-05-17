@@ -14,7 +14,10 @@ class DashboardController < ApplicationController
       lojas = Loja.do_mesmo_estado(@loja)
       irmaos = @loja.membros
       eventos = @loja.eventos
-      dependentes = Dependente.find_by_sql "select pessoas.id, dependentes.dependente_id, pessoas.nome, pessoas.data_nascimento from pessoas inner join dependentes on dependentes.pessoa_id = pessoas.id where dependentes.pessoa_id IN (#{irmaos.map(&:pessoa_id).join(", ")}) AND pessoas.data_nascimento <> 'NULL'"
+
+      if irmaos.present?
+        dependentes = Dependente.find_by_sql "select pessoas.id, dependentes.dependente_id, pessoas.nome, pessoas.data_nascimento from pessoas inner join dependentes on dependentes.pessoa_id = pessoas.id where dependentes.pessoa_id IN (#{irmaos.map(&:pessoa_id).join(", ")}) AND pessoas.data_nascimento <> 'NULL'"
+      end
     else
       lojas = []
       irmaos = []
