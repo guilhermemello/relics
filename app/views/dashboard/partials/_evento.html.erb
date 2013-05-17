@@ -6,7 +6,7 @@
 			<% elsif evento.tipo == :aniversario_irmao %>
 				<%= link_to evento.descricao, "irmaos/#{evento.objeto.id}/edit" %>
 			<% elsif evento.tipo == :aniversario_dependente %>
-				<%= link_to evento.descricao, "dependentes/#{evento.objeto.pessoa.id}/edit?irmao_id=#{evento.objeto.id}" %>
+				<%= link_to evento.descricao, "dependentes/#{evento.objeto.pessoa.id}/edit" %>
 			<% else %>
 				<%= link_to evento.descricao, "eventos/#{evento.id}" %>
 			<% end %>
