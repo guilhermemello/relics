@@ -20,7 +20,11 @@ class DashboardController < ApplicationController
       eventos = []
     end
 
-    dependentes = Dependente.joins(:pessoa).where("dependentes.pessoa_id IN (?) AND pessoas.data_nascimento <> 'NULL'", irmaos.map(&:pessoa_id))
+    #dependentes = Dependente.joins(:pessoa).where("dependentes.pessoa_id IN (?) AND pessoas.data_nascimento <> 'NULL'", irmaos.map(&:pessoa_id))
+    dependentes = Dependente.find_by_sql "select pessoas.id, dependentes.dependente_id, pessoas.nome, pessoas.data_nascimento from pessoas
+    inner join dependentes on dependentes.pessoa_id = pessoas.id
+    where dependentes.pessoa_id IN (#{irmaos.map(&:pessoa_id)})
+    AND pessoas.data_nascimento <> 'NULL'"
 
     lojas.each do |loja|
       @eventos << Struct::Evento.new(nil, gerar_data_evento(loja.fundacao), DateTime.now, "Aniversário da loja #{loja.nome}", :aniversario_loja, [Visibilidade::MACONS], loja)
