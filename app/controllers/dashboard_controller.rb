@@ -20,7 +20,7 @@ class DashboardController < ApplicationController
       eventos = []
     end
 
-    dependentes = Dependente.select("pessoas.id, dependentes.dependente_id, pessoas.nome, pessoas.data_nascimento").joins(:pessoa).where("dependentes.pessoa_id IN (?) AND pessoas.data_nascimento <> 'NULL'", irmaos.map(&:pessoa_id))
+    dependentes = Pessoa.select("pessoas.id, dependentes.dependente_id, pessoas.nome, pessoas.data_nascimento").joins("inner join dependentes on dependentes.pessoa_id = pessoas.id").where("dependentes.pessoa_id IN (?) AND pessoas.data_nascimento <> 'NULL'", irmaos.map(&:pessoa_id))
     #dependentes = Dependente.find_by_sql " from pessoas inner join dependentes on dependentes.pessoa_id = pessoas.id where dependentes.pessoa_id IN (#{irmaos.map(&:pessoa_id).join(", ")}) AND pessoas.data_nascimento <> 'NULL'"
 
     lojas.each do |loja|
