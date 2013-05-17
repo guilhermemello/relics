@@ -1,0 +1,64 @@
+<div class="mws-panel grid_6">
+	<div class="mws-panel-header">
+		<div style="float: right; margin-top: -4px;">
+			<%= link_to "Nova loja", "/lojas/new", :class => "btn btn-success" if can? :criar, Loja %>
+		</div>
+
+		<span>Lojas</span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
+			<table class="mws-table">
+				<thead>
+					<tr>
+						<th>Obediência</th>
+						<th>Oriente Estadual</th>
+						<th>Nome</th>
+						<th>Rito</th>
+						<th>UF</th>
+						<th>Cidade</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @lojas.each do |loja| %>
+						<tr>
+							<td><%= loja.obediencia_sigla %></td>
+							<td><%= loja.oriente_estadual_sigla %></td>
+							<td><%= loja.nome %></td>
+							<td><%= loja.rito_nome %></td>
+
+							<% if loja.possui_templo? %>
+								<td><%= loja.templo_uf %></td>
+								<td><%= loja.templo_cidade_nome %></td>
+							<% else %>
+								<td><%= loja.estado.nome %></td>
+								<td><%= loja.cidade.nome %></td>
+							<% end %>
+							<td>
+								<span><i class="icon-search"></i><span>
+								<%= link_to "Consultar", edit_loja_path(loja), :style => "color: black;" %>
+
+								&nbsp;
+
+								<% if can? :excluir, Loja %>
+									<span><i class="icon-trash"></i><span>
+									<%= link_to "Excluir", loja_path(loja), :method => :delete, :confirm => "Confirma a exclusão ?", :style => "color: black;" %>
+								<% end %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<%= page_entries_info(@lojas) %>
+
+			<%= will_paginate(@lojas, :renderer => WillPaginate::ActionView::RelicsLinkRenderer) %>
+		</div>
+	</div>
+</div>
+
+<div class="mws-panel grid_2">
+	<%= render "lojas/partials/filtro" %>
+</div>

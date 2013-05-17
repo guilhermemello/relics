@@ -1,0 +1,30 @@
+$("#loja_endereco").val("<%= @loja.endereco %>");
+$("#estado_id").val("<%= @loja.estado.id %>");
+
+// CIDADE POR ESTADO
+$.getJSON("/combo/cidades/<%= @loja.estado.id %>", function(data) {
+	$("#bairro_id").empty();
+	$("#cidade_id").empty();
+	$("<option value=''>Selecione</option>").appendTo("#cidade_id");
+	$("<option value=''>Selecione</option>").appendTo("#bairro_id");
+
+	$.each(data, function(i,item) {
+		$("<option value=\"" + item.id + "\">" + item.nome + "</option>").appendTo("#cidade_id");
+	});
+}).done(function() {
+	$("#cidade_id").val("<%= @loja.cidade.id %>");
+
+	// BAIRRO POR CIDADE
+	$.getJSON("/combo/bairros/<%= @loja.cidade.id %>", function(data) {
+		$("#bairro_id").empty();
+		$("<option value=''>Selecione</option>").appendTo("#bairro_id");
+
+		$.each(data, function(i,item) {
+			$("<option value=\"" + item.id + "\">" + item.nome + "</option>").appendTo("#bairro_id");
+		});
+	}).done(function() {
+		$("#bairro_id").val("<%= @loja.bairro.id %>");
+	});
+});
+
+$("#loja_cep").val("<%= @loja.cep %>");

@@ -1,0 +1,39 @@
+<div id="mws-login-wrapper">
+	<div id="mws-login">
+		<h1>Entrar</h1>
+		<div class="mws-login-lock"><i class="icon-lock"></i></div>
+
+		<div id="mws-login-form">
+			<div class="mws-form-message error" style="<% unless flash[:alert].present? %>display: none;<% end %>">
+				<%= flash[:alert] %>
+			</div>
+
+			<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "mws-form" }) do |f| %>
+				<div class="mws-form-row">
+					<div class="mws-form-item">
+						<%= f.text_field :email, :autofocus => true, :class => "mws-login-username required", :placeholder => "Email" %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<div class="mws-form-item">
+						<%= f.password_field :password, :class => "mws-login-password required", :placeholder => "Senha" %>
+					</div>
+				</div>
+				<div id="mws-login-remember" class="mws-form-row mws-inset">
+					<ul class="mws-form-list inline">
+						<li>
+							<%= f.check_box :remember_me %>
+							<label for="remember">Remember me</label>
+						</li>
+					</ul>
+				</div>
+				<div class="mws-form-row">
+					<%= f.submit "Entrar", :class => 'btn btn-success mws-login-button' %>
+				</div>
+
+				<br />
+				<%= render "devise/shared/links" %>
+			<% end %>
+		</div>
+	</div>
+</div>

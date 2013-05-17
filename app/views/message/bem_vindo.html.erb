@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Olá, <%= @pessoa.nome %></h1>
+    <p>
+			Uma conta foi criada para você no Relics.
+			<br /> </br >
+			Seu <b>login</b> é: <%= @pessoa.email_particular %> e sua <b>senha</b> é: <%= @user.password %><br/>
+    </p>
+    <p>
+			Acesse <a href="<%= @url %>"><%= @url %></a>.
+    </p>
+  </body>
+</html>

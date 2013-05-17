@@ -1,0 +1,41 @@
+<div class="mws-panel-header">
+	<span><i class="icon-filter"></i> Filtro</span>
+</div>
+
+<div class="mws-panel-body no-padding">
+	<%= form_for @search, :url => pessoas_path, :html => { :method => :get, :class => "mws-form" } do |f| %>
+		<%= hidden_field_tag "loja_id", session[:loja_id] if session[:loja_id].present? %>
+
+		<div class="mws-form-block">
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">Nome</label>
+				<div class="mws-form-item">
+					<%= f.text_field :pessoa_nome_contains, :class => "large" %>
+				</div>
+			</div>
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">Grau</label>
+				<div class="mws-form-item">
+					<%= f.select :pessoa_grau_id_equals, @grau, { :include_blank => "Selecione" }, { :class => "large" } %>
+				</div>
+			</div>
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">Situação</label>
+				<div class="mws-form-item">
+					<select name="situacao" class="large">
+						<option value="1">Todos</option>
+
+						<% @situacoes.each do |nome, id| %>
+							<option <% if params[:situacao].to_i == id or id == Situacao::FILIADO %>selected="true"<% end %> value="<%= id %>"><%= nome %></option>
+						<% end %>
+					</select>
+				</div>
+			</div>
+
+			<div class="mws-button-row">
+				<input type="submit" value="Filtrar" class="btn btn-success">
+				<input type="reset" value="Limpar" class="btn " onclick="window.location.href='/irmaos';">
+			</div>
+		</div>
+	<% end %>
+</div>

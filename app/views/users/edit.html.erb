@@ -1,0 +1,35 @@
+<div class="mws-panel grid_6">
+	<div class="mws-panel-header">
+		<span>Alterar Senha</span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<%= form_for(@user, :url => { :action => :update_password }, :html => { :class => "mws-form" }) do |f| %>
+			<div class="mws-form-inline">
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Senha
+						<span class="required">*</span>	
+					</label>
+					<div class="mws-form-item">
+						<%= f.password_field :password, :autocomplete => "off"  %>
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Confirme a Senha
+						<span class="required">*</span>	
+					</label>
+					<div class="mws-form-item">
+						<%= f.password_field :password_confirmation %>
+					</div>
+				</div>
+			</div>
+
+			<div class="mws-button-row">
+				<input type="submit" value="Atualizar" class="btn btn-success">
+			</div>
+		<% end %>
+	</div>
+</div>

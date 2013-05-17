@@ -1,0 +1,65 @@
+<div class="mws-panel-header">
+	<span><i class="icon-filter"></i> Filtro</span>
+</div>
+
+<div class="mws-panel-body no-padding">
+	<%= form_for @search, :url => lojas_path, :html => { :method => :get, :class => "mws-form" } do |f| %>
+		<div class="mws-form-block">
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">Nome</label>
+				<div class="mws-form-item">
+					<%= f.text_field :nome_contains, :class => "large" %>
+				</div>
+			</div>
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">Obediência</label>
+				<div class="mws-form-item">
+					<%= f.select :obediencia_id_equals, @obediencias, { :include_blank => "Selecione" }, { :class => "large" } %>
+				</div>
+			</div>
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">Oriente Estadual</label>
+				<div class="mws-form-item">
+					<%= f.select :oriente_estadual_id_equals, @orientes_estaduais, { :include_blank => "Selecione" }, { :class => "large" } %>
+				</div>
+			</div>
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">Rito</label>
+				<div class="mws-form-item">
+					<%= f.select :rito_id_equals, @ritos, { :include_blank => "Selecione" }, { :class => "large" } %>
+				</div>
+			</div>
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">UF</label>
+				<div class="mws-form-item">
+					<%= f.select :templo_estado_id_or_estado_id_equals, @ufs, { :include_blank => "Selecione" }, { :class => "large", :id => "estado_id" } %>
+				</div>
+			</div>
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">Cidade</label>
+				<div class="mws-form-item">
+					<% if params[:search].present? and params[:search][:templo_estado_id_or_estado_id_equals].present? %>
+						<%= f.select :templo_cidade_id_or_cidade_id_equals, Cidade.por_estado(params[:search][:templo_estado_id_or_estado_id_equals]), { :include_blank => "Selecione" }, { :class => "large", :id => "cidade_id" } %>
+					<% else %>
+						<%= f.select :templo_cidade_id_or_cidade_id_equals, [], { :include_blank => "Selecione" }, { :class => "large", :id => "cidade_id" } %>
+					<% end %>
+				</div>
+			</div>
+			<div class="mws-form-row">
+				<label class="mws-form-label">Bairro</label>
+				<div class="mws-form-item">
+					<% if params[:search].present? and params[:search][:templo_cidade_id_or_cidade_id_equals].present? %>
+						<%= f.select :templo_bairro_id_or_bairro_id_equals, Bairro.por_cidade(params[:search][:templo_cidade_id_or_cidade_id_equals]), { :include_blank => "Selecione" }, { :class => "large", :id => "bairro_id" } %>
+					<% else %>
+						<%= f.select :templo_bairro_id_or_bairro_id_equals, [], { :include_blank => "Selecione" }, { :class => "large", :id => "bairro_id" } %>
+					<% end %>
+				</div>
+			</div>
+
+			<div class="mws-button-row">
+				<input type="submit" value="Filtrar" class="btn btn-success">
+				<input type="reset" value="Limpar" class="btn " onclick="window.location.href='/lojas';">
+			</div>
+		</div>
+	<% end %>
+</div>

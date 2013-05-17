@@ -1,0 +1,193 @@
+<script>
+	$(document).ready(function() {
+		<% if @loja.templo.present? %>
+			carregarDadosTemplo(<%= @loja.templo.id %>);
+		<% else %>
+			carregarDadosEndereco(<%= @loja.id %>);
+		<% end %>
+
+		$("#loja_fundacao").mask("99/99/9999");
+		$("#loja_hora").mask("99:99");
+	});
+</script>
+
+<div class="mws-panel grid_6">
+	<div class="mws-panel-header">
+		<span><%= @loja.new_record? ? "Cadastrar Loja" : @loja.nome %></span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<%= form_for @loja, :html => { :class => "mws-form", :multipart => true } do |f| %>
+			<div class="mws-form-inline">
+				<% if can? :editar, Loja %>
+					<div class="mws-form-row">
+						<div id="mws-crop-parent" class="mws-form-item">
+							<%= image_tag @loja.estandarte.url(:medium), :alt => "" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Estandarte</label>
+						<div class="mws-form-item">
+							<%= f.file_field :estandarte %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Currículo</label>
+						<div class="mws-form-item">
+							<%= f.text_area :curriculo, :size => "35x30", :class => "small autosize" %>
+						</div>
+					</div>
+				<% end %>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Obediência
+						<span class="required">*</span>	
+					</label>
+					<div class="mws-form-item">
+						<%= f.select :obediencia_id, @obediencias, { :include_blank => "Selecione" }, { :class => "small" } %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Oriente Estadual
+						<span class="required">*</span>	
+					</label>
+					<div class="mws-form-item">
+						<%= f.select :oriente_estadual_id, @orientes_estaduais, { :include_blank => "Selecione" }, { :class => "small" } %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Nome
+						<span class="required">*</span>	
+					</label>
+					<div class="mws-form-item">
+						<%= f.text_field :nome, :class => "small" %>
+					</div>
+				</div>
+
+				<% if can? :editar, Loja %>
+					<div class="mws-form-row">
+						<label class="mws-form-label">Número</label>
+						<div class="mws-form-item">
+							<%= f.text_field :numero, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Circunscrição</label>
+						<div class="mws-form-item">
+							<%= f.text_field :circunscricao, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Fundação</label>
+						<div class="mws-form-item">
+							<%= f.text_field :fundacao, :class => "small" %>
+						</div>
+					</div>
+				<% end %>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Rito
+						<span class="required">*</span>	
+					</label>
+					<div class="mws-form-item">
+						<%= f.select :rito_id, @ritos, { :include_blank => "Selecione" }, { :class => "small" } %>
+					</div>
+				</div>
+
+				<% if can? :editar, Loja %>
+					<div class="mws-form-row">
+						<label class="mws-form-label">Situação</label>
+						<div class="mws-form-item">
+							<%= f.select :situacao, Loja.situacao.options, { :include_blank => "Selecione" }, { :class => "small" } %>
+						</div>
+					</div>
+				<% end %>
+
+				<% if can? :editar, Loja %>
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							<strong><u>Sessões</u></strong>
+						</label>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Dia</label>
+						<div class="mws-form-item">
+							<%= f.text_field :dia, :class => "small" %>
+						</div>
+					</div>
+					<div class="mws-form-row">
+						<label class="mws-form-label">Hora</label>
+						<div class="mws-form-item">
+							<%= f.text_field :hora, :class => "small" %>
+						</div>
+					</div>
+				<% end %>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">Templo</label>
+					<div class="mws-form-item">
+						<%= f.select :templo_id, @templos, { :include_blank => "Selecione" }, { :class => "small", :onchange => "carregarDadosTemplo($(this).val());" } %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<label class="mws-form-label">Endereço</label>
+					<div class="mws-form-item">
+						<%= f.text_field :endereco, :class => "small" %>
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">UF</label>
+					<div class="mws-form-item">
+						<%= f.select :estado_id, @ufs, { :include_blank => "Selecione" }, { :class => "small", :id => "estado_id" } %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<label class="mws-form-label">Cidade</label>
+					<div class="mws-form-item">
+
+							<%= f.select :cidade_id, [], { :include_blank => "Selecione" }, { :class => "small", :id => "cidade_id" } %>
+
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<label class="mws-form-label">Bairro</label>
+					<div class="mws-form-item">
+							<%= f.select :bairro_id, [], { :include_blank => "Selecione" }, { :class => "small", :id => "bairro_id" } %>
+
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">CEP</label>
+					<div class="mws-form-item">
+						<%= f.text_field :cep, :class => "small" %>
+					</div>
+				</div>
+			</div>
+
+			<div class="mws-button-row">
+				<% if @loja.new_record? %>
+					<% if can? :criar, Loja %>
+						<input type="submit" value="Cadastrar" class="btn btn-success">
+					<% end %>
+				<% else %>
+					<% if can? :editar, @loja %>
+						<input type="submit" value="Atualizar" class="btn btn-success">
+					<% end %>
+				<% end %>
+
+				<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/lojas';">
+			</div>
+		<% end %>
+	</div>    	
+</div>

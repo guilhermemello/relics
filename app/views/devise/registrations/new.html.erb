@@ -1,0 +1,37 @@
+<div id="mws-login-wrapper">
+	<div id="mws-login">
+		<h1>Criar conta</h1>
+		<div class="mws-login-lock"><i class="icon-user"></i></div>
+
+		<div id="mws-register-form">
+			<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "mws-form" }) do |f| %>
+				<div class="mws-form-row">
+					<div class="mws-form-item">
+						<%= f.text_field :name, :autofocus => true, :class => "mws-login-username required", :placeholder => "Nome" %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<div class="mws-form-item">
+						<%= f.text_field :email, :autofocus => true, :class => "mws-login-username required", :placeholder => "E-mail" %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<div class="mws-form-item">
+						<%= f.password_field :password, :autofocus => true, :class => "mws-login-password required", :placeholder => "Senha" %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<div class="mws-form-item">
+						<%= f.password_field :password_confirmation, :autofocus => true, :class => "mws-login-password required", :placeholder => "Confirme a senha" %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<%= f.submit "Criar", :class => 'btn btn-success mws-login-button' %>
+				</div>
+
+				<br />
+				<%= render "devise/shared/links" %>
+			<% end %>
+		</div>
+	</div>
+</div>

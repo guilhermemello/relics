@@ -1,0 +1,40 @@
+Relics::Application.routes.draw do
+  match 'combo/cidades/:estado_id' => 'combo#cidades_por_uf'
+  match 'combo/bairros/:cidade_id' => 'combo#bairros_por_cidade'
+  match 'loja/carregar_dados_templo/:templo_id' => 'lojas#carregar_dados_templo'
+  match 'loja/carregar_dados_endereco/:loja_id' => 'lojas#carregar_dados_endereco'
+  match 'loja/carregar/:loja_id' => 'irmaos#carregar_loja'
+  match 'verificar_pessoa/:identificador/em/:loja_id' => 'irmaos#verificar_pessoa'
+  match 'irmaos/:identificador/filiar/:loja_id' => 'irmaos#filiar_a_loja'
+  match 'irmaos/:identificador/desfiliar/:loja_id' => 'irmaos#desfiliar_de_loja'
+
+  match 'selecionar_loja/:loja_id' => 'application#selecionar_loja'
+
+  authenticated :user do
+    root :to => 'dashboard#index'
+  end
+
+  devise_for :users do
+    root :to => "devise/sessions#new"
+  end
+
+  as :user do
+    get 'login' => 'devise/sessions#new', :as => :new_user_session
+    get "cadastro" => "devise/registrations#new", :as => :new_user
+    delete 'sair' => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
+  resources :users
+  resources :irmaos, :as => "pessoas"
+  resources :pessoas
+  resources :lojas
+  resources :ritos
+  resources :obediencias
+  resources :oriente_estadual
+  resources :dashboard
+  resources :permissoes
+  resources :dependentes
+  resources :eventos
+
+  put 'update_password' => 'users#update_password'
+end

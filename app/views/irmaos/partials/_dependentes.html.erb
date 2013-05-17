@@ -1,0 +1,52 @@
+<div class="mws-panel grid_12">
+	<div class="mws-panel-header">
+		<% if can? :criar, Dependente or current_user.pessoa == @irmao %>
+			<div style="float: right; margin-top: -4px;">
+				<%= link_to "Novo Dependente", new_dependente_path(:irmao_id => params[:id]), :class => "btn btn-success" %>
+			</div>
+		<% end %>
+
+		<span id="dependentes">Dependentes</span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
+			<table class="mws-table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Aniversário</th>
+						<th>Telefone</th>
+						<th>E-mail</th>
+						<th>Profissão</th>
+						<th>Parentesco</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @dependentes.each do |dependente| %>
+						<tr>
+							<td style="text-align: center;"><%= dependente.nome %></td>
+							<td style="text-align: center;"><%= dependente.data_nascimento %></td>
+							<td style="text-align: center;"><%= dependente.telefone_celular %></td>
+							<td style="text-align: center;"><%= dependente.email_particular %></td>
+							<td style="text-align: center;"><%= dependente.profissao_nome %></td>
+							<td style="text-align: center;"><%= dependente.categoria_nome %></td>
+							<td style="text-align: center;">
+								<span><i class="icon-search"></i><span>
+								<%= link_to "Consultar", edit_dependente_path(dependente, :irmao_id => params[:id]), :style => "color: black;" %>
+
+								&nbsp;
+
+								<% if can? :excluir, Dependente or current_user.pessoa == @irmao %>
+									<span><i class="icon-trash"></i><span>
+									<%= link_to "Excluir", dependente_path(dependente, :irmao_id => params[:id]), :method => :delete, :confirm => "Confirma a exclusão ?", :style => "color: black;" %>
+								<% end %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

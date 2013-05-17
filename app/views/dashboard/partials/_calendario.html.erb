@@ -1,0 +1,73 @@
+<div class="mws-panel grid_8">
+	<div class="mws-panel-header">
+		<span>Calendário</span>
+	</div>
+
+	<div class="mws-panel-body no-padding no-border">
+		<div id="mws-calendar" class="fc">
+			<table class="fc-header" style="width:100%">
+				<tbody>
+					<tr>
+						<td class="fc-header-left">
+							<span class="fc-button fc-button-prev fc-state-default fc-corner-left">
+								<span class="fc-button-inner">
+									<span class="fc-button-content">
+										<%= link_to "◄", :mes => (@date.beginning_of_month - 1).strftime("%Y-%m-01") %>
+									</span>
+									<span class="fc-button-effect">
+										<span></span>
+									</span>
+								</span>
+							</span>
+							<span class="fc-button fc-button-next fc-state-default fc-corner-right">
+								<span class="fc-button-inner">
+									<span class="fc-button-content">
+										<%= link_to "►", :mes => (@date.end_of_month + 1).strftime("%Y-%m-01") %>
+									</span>
+									<span class="fc-button-effect"><span></span>
+								</span>
+							</span>
+						</span>
+					</td>
+					<td class="fc-header-center">
+						<span class="fc-header-title">
+							<h2><%= l @date, :format => :mes %></h2>
+						</span>
+					</td>
+					<td class="fc-header-right">
+						&nbsp;
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div id="calendar">
+			<div class="fc-view fc-view-month fc-grid">
+				<%= calendar_for @eventos, :year => @date.year, :month => @date.month do |calendar| %>
+				<%= calendar.head('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado') %>
+
+				<% calendar.day(:day_method => :data) do |date, eventos| %>
+					<%= date.day %>
+
+					<ul>
+						<% eventos.each do |evento| %>
+							<% if @loja.present? %>
+								<% if evento.visibilidades.include?(Visibilidade::MEMBROS_DA_LOJA) and @loja.membros_ids.include?(current_user.pessoa.id) %>
+									<%= render "/dashboard/partials/evento", :evento => evento, :tipo => evento.tipo %>
+								<% else %>
+									<% if evento.visibilidades.include?(Visibilidade::MACONS) or current_user.has_role?(:master) %>
+										<%= render "/dashboard/partials/evento", :evento => evento, :tipo => evento.tipo %>
+									<% end %>
+								<% end %>
+							<% else %>
+								<% if evento.visibilidades.include?(Visibilidade::MACONS) %>
+									<%= render "/dashboard/partials/evento", :evento => evento, :tipo => evento.tipo, :objeto => evento.objeto %>
+								<% end %>
+							<% end %>
+						<% end %>
+					</ul>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

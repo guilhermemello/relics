@@ -1,0 +1,27 @@
+<div id="mws-login-wrapper">
+	<div id="mws-login">
+		<h1>Esqueceu a senha ?</h1>
+		<div class="mws-login-lock"><i class="icon-key"></i></div>
+
+		<div id="mws-login-form">
+			<div class="mws-form-message error" style="<% unless flash[:alert].present? %>display: none;<% end %>">
+				<%= flash[:alert] %>
+			</div>
+
+			<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :class => "mws-form" }) do |f| %>
+				<div class="mws-form-row">
+					<div class="mws-form-item">
+						<%= f.text_field :email, :autofocus => true, :class => "mws-login-username required", :placeholder => "Email" %>
+						<div class="mws-error"><%= resource.errors[:email].first %></div>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<%= f.submit "Enviar instruções", :class => 'btn btn-success mws-login-button' %>
+				</div>
+
+				<br />
+				<%= render "devise/shared/links" %>
+			<% end %>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,41 @@
+<div id="mws-header" class="clearfix">
+	<!-- Logo Container -->
+	<div id="mws-logo-container"></div>
+
+	<!-- User Tools (notifications, logout, profile, change password) -->
+	<div id="mws-user-tools" class="clearfix">
+		<!-- Notifications -->
+		<div id="mws-user-notif" class="mws-dropdown-menu"></div>
+
+			<!-- Messages -->
+			<div id="mws-user-message" class="mws-dropdown-menu"></div>
+
+				<!-- User Information and functions section -->
+				<div id="mws-user-info" class="mws-inset">
+					<!-- User Photo -->
+					<div id="mws-user-photo">
+						<%= image_tag @current_user.pessoa.foto.url(:thumb) %>
+					</div>
+
+					<!-- Username and Functions -->
+					<div id="mws-user-functions">
+						<div id="mws-username">
+							Olá, 
+							<% if current_user.name.present? %>
+								<%= current_user.name %>
+							<% else %>
+								<%= current_user.email %>
+							<% end %>
+						</div>
+
+						<ul>
+							<li><%= link_to "Alterar senha", "/users/#{current_user.id}/edit" %></li>
+							<li><%= link_to "Sair", destroy_user_session_path, :method => :delete  %></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		

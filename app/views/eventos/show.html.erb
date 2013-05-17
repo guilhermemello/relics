@@ -1,0 +1,51 @@
+<div class="mws-panel grid_8">
+	<div class="mws-panel-header">
+		<span>Eventos</span>
+	</div>
+
+	<div class="mws-panel-body no-padding mws-form">
+			<div class="mws-form-inline">
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Evento
+					</label>
+					<div class="mws-form-item">
+						<%= @evento.descricao %>
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Tipo
+					</label>
+					<div class="mws-form-item">
+						<%= @evento.tipo_evento_nome %>
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Data/Hora
+					</label>
+					<div class="mws-form-item">
+						<%= @evento.data %> - <%= l @evento.hora %>
+					</div>
+				</div>
+
+				<% if @evento.observacao.present? %>
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							Observação
+						</label>
+						<div class="mws-form-item">
+							<%= @evento.observacao %>
+						</div>
+					</div>
+				<% end %>
+			</div>
+
+			<div class="mws-button-row">
+				<input type="reset" value="Voltar" class="btn" onclick="window.location.href='/';">
+			</div>
+	</div>    	
+</div>

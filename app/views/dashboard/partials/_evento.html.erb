@@ -1,0 +1,15 @@
+<div class="fc-event fc-event-skin fc-event-hori fc-corner-left fc-corner-right">
+	<div class="fc-event-inner fc-event-skin">
+		<span class="fc-event-title">
+			<% if evento.tipo == :aniversario_loja %>
+				<%= link_to evento.descricao, "/lojas/#{evento.objeto.id}/edit" %>
+			<% elsif evento.tipo == :aniversario_irmao %>
+				<%= link_to evento.descricao, "irmaos/#{evento.objeto.id}/edit" %>
+			<% elsif evento.tipo == :aniversario_dependente %>
+				<%= link_to evento.descricao, "dependentes/67/edit?irmao_id=38" %>
+			<% else %>
+				<%= link_to evento.descricao, "eventos/#{evento.id}" %>
+			<% end %>
+		</span>
+	</div>
+</div>

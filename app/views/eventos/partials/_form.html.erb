@@ -1,0 +1,84 @@
+<script>
+	$(document).ready(function() {
+		$("#evento_data").mask("99/99/9999");
+		$("#evento_hora").mask("99:99");
+	});
+</script>
+
+<div class="mws-panel grid_6">
+	<div class="mws-panel-header">
+		<span><%= @evento.new_record? ? "Cadastrar Evento" : @evento.descricao %></span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<%= form_for @evento, :html => { :class => "mws-form", :multipart => true } do |f| %>
+			<div class="mws-form-inline">
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Tipo
+						<span class="required">*</span>	
+					</label>
+					<div class="mws-form-item">
+						<%= f.select :tipo_evento_id, @tipo_eventos, { :include_blank => "Selecione" }, { :class => "small" } %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Descrição
+						<span class="required">*</span>	
+					</label>
+					<div class="mws-form-item">
+						<%= f.text_field :descricao, :class => "small" %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Data
+						<span class="required">*</span>	
+					</label>
+					<div class="mws-form-item">
+						<%= f.text_field :data, :class => "small" %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Hora
+						<span class="required">*</span>	
+					</label>
+					<div class="mws-form-item">
+						<%= f.text_field :hora, :class => "small" %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<label class="mws-form-label">Observação</label>
+					<div class="mws-form-item">
+						<%= f.text_area :observacao, :size => "35x30", :class => "small autosize" %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<label class="mws-form-label">Visibilidade</label>
+					<div class="mws-form-item">
+						<% Visibilidade.todas.each do |visibilidade| %>
+							<input type="checkbox" name="evento[visibilidade_ids][]" value="<%= visibilidade.id %>" <% if @evento.visibilidades.include?(visibilidade) %> checked="checked" <% end %>>
+							<label><%= visibilidade.nome %></label>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+			<div class="mws-button-row">
+				<% if @evento.new_record? %>
+					<% if can? :criar_evento, Loja %>
+						<input type="submit" value="Cadastrar" class="btn btn-success">
+					<% end %>
+				<% else %>
+					<% if can? :editar_evento, Loja %>
+						<input type="submit" value="Atualizar" class="btn btn-success">
+					<% end %>
+				<% end %>
+
+				<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/eventos';">
+			</div>
+		<% end %>
+	</div>    	
+</div>

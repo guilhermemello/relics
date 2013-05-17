@@ -1,0 +1,11 @@
+class CreateBairros < ActiveRecord::Migration
+  def change
+    create_table :bairros do |t|
+      t.string :uf
+      t.references :cidade
+      t.string :nome
+
+      t.timestamps
+    end
+  end
+end

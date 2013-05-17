@@ -1,0 +1,36 @@
+<div id="mws-login-wrapper">
+	<div id="mws-login">
+		<h1>Crie sua nova senha</h1>
+		<div class="mws-login-lock"><i class="icon-key"></i></div>
+
+		<div id="mws-login-form">
+			<div class="mws-form-message error" style="<% unless flash[:alert].present? %>display: none;<% end %>">
+				<%= flash[:alert] %>
+			</div>
+
+			<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :class => "mws-form" }) do |f| %>
+			<input name="_method" type="hidden" value="put" />
+				<input id="user_reset_password_token" name="user[reset_password_token]" type="hidden" value="<%= params[:reset_password_token] %>" />
+
+				<div class="mws-form-row">
+					<div class="mws-form-item">
+					<%= f.password_field :password, :autofocus => true, :class => "mws-login-password required", :placeholder => "Senha" %>
+					<div class="mws-error"><%= resource.errors[:password].first %></div>
+				</div>
+
+				<div class="mws-form-row">
+					<div class="mws-form-item">
+						<%= f.password_field :password_confirmation, :autofocus => true, :class => "mws-login-password required", :placeholder => "Confirme a senha" %>
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<%= f.submit "Criar", :class => 'btn btn-success mws-login-button' %>
+				</div>
+
+				<br />
+				<%= render "devise/shared/links" %>
+			<% end %>
+		</div>
+	</div>
+</div>

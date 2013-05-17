@@ -1,0 +1,37 @@
+<div class="mws-panel grid_6">
+	<div class="mws-panel-header">
+		<span>Irmãos filiados à loja: &nbsp; <%= @loja.nome %></span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
+			<table class="mws-table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @irmaos_filiados.each do |irmao| %>
+						<tr>
+							<td style="text-align: center;"><%= irmao.pessoa.nome %></td>
+							<td style="text-align: center;">
+								<span><i class="icon-search"></i><span>
+								<%= link_to "Consultar", "permissoes/#{irmao.pessoa.id}", :style => "color: black;" %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<%= page_entries_info(@irmaos_filiados) %>
+
+			<%= will_paginate(@irmaos_filiados, :renderer => WillPaginate::ActionView::RelicsLinkRenderer) %>
+		</div>
+	</div>
+</div>
+
+<div class="mws-panel grid_2">
+	<%= render "permissoes/partials/filtro" %>
+</div>

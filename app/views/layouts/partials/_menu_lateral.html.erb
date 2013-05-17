@@ -1,0 +1,39 @@
+<div id="mws-sidebar">
+	<!-- Hidden Nav Collapse Button -->
+	<div id="mws-nav-collapse">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+	<div id="mws-searchbox">
+		<select style="width: 100%;" onchange="carregarDadosLoja(this.value);">
+			<option value="0">Selecione uma loja</option>
+
+			<% @lojas_filiadas.each do |loja| %>
+				<option value="<%= loja.id %>" <% if loja.id == session[:loja_id] %> selected="true" <% end %>><%= loja.nome %></option>
+			<% end %>
+		</select>
+	</div>
+
+	<!-- Main Navigation -->
+	<div id="mws-navigation">
+		<ul>
+			<li <% if params[:controller] == "dashboard" %>class="active" <% end %>><a href="/"><i class="icon-bookmark"></i> Início</a></li>
+			<li <% if params[:controller] == "lojas" %>class="active" <% end %>>
+				<a href="/lojas"><i class="icon-home"></i> Lojas</a>
+			</li>
+			<li <% if params[:controller] == "irmaos" %>class="active" <% end %>>
+				<a href="/irmaos"><i class="icon-user"></i> Irmãos</a>
+			</li>
+			<li <% if params[:controller] == "eventos" %>class="active" <% end %>>
+				<a href="/eventos"><i class="icon-calendar"></i> Eventos</a>
+			</li>
+			<% if current_user.has_role?(:admin_master) %>
+				<li <% if params[:controller] == "permissoes" %>class="active" <% end %>>
+					<a href="/permissoes"><i class="icon-key"></i> Permissões</a>
+				</li>
+			<% end %>
+		</ul>
+	</div>         
+</div>

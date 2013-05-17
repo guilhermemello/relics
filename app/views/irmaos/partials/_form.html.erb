@@ -1,0 +1,291 @@
+<script>
+	$(document).ready(function() {
+		$("#pessoa_cpf").mask("999.999.999-99");
+		$("#pessoa_data_nascimento").mask("99/99/9999");
+		$("#pessoa_telefone_celular").mask("(99) 9999 - 9999");
+		$("#pessoa_telefone_residencial").mask("(99) 9999 - 9999");
+		$("#pessoa_telefone_comercial").mask("(99) 9999 - 9999");
+		$("#pessoa_cep").mask("99999-999");
+
+		var cpf =  $("#pessoa_cpf").val();
+		var cim =  $("#pessoa_cim").val();
+
+		if (cpf != "" || cim != "") {
+			$("#complemento_form_pessoa").show();
+			$("#botao_cadastrar").show();
+		}
+	});
+</script>
+
+<div class="mws-panel grid_8">
+	<div class="mws-panel-header">
+		<span><%= @irmao.new_record? ? "#{@loja.nome} - Cadastrar Irmão" : "#{@loja.nome} - #{@irmao.nome}" %></span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<%#= form_for @irmao, :html => { :class => "mws-form", :multipart => true, :onsubmit => "return validarCPFSubmit($('#pessoa_cpf').val());" } do |f| %>
+		<%= form_for @irmao, :html => { :class => "mws-form", :multipart => true } do |f| %>
+			<%= hidden_field_tag "loja_id", @loja.id %>
+
+			<div class="mws-form-inline">
+				<div class="mws-form-row">
+					<label class="mws-form-label">CPF</label>
+					<div class="mws-form-item">
+						<%= f.text_field :cpf, :class => "small" %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<label class="mws-form-label">CIM</label>
+					<div class="mws-form-item">
+						<%= f.text_field :cim, :class => "small" %>
+					</div>
+				</div>	
+
+				<div class="mws-form-row">
+					<div class="mws-form-item">
+						<% if @irmao.new_record? %>
+							<button type="button" class="btn btn-danger btn-small" onclick="CPFCadastradoEmOutraloja($('#pessoa_cpf').val(), $('#pessoa_cim').val(), <%= params[:loja_id] %>);">Buscar</button>
+						<% end %>
+					</div>
+				</div>
+
+				<div id="complemento_form_pessoa" style="display: none;">
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							Nome
+							<span class="required">*</span>
+						</label>
+						<div class="mws-form-item">
+							<%= f.text_field :nome, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Foto</label>
+						<div id="mws-crop-parent" class="mws-form-item">
+							<%= image_tag @irmao.foto.url(:medium), :alt => "" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						
+						<div class="mws-form-item">
+							<%= f.file_field :foto %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							Grau
+							<span class="required">*</span>
+						</label>
+						<div class="mws-form-item">
+							<%= f.select :grau_id, @grau, { :include_blank => "Selecione" }, { :class => "small" } %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							<strong><u>Contatos</u></strong>
+						</label>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Telefone Celular</label>
+						<div class="mws-form-item">
+							<%= f.text_field :telefone_celular, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							E-mail Particular
+							<span class="required">*</span>
+						</label>
+						<div class="mws-form-item">
+							<%= f.text_field :email_particular, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							<strong><u>Dados Pessoais</u></strong>
+						</label>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Nome do Pai</label>
+						<div class="mws-form-item">
+							<%= f.text_field :nome_pai, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Nome da Mãe</label>
+						<div class="mws-form-item">
+							<%= f.text_field :nome_mae, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Data de Nascimento</label>
+						<div class="mws-form-item">
+							<%= f.text_field :data_nascimento, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							<strong><u>Naturalidade</u></strong>
+						</label>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">UF</label>
+						<div class="mws-form-item">
+							<%= f.select :estado_nascimento_id, @ufs, { :include_blank => "Selecione" }, { :class => "small" } %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">País</label>
+						<div class="mws-form-item">
+							<%= f.select :pais_nascimento_id, @paises, { :include_blank => "Selecione" }, { :class => "small" } %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							<strong><u>Residência</u></strong>
+						</label>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Endereço</label>
+						<div class="mws-form-item">
+							<%= f.text_field :endereco, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">CEP</label>
+						<div class="mws-form-item">
+							<%= f.text_field :cep, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">UF</label>
+						<div class="mws-form-item">
+							<%= f.select :estado_id, @ufs, { :include_blank => "Selecione" }, { :class => "small", :id => "estado_id" } %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Cidade</label>
+						<div class="mws-form-item">
+							<% if @irmao.estado.present? %>
+								<%= f.select :cidade_id, Cidade.por_estado(@irmao.estado.id), { :include_blank => "Selecione" }, { :class => "small", :id => "cidade_id" } %>
+							<% else %>
+								<%= f.select :cidade_id, [], { :include_blank => "Selecione" }, { :class => "small", :id => "cidade_id" } %>
+							<% end %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Bairro</label>
+						<div class="mws-form-item">
+							<% if @irmao.cidade.present? %>
+								<%= f.select :bairro_id, Bairro.por_cidade(@irmao.cidade.id), { :include_blank => "Selecione" }, { :class => "small", :id => "bairro_id" } %>
+							<% else %>
+								<%= f.select :bairro_id, [], { :include_blank => "Selecione" }, { :class => "small", :id => "bairro_id" } %>
+							<% end %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Telefone Residencial</label>
+						<div class="mws-form-item">
+							<%= f.text_field :telefone_residencial, :class => "small" %>
+						</div>
+					</div>
+	
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							<strong><u>Atividade Profissional</u></strong>
+						</label>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Aposentado</label>
+						<div class="mws-form-item">
+							<%= f.select :aposentado, Pessoa.aposentado.options, { :include_blank => "Selecione" }, { :class => "small" } %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Empresa</label>
+						<div class="mws-form-item">
+							<%= f.text_field :empresa, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Profissão</label>
+						<div class="mws-form-item">
+							<%= f.select :profissao_id, @profissoes, { :include_blank => "Selecione" }, { :class => "small" } %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Telefone Comercial</label>
+						<div class="mws-form-item">
+							<%= f.text_field :telefone_comercial, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">Ramal</label>
+						<div class="mws-form-item">
+							<%= f.text_field :ramal, :class => "small" %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">E-mail Comercial</label>
+						<div class="mws-form-item">
+							<%= f.text_field :email_comercial, :class => "small" %>
+						</div>
+					</div>
+
+					<% unless @irmao.new_record? %>
+						<br />
+
+						<div class="mws-form-row">
+							<%= render "/irmaos/partials/dependentes" %>
+						</div>
+					<% end %>
+				</div>
+
+				<div class="mws-button-row">
+					<% if @irmao.new_record? %>
+						<input type="submit" value="Cadastrar" class="btn btn-success" id="botao_cadastrar" style="display: none;">
+					<% else %>
+						<% if @irmao.que_esta_logado?(current_user) or can? :editar, @loja %>
+							<input type="submit" value="Atualizar" class="btn btn-success">
+						<% end %>
+
+						<% if can? :desfiliar, @loja %>
+							<% if @irmao.cpf.present? %>
+								<input type="button" value="Desfiliar" class="btn btn-danger" onclick="desfiliar('cpf', '<%= @irmao.cpf %>', <%= params[:loja_id] %>);">
+							<% else %>
+								<input type="button" value="Desfiliar" class="btn btn-danger" onclick="desfiliar('cim', '<%= @irmao.cim %>', <%= params[:loja_id] %>);">
+							<% end %>
+						<% end %>
+					<% end %>
+
+					<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/irmaos';">
+				</div>
+		<% end %>
+	</div>    	
+</div>
