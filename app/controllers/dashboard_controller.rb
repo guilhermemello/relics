@@ -31,7 +31,7 @@ class DashboardController < ApplicationController
     end
 
     dependentes.each do |dependente|
-      @eventos << Struct::Evento.new(nil, gerar_data_evento(dependente.pessoa.data_nascimento), DateTime.now, "Aniversário - #{dependente.pessoa.nome}", :aniversario_dependente, [Visibilidade::MEMBROS_DA_LOJA], dependente.pessoa)
+      @eventos << Struct::Evento.new(nil, gerar_data_evento(dependente.pessoa.data_nascimento), DateTime.now, "Aniversário - #{dependente.pessoa.nome}", :aniversario_dependente, [Visibilidade::MEMBROS_DA_LOJA], dependente)
     end
 
     eventos.each do |evento|
