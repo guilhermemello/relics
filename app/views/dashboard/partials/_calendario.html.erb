@@ -53,16 +53,13 @@
 						<% eventos.each do |evento| %>
 							<% if @loja.present? %>
 								<% if evento.visibilidades.include?(Visibilidade::MEMBROS_DA_LOJA) and @loja.membros_ids.include?(current_user.pessoa.id) %>
-									a
 									<%= render "/dashboard/partials/evento", :evento => evento, :tipo => evento.tipo %>
 								<% else %>
-									b
 									<% if evento.visibilidades.include?(Visibilidade::MACONS) or current_user.has_role?(:master) %>
 										<%= render "/dashboard/partials/evento", :evento => evento, :tipo => evento.tipo %>
 									<% end %>
 								<% end %>
 							<% else %>
-							c
 								<% if evento.visibilidades.include?(Visibilidade::MACONS) %>
 									<%= render "/dashboard/partials/evento", :evento => evento, :tipo => evento.tipo, :objeto => evento.objeto %>
 								<% end %>
