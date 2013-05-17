@@ -11,12 +11,11 @@ class DashboardController < ApplicationController
     @eventos = []
 
     if @loja.present?
-      lojas = Loja.do_mesmo_estado_selecionado(@loja)
+      lojas = Loja.do_mesmo_estado(@loja)
       irmaos = @loja.membros
       eventos = @loja.eventos
     else
-      #lojas = []
-      lojas = Loja.do_mesmo_estado(@loja)
+      lojas = []
       irmaos = []
       eventos = []
     end
