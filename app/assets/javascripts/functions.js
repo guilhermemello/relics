@@ -57,8 +57,12 @@ function carregarDadosEndereco(loja_id) {
 
 // CARREGA OS DADOS DA LOJA
 function carregarDadosLoja(loja_id) {
-	if (loja_id != "" || loja_id != undefined) {
-		window.location.href = "/selecionar_loja/" + loja_id
+	if (loja_id == 0 || loja_id == undefined) {
+		return false;
+	} else {
+		if (loja_id != "" || loja_id != undefined) {
+			window.location.href = "/selecionar_loja/" + loja_id
+		}
 	}
 }
 
