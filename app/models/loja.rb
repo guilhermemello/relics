@@ -43,11 +43,19 @@ class Loja < ActiveRecord::Base
     Filiacao.joins(:pessoa).where("loja_id = ? AND filiado_em <> 'NULL' AND pessoas.data_nascimento <> 'NULL'", self.id).map(&:pessoa_id)
   end
 
-  def self.do_mesmo_estado(loja)
+  def self.do_mesmo_estado_selecionado(loja)
     if loja.templo.present?
       joins(:templo).where("templos.estado_id = ? AND lojas.fundacao <> 'NULL'", loja.templo.estado.id)
     else
       where("lojas.estado_id = ? AND lojas.fundacao <> 'NULL'", loja.estado.id)
+    end
+  end
+
+  def self.do_mesmo_estado(loja)
+    if loja.templo.present?
+      joins(:templo).where("templos.estado_id = ? AND lojas.fundacao <> 'NULL' AND lojas.id = ?", loja.templo.estado.id, loja.id)
+    else
+      where("lojas.estado_id = ? AND lojas.fundacao <> 'NULL' AND lojas.id = ?", loja.estado.id, loja.id)
     end
   end
 
