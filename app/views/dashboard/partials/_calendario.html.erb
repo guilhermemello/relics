@@ -52,15 +52,20 @@
 					<ul>
 						<% eventos.each do |evento| %>
 							<% if @loja.present? %>
+							a
 								<% if evento.visibilidades.include?(Visibilidade::MEMBROS_DA_LOJA) and @loja.membros_ids.include?(current_user.pessoa.id) or current_user.has_role?(:master) %>
 									<%= render "/dashboard/partials/evento", :evento => evento, :tipo => evento.tipo %>
+									b
 								<% else %>
+								c
 									<% if evento.visibilidades.include?(Visibilidade::MACONS) or current_user.has_role?(:master) %>
 										<%= render "/dashboard/partials/evento", :evento => evento, :tipo => evento.tipo %>
 									<% end %>
 								<% end %>
 							<% else %>
+							d
 								<% if evento.visibilidades.include?(Visibilidade::MACONS) or current_user.has_role?(:master) %>
+								e
 									<%= render "/dashboard/partials/evento", :evento => evento, :tipo => evento.tipo, :objeto => evento.objeto %>
 								<% end %>
 							<% end %>
