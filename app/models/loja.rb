@@ -36,7 +36,7 @@ class Loja < ActiveRecord::Base
   validate :validar_tamanho_estandarte
 
   def validar_tamanho_estandarte
-    errors.add(:estandarte, "O estandarte deve possuir menos de 2 MB") if self.estandarte_file_size > 1.kilobyte
+    errors.add(:estandarte, "O estandarte deve possuir menos de 400K") if self.estandarte_file_size > 400.kilobytes
   end
 
   scope :todas, order("nome ASC")
