@@ -32,7 +32,7 @@ class Loja < ActiveRecord::Base
   enumerize :situacao, in: { :ativa => 1, :inativa => 0 }
 
   has_attached_file :estandarte, :styles => { :medium => "200x200>", :thumb => "100x100>" }, :default_url => "/assets/:style/missing.png"
-  validates_attachment_size :estandarte, :greater_than => 2.megabytes, :message => "O estandarte deve ter no máximo 2 MB"
+  validates_attachment_size :estandarte, :greater_than => 2.kilobytes, :message => "O estandarte deve ter no máximo 2 MB"
 
   scope :todas, order("nome ASC")
 
