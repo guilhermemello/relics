@@ -33,11 +33,13 @@ class Loja < ActiveRecord::Base
 
   has_attached_file :estandarte, :styles => { :medium => "200x200>", :thumb => "100x100>" }, :default_url => "/assets/:style/missing.png"
   
-  validate :validar_tamanho_estandarte
+  #validate :validar_tamanho_estandarte
 
-  def validar_tamanho_estandarte
-    errors.add(:estandarte, "O estandarte deve possuir menos de 2 MB") if estandarte_file_size > 2.megabytes
-  end
+  #def validar_tamanho_estandarte
+  #  errors.add(:estandarte_file_size, "O estandarte deve possuir menos de 2 MB") if estandarte_file_size > 2.megabytes
+  #end
+
+  validates_attachment_size :estandarte, :less_than => 2.megabytes
 
   scope :todas, order("nome ASC")
 
