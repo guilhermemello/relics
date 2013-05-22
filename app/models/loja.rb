@@ -36,6 +36,7 @@ class Loja < ActiveRecord::Base
   validate :validar_tamanho_estandarte
 
   def validar_tamanho_estandarte
+    logger.debug(estandarte_file_size.inspect)
     errors.add(:estandarte, "O estandarte deve possuir menos de 2 MB") if estandarte_file_size > 2.megabytes
   end
 
