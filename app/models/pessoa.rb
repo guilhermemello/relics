@@ -31,6 +31,12 @@ class Pessoa < ActiveRecord::Base
 
   enumerize :aposentado, in: { :sim => 1, :nao => 2 }
 
+  validate :validar_tamanho_foto
+
+  def validar_tamanho_foto
+    errors.add(:foto, "A foto deve possuir menos de 400K") if self.foto_file_size > 400.kilobytes
+  end
+
   scope :possui_filiacaao?, lambda { |cpf|
     where("cpf = ?", params[:cpf]).first
   }
