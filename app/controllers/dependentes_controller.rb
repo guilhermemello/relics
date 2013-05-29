@@ -7,6 +7,7 @@ class DependentesController < ApplicationController
 
   def new
     @irmao = Pessoa.where("id = ?", params[:irmao_id]).first
+    @loja = Loja.where("id = ?", session[:loja_id]).first
     @dependente = Pessoa.new
   end
 
