@@ -203,7 +203,8 @@
 						<input type="submit" value="Cadastrar" class="btn btn-success" id="botao_cadastrar">
 					<% else %>
 					<%= debug @loja %>
-						<% if @irmao.que_esta_logado?(current_user) or can? :editar_dependente, @loja or current_user.has_role?(:admin_master) %>
+					<%= current_user.has_role?(:admin_loja) %>
+						<% if @irmao.que_esta_logado?(current_user) or can?(:editar_dependente, @loja) or current_user.has_role?(:admin_master) %>
 							<input type="submit" value="Atualizar" class="btn btn-success">
 						<% end %>
 					<% end %>
