@@ -25,6 +25,7 @@ class DependentesController < ApplicationController
   end
 
   def edit
+    @loja = Loja.where("id = ?", session[:loja_id]).first
     @irmao = Pessoa.where("id = ?", params[:irmao_id]).first
     @dependente = Pessoa.where("id = ?", params[:id]).first
   end
