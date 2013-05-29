@@ -1,6 +1,6 @@
 <div class="mws-panel grid_12">
 	<div class="mws-panel-header">
-		<% if can? :criar, Dependente or current_user.pessoa == @irmao %>
+		<% if can? :criar_dependente, @loja or current_user.pessoa == @irmao %>
 			<div style="float: right; margin-top: -4px;">
 				<%= link_to "Novo Dependente", new_dependente_path(:irmao_id => params[:id]), :class => "btn btn-success" %>
 			</div>

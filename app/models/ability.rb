@@ -40,6 +40,10 @@ class Ability
       can :excluir_evento, Loja do |loja|
         loja.users.include?(user)
       end
+
+      can :criar_dependente, Loja do |loja|
+        loja.users.include?(user)
+      end
     elsif user.has_role? :admin_master
       can :criar, Loja
       can :excluir, Loja
