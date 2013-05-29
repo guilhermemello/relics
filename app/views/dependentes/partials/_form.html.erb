@@ -202,7 +202,7 @@
 					<% if @dependente.new_record? %>
 						<input type="submit" value="Cadastrar" class="btn btn-success" id="botao_cadastrar">
 					<% else %>
-						<% if @irmao.que_esta_logado?(current_user) or can? :editar, Dependente %>
+						<% if @irmao.que_esta_logado?(current_user) or can? :editar_dependente, Dependente %>
 							<input type="submit" value="Atualizar" class="btn btn-success">
 						<% end %>
 					<% end %>
