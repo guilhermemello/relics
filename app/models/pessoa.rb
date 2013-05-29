@@ -34,7 +34,7 @@ class Pessoa < ActiveRecord::Base
   validate :validar_tamanho_foto
 
   def validar_tamanho_foto
-    errors.add(:foto, "A foto deve possuir menos de 400K") if self.foto_file_size > 400.kilobytes
+    errors.add(:foto, "A foto deve possuir menos de 400K") if self.foto_file_size.present? and self.foto_file_size > 400.kilobytes
   end
 
   scope :possui_filiacaao?, lambda { |cpf|
