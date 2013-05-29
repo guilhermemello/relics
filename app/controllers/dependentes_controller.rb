@@ -6,6 +6,7 @@ class DependentesController < ApplicationController
   before_filter :combos, :only => [:new, :create, :edit, :update]
 
   def new
+    @irmao = Pessoa.where("id = ?", params[:irmao_id]).first
     @dependente = Pessoa.new
   end
 
