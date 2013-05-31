@@ -39,6 +39,12 @@ class Loja < ActiveRecord::Base
     errors.add(:estandarte, "O estandarte deve possuir menos de 400K") if self.estandarte_file_size.present? and self.estandarte_file_size > 400.kilobytes
   end
 
+  def validar_endereco
+    if self.templo.nil? and self.endereco.nil? and self.cep.nil? and self.estado_id.nil? and self.cidade_id.nil? and self.bairro_id.nil?
+      errors.add(:templo_idm "Informe um templo ou preencha um endereço")
+    end
+  end
+
   scope :todas, order("nome ASC")
 
   def membros
