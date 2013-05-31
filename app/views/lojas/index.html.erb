@@ -1,7 +1,7 @@
 <div class="mws-panel grid_6">
 	<div class="mws-panel-header">
 		<div style="float: right; margin-top: -4px;">
-			<%= link_to "Nova loja", "/lojas/new", :class => "btn btn-success" if can? :criar, Loja %>
+			<%= link_to "Nova loja", "/lojas/new", :class => "btn btn-success" if current_user.has_role?(:admin_master) #if can? :criar, Loja %>
 		</div>
 
 		<span>Lojas</span>

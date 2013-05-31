@@ -21,7 +21,7 @@ class DashboardController < ApplicationController
     end
 
     if irmaos.present?
-      dependentes = Dependente.find_by_sql "select pessoas.id, dependentes.dependente_id, pessoas.nome, pessoas.data_nascimento from pessoas inner join dependentes on dependentes.pessoa_id = pessoas.id where dependentes.pessoa_id IN (#{irmaos.map(&:pessoa_id).join(", ")}) AND pessoas.data_nascimento <> 'NULL'"
+      dependentes = Dependente.find_by_sql "SELECT pessoas.id, dependentes.dependente_id, pessoas.nome, pessoas.data_nascimento FROM pessoas INNER JOIN dependentes on dependentes.pessoa_id = pessoas.id WHERE dependentes.pessoa_id IN (#{irmaos.map(&:pessoa_id).join(", ")}) AND pessoas.data_nascimento <> 'NULL'"
     else
       dependentes = []
     end
