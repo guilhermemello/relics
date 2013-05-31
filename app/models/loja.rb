@@ -34,6 +34,7 @@ class Loja < ActiveRecord::Base
   has_attached_file :estandarte, :styles => { :medium => "200x200>", :thumb => "100x100>" }, :default_url => "/assets/:style/missing.png"
 
   validate :validar_tamanho_estandarte
+  validate :validar_endereco
 
   def validar_tamanho_estandarte
     errors.add(:estandarte, "O estandarte deve possuir menos de 400K") if self.estandarte_file_size.present? and self.estandarte_file_size > 400.kilobytes
