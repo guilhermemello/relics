@@ -41,7 +41,7 @@ class Loja < ActiveRecord::Base
   end
 
   def validar_endereco
-    if self.templo.nil? and self.endereco.nil? and self.cep.nil? and self.estado_id.nil? and self.cidade_id.nil? and self.bairro_id.nil?
+    if !self.templo.present? and !self.endereco.present? and !self.cep.present? and !self.estado_id.present? and !self.cidade_id.present? and !self.bairro_id.present?
       errors.add(:templo_id, "Informe um templo ou preencha um endereço")
     end
   end
