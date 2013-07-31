@@ -23,6 +23,7 @@ gem "webrick", "~> 1.3.1"
 gem "enumerize"
 gem "simple_form"
 gem "watu_table_builder", :require => "table_builder"
+gem "rmagick"
 
 group :test do
   gem "rspec", "2.11.0"

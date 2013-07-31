@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130424120552) do
+ActiveRecord::Schema.define(:version => 20130730233115) do
 
   create_table "bairros", :force => true do |t|
     t.string   "uf"
@@ -43,19 +43,18 @@ ActiveRecord::Schema.define(:version => 20130424120552) do
   end
 
   create_table "enderecos", :force => true do |t|
-    t.string  "uf",         :limit => 2,   :null => false
-    t.integer "cidades_id",                :null => false
-    t.string  "nomeslog",   :limit => 300, :null => false
-    t.string  "nomeclog",   :limit => 300, :null => false
-    t.integer "bairros_id",                :null => false
-    t.string  "logradouro", :limit => 300, :null => false
-    t.string  "cep",        :limit => 300, :null => false
-    t.integer "uf_cod",                    :null => false
-    t.string  "logracompl", :limit => 300, :null => false
+    t.string   "uf"
+    t.integer  "cidade_id"
+    t.string   "nomeslog"
+    t.string   "nomeclog"
+    t.integer  "bairro_id"
+    t.string   "logradouro"
+    t.string   "cep"
+    t.integer  "uf_cod"
+    t.string   "logracompl"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
-
-  add_index "enderecos", ["bairros_id"], :name => "fk_enderecos_bairros_idx"
-  add_index "enderecos", ["cidades_id"], :name => "fk_enderecos_cidades_idx"
 
   create_table "estados", :force => true do |t|
     t.string   "nome"
@@ -71,9 +70,9 @@ ActiveRecord::Schema.define(:version => 20130424120552) do
     t.time     "hora"
     t.text     "observacao"
     t.integer  "visibilidade"
-    t.integer  "loja_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "loja_id"
   end
 
   create_table "eventos_visibilidades", :id => false, :force => true do |t|
@@ -88,8 +87,24 @@ ActiveRecord::Schema.define(:version => 20130424120552) do
     t.datetime "desfiliado_em"
   end
 
+  create_table "fotos", :force => true do |t|
+    t.integer  "evento_id"
+    t.text     "descricao"
+    t.string   "imagem_file_name"
+    t.string   "imagem_content_type"
+    t.integer  "imagem_file_size"
+    t.datetime "imagem_updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
   create_table "graus", :force => true do |t|
     t.string   "nome"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "irmaos", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -107,13 +122,12 @@ ActiveRecord::Schema.define(:version => 20130424120552) do
     t.text     "curriculo"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
+    t.string   "dia"
+    t.string   "hora"
     t.string   "estandarte_file_name"
     t.string   "estandarte_content_type"
     t.integer  "estandarte_file_size"
     t.datetime "estandarte_updated_at"
-    t.integer  "user_id"
-    t.string   "dia"
-    t.string   "hora"
     t.string   "endereco"
     t.string   "cep"
     t.integer  "estado_id"
@@ -188,7 +202,7 @@ ActiveRecord::Schema.define(:version => 20130424120552) do
     t.integer  "cidade_id"
     t.integer  "estado_id"
     t.string   "cep"
-    t.boolean  "aposentado"
+    t.integer  "aposentado"
     t.string   "empresa"
     t.integer  "profissao_id"
     t.string   "telefone_comercial"
@@ -265,6 +279,7 @@ ActiveRecord::Schema.define(:version => 20130424120552) do
     t.string   "unconfirmed_email"
   end
 
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 

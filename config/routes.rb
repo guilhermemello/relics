@@ -7,6 +7,8 @@ Relics::Application.routes.draw do
   match 'verificar_pessoa/:identificador/em/:loja_id' => 'irmaos#verificar_pessoa'
   match 'irmaos/:identificador/filiar/:loja_id' => 'irmaos#filiar_a_loja'
   match 'irmaos/:identificador/desfiliar/:loja_id' => 'irmaos#desfiliar_de_loja'
+  match 'evento/adicionar_foto' => 'eventos#adicionar_foto'
+  match 'evento/remover_foto/:id/:evento_id' => 'eventos#remover_foto'
 
   match 'selecionar_loja/:loja_id' => 'application#selecionar_loja'
 

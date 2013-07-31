@@ -6,6 +6,7 @@ class Evento < ActiveRecord::Base
   belongs_to :tipo_evento
   has_and_belongs_to_many :visibilidades
   belongs_to :loja
+  has_many :fotos
 
   delegate :nome, :to => :tipo_evento, :prefix => true
 

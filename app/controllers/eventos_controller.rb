@@ -27,6 +27,7 @@ class EventosController < ApplicationController
 
   def edit
     @evento = Evento.where("id = ?", params[:id]).first
+    @fotos = @evento.fotos
   end
 
   def update
@@ -52,6 +53,17 @@ class EventosController < ApplicationController
 
   def show
     @evento = Evento.where("id = ?", params[:id]).first
+  end
+
+  def adicionar_foto
+    foto = Foto.create(params[:foto])
+    redirect_to "/eventos/#{params[:foto][:evento_id]}/edit?#galeria"
+  end
+
+  def remover_foto
+    foto = Foto.where("id = ? AND evento_id = ?", params[:id], params[:evento_id]).first
+    foto.destroy if foto.present?
+    redirect_to "/eventos/#{params[:evento_id]}/edit?#galeria"
   end
 
   private
