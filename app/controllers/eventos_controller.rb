@@ -1,7 +1,7 @@
 class EventosController < ApplicationController
   layout "interno"
 
-  before_filter :combos, :only => [:index, :new, :create, :edit, :update]
+  before_filter :combos, :only => [:index, :new, :create, :edit, :update, :adicionar_foto]
   before_filter :carregar_loja, :only => [:index, :new, :create, :edit, :update]
 
   def index
@@ -27,7 +27,6 @@ class EventosController < ApplicationController
 
   def edit
     @evento = Evento.where("id = ?", params[:id]).first
-    @fotos = @evento.fotos
   end
 
   def update
@@ -56,13 +55,17 @@ class EventosController < ApplicationController
   end
 
   def adicionar_foto
-    foto = Foto.create(params[:foto])
-    redirect_to "/eventos/#{params[:foto][:evento_id]}/edit?#galeria"
+    @evento = Evento.where("id = ?", params[:foto][:evento_id]).first
+    @foto = Foto.new(params[:foto])
+    @foto.save
+
+    render :action => :edit
   end
 
   def remover_foto
     foto = Foto.where("id = ? AND evento_id = ?", params[:id], params[:evento_id]).first
     foto.destroy if foto.present?
+
     redirect_to "/eventos/#{params[:evento_id]}/edit?#galeria"
   end
 

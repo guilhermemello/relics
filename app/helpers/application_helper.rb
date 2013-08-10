@@ -12,6 +12,20 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def display_errors_from(resource)
+    return '' if resource.nil? or resource.errors.empty?
+
+    html = "<div class=\"mws-form-message error\">Ocorreu um erro<ul>"
+
+    resource.errors.each do |attr, msg|
+      html << "<li>#{msg}</li>" if resource.errors[attr].first == msg
+    end
+
+    html << "</ul></div>"
+
+    html.html_safe
+  end
+
   def page_entries_info(collection, options = {})
     entry_name = options[:entry_name] || (collection.empty?? 'item' : collection.first.class.name.split('::').last.titleize)
     container_inicio = "<div class=\"dataTables_info\">"

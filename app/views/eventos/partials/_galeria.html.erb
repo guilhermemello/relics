@@ -2,10 +2,13 @@
  function getFile(){
    document.getElementById("upfile").click();
  }
+
  function sub(obj){
     var file = obj.value;
     var fileName = file.split("\\");
-    document.getElementById("teste").innerHTML = fileName[fileName.length-1];
+
+    document.getElementById("file").innerHTML = fileName[fileName.length - 1];
+		$(".fileinput-preview").val(fileName[fileName.length - 1]);
     document.myForm.submit();
     event.preventDefault();
   }
@@ -15,50 +18,47 @@
 	<div class="mws-panel-header">
 		<span><i class="icon-pictures"></i> Galeria de Fotos</span>
 	</div>
-	<div class="mws-panel-body">
-		<%= form_tag "/evento/adicionar_foto", :class=> "mws-form", :multipart => true do %>
+	<div class="mws-panel-body no-padding">
+		<%= form_tag "/evento/adicionar_foto#galeria", :class=> "mws-form", :multipart => true do %>
 			<%= hidden_field_tag "foto[evento_id]", @evento.id %>
+
+			<%= display_errors_from(@foto) %>
 
 			<div class="mws-form">
 				<div class="mws-form-row">
 					<div class="mws-form-cols">
-					                                    <div class="mws-form-col-7-8">
-																								<label class="mws-form-label">Foto</label>
-																								<div class="mws-form-item">
-																									<div class="fileinput-holder" style="position: relative;">
-																										<input type="text" class="fileinput-preview" style="width: 100%; padding-right: 85px;" readonly="readonly" placeholder="No file selected...">
-																											<span class="fileinput-btn btn" type="button" style="display:block; overflow: hidden; position: absolute; top: 0; right: 0; cursor: pointer;">
-																											Browse...<input name="foto[imagem]" id="teste" onchange="sub(this)" type="file" style="position: absolute; top: 0px; right: 0px; margin: 0px; cursor: pointer; font-size: 999px; opacity: 0; z-index: 999;">
-
-																										</span>
-																									</div>
-																								</div>
-
-					                                    </div>
-					                                    <div class="mws-form-col-1-8">
-					                                        <label class="mws-form-label">&nbsp;</label>
-					                                        <div class="mws-form-item">
-					                                            <input type="submit" value="Enviar" class="btn btn-success">
-					                                        </div>
-					                                    </div>
-					                                </div>
-					
-					
+						<div class="mws-form-col-7-8">
+							<label class="mws-form-label">Foto</label>
+							<div class="mws-form-item">
+								<div class="fileinput-holder" style="position: relative;">
+									<input type="text" class="fileinput-preview" style="width: 100%; padding-right: 85px;" readonly="readonly" placeholder="No file selected...">
+									<span class="fileinput-btn btn" type="button" style="display:block; overflow: hidden; position: absolute; top: 0; right: 0; cursor: pointer;">
+										Browse...<input name="foto[imagem]" id="file" onchange="sub(this)" type="file" style="position: absolute; top: 0px; right: 0px; margin: 0px; cursor: pointer; font-size: 999px; opacity: 0; z-index: 999;">
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="mws-form-col-1-8">
+							<label class="mws-form-label">&nbsp;</label>
+							<div class="mws-form-item">
+								<input type="submit" value="Enviar" class="btn btn-success">
+							</div>
+						</div>
+					</div>
 				</div>
-
 			</div>
 		<% end %>
 
 		<hr />
 
 		<ul class="thumbnails mws-gallery">
-			<% @fotos.each do |foto| %>
+			<% @evento.fotos.each do |foto| %>
 				<li>
 					<span class="thumbnail">
 						<%= image_tag foto.imagem.url(:thumb) %>
 					</span>
 					<span class="mws-gallery-overlay">
-						<a href="<%= foto.imagem.url %>" rel="prettyPhoto[gallery1]" class="mws-gallery-btn"><i class="icon-search"></i></a>
+						<a target="_blank" href="<%= foto.imagem.url %>" rel="prettyPhoto[gallery1]" class="mws-gallery-btn"><i class="icon-search"></i></a>
 						<a href="/evento/remover_foto/<%= foto.id %>/<%= foto.evento.id %>" class="mws-gallery-btn"><i class="icon-trash"></i></a>
 					</span>
 				</li>
