@@ -50,6 +50,6 @@ class DashboardController < ApplicationController
   end
 
   def gerar_data_evento(objeto)
-    objeto.change(:year => Date.today.year) if objeto.present?
+    objeto.change(:year => Date.today.year)
   end
 end
