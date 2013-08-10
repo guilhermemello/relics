@@ -21,7 +21,7 @@ class DashboardController < ApplicationController
     end
 
     if irmaos.present?
-      dependentes = Dependente.find_by_sql "SELECT pessoas.id, dependentes.dependente_id, pessoas.nome, pessoas.data_nascimento FROM pessoas INNER JOIN dependentes on dependentes.pessoa_id = pessoas.id WHERE dependentes.pessoa_id IN (#{irmaos.map(&:pessoa_id).join(", ")}) AND pessoas.data_nascimento <> 'NULL'"
+      dependentes = Dependente.find_by_sql "SELECT pessoas.id, dependentes.dependente_id, pessoas.nome, pessoas.data_nascimento FROM pessoas INNER JOIN dependentes on dependentes.pessoa_id = pessoas.id WHERE dependentes.pessoa_id IN (#{irmaos.map(&:pessoa_id).join(", ")})"
     else
       dependentes = []
     end
@@ -31,11 +31,15 @@ class DashboardController < ApplicationController
     end
 
     irmaos.each do |irmao|
-      @eventos << Struct::Evento.new(nil, gerar_data_evento(irmao.pessoa.data_nascimento), DateTime.now, "Aniversário - #{irmao.pessoa.nome}", :aniversario_irmao, [Visibilidade::MEMBROS_DA_LOJA], irmao.pessoa)
+      if irmao.pessoa.possui_data_de_nascimento?
+        @eventos << Struct::Evento.new(nil, gerar_data_evento(irmao.pessoa.data_nascimento), DateTime.now, "Aniversário - #{irmao.pessoa.nome}", :aniversario_irmao, [Visibilidade::MEMBROS_DA_LOJA], irmao.pessoa)
+      end
     end
 
     dependentes.each do |dependente|
-      @eventos << Struct::Evento.new(nil, gerar_data_evento(dependente.pessoa.data_nascimento), DateTime.now, "Aniversário - #{dependente.pessoa.nome}", :aniversario_dependente, [Visibilidade::MEMBROS_DA_LOJA], dependente)
+      if dependente.pessoa.possui_data_de_nascimento?
+        @eventos << Struct::Evento.new(nil, gerar_data_evento(dependente.pessoa.data_nascimento), DateTime.now, "Aniversário - #{dependente.pessoa.nome}", :aniversario_dependente, [Visibilidade::MEMBROS_DA_LOJA], dependente)
+      end
     end
 
     eventos.each do |evento|
