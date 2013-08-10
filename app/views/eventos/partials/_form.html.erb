@@ -61,7 +61,7 @@
 						<ul class="mws-form-list inline" id="visibilidade_checkboxes">
 							<% Visibilidade.todas.each do |visibilidade| %>
 								<li>
-									<input type="checkbox" id="checkbox-<%= visibilidade.id %>" name="evento[visibilidade_ids][]" value="<%= visibilidade.id %>" <% if @evento.visibilidades.include?(visibilidade) %> checked="checked" <% end %> >
+									<input type="checkbox" id="checkbox-<%= visibilidade.id %>" name="evento[visibilidade_ids][]" value="<%= visibilidade.id %>" <% if @evento.visibilidades.include?(visibilidade) %> checked="checked" <% end %> <% if visibilidade.id == Visibilidade::PUBLICO.id %>onclick="desmarcarVisibilidades();"<% end %>>
 									<label><%= visibilidade.nome %></label>
 								</li>
 							<% end %>
