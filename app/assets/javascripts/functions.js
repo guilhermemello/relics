@@ -183,3 +183,11 @@ function validarCPF(cpf) {
          
     return true;    
 }
+
+function desmarcarVisibilidades() {
+	if ($("#visibilidade_checkboxes #checkbox-4").is(":checked")) {
+		$("#visibilidade_checkboxes #checkbox-1").attr("checked", false);
+		$("#visibilidade_checkboxes #checkbox-2").attr("checked", false);
+		$("#visibilidade_checkboxes #checkbox-3").attr("checked", false);
+	}
+}

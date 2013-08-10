@@ -59,6 +59,8 @@ eventos_maconicos = TipoEvento.find_or_create_by_nome(:nome => "Eventos Maçôni
 puts "CRIANDO VISIBILIDADES"
 membros_da_loja = Visibilidade.find_or_create_by_nome(:nome => "Membros da Loja")
 macons = Visibilidade.find_or_create_by_nome(:nome => "Maçons")
+dependentes = Visibilidade.find_or_create_by_nome(:nome => "Dependentes")
+publico = Visibilidade.find_or_create_by_nome(:nome => "Público")
 
 puts "CRIANDO USUÁRIOS"
 user_master = User.find_or_create_by_email :name => "Master", :email => "master@gmail.com", :password => "123456", :password_confirmation => "123456", :confirmed_at => DateTime.now

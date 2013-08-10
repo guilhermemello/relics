@@ -57,11 +57,15 @@
 				</div>
 				<div class="mws-form-row">
 					<label class="mws-form-label">Visibilidade</label>
-					<div class="mws-form-item">
-						<% Visibilidade.todas.each do |visibilidade| %>
-							<input type="checkbox" name="evento[visibilidade_ids][]" value="<%= visibilidade.id %>" <% if @evento.visibilidades.include?(visibilidade) %> checked="checked" <% end %>>
-							<label><%= visibilidade.nome %></label>
-						<% end %>
+					<div class="mws-form-item clearfix">
+						<ul class="mws-form-list inline" id="visibilidade_checkboxes">
+							<% Visibilidade.todas.each do |visibilidade| %>
+								<li>
+									<input type="checkbox" id="checkbox-<%= visibilidade.id %>" name="evento[visibilidade_ids][]" value="<%= visibilidade.id %>" <% if @evento.visibilidades.include?(visibilidade) %> checked="checked" <% end %> <% if visibilidade.id == Visibilidade::PUBLICO.id %>onclick="desmarcarVisibilidades();"<% end %>>
+									<label><%= visibilidade.nome %></label>
+								</li>
+							<% end %>
+						</ul>
 					</div>
 				</div>
 			</div>
