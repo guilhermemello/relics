@@ -48,6 +48,10 @@ class Ability
       can :editar_dependente, Loja do |loja|
         loja.users.include?(user)
       end
+
+      can :excluir_fotos, Loja do |loja|
+        loja.users.include?(user)
+      end
     elsif user.has_role? :admin_master
       can :criar, Loja
       can :excluir, Loja

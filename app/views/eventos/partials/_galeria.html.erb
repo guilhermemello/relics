@@ -59,7 +59,10 @@
 					</span>
 					<span class="mws-gallery-overlay">
 						<a target="_blank" href="<%= foto.imagem.url %>" rel="prettyPhoto[gallery1]" class="mws-gallery-btn"><i class="icon-search"></i></a>
-						<a href="/evento/remover_foto/<%= foto.id %>/<%= foto.evento.id %>" class="mws-gallery-btn"><i class="icon-trash"></i></a>
+
+						<% if can? :excluir_fotos, Loja or current_user.has_role?(:admin_master) %>
+							<a href="/evento/remover_foto/<%= foto.id %>/<%= foto.evento.id %>" class="mws-gallery-btn"><i class="icon-trash"></i></a>
+						<% end %>
 					</span>
 				</li>
 			<% end %>
