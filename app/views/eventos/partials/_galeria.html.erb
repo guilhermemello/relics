@@ -1,17 +1,21 @@
 <script type="text/javascript">
- function getFile(){
-   document.getElementById("upfile").click();
+function getFile(){
+  document.getElementById("upfile").click();
+}
+
+function sub(obj){
+   var file = obj.value;
+   var fileName = file.split("\\");
+
+   document.getElementById("file").innerHTML = fileName[fileName.length - 1];
+	$(".fileinput-preview").val(fileName[fileName.length - 1]);
+   document.myForm.submit();
+   event.preventDefault();
  }
 
- function sub(obj){
-    var file = obj.value;
-    var fileName = file.split("\\");
-
-    document.getElementById("file").innerHTML = fileName[fileName.length - 1];
-		$(".fileinput-preview").val(fileName[fileName.length - 1]);
-    document.myForm.submit();
-    event.preventDefault();
-  }
+$(document).ready(function(){
+  $("a[rel^='prettyPhoto']").prettyPhoto();
+});
 </script>
 
 <div class="mws-panel grid_8" id="galeria">
@@ -36,6 +40,11 @@
 										Browse...<input name="foto[imagem]" id="file" onchange="sub(this)" type="file" style="position: absolute; top: 0px; right: 0px; margin: 0px; cursor: pointer; font-size: 999px; opacity: 0; z-index: 999;">
 									</span>
 								</div>
+								<br />
+								<div class="mws-form-item">
+									<label class="mws-form-label">Descrição</label>
+									<input type="text" name="foto[descricao]">
+								</div>
 							</div>
 						</div>
 						<div class="mws-form-col-1-8">
@@ -57,12 +66,9 @@
 					<span class="thumbnail">
 						<%= image_tag foto.imagem.url(:thumb) %>
 					</span>
-					<span class="mws-gallery-overlay">
-						<a target="_blank" href="<%= foto.imagem.url %>" rel="prettyPhoto[gallery1]" class="mws-gallery-btn"><i class="icon-search"></i></a>
 
-						<% if can? :excluir_fotos, Loja or current_user.has_role?(:admin_master) %>
-							<a href="/evento/remover_foto/<%= foto.id %>/<%= foto.evento.id %>" class="mws-gallery-btn"><i class="icon-trash"></i></a>
-						<% end %>
+					<span class="mws-gallery-overlay">
+						<a href="<%= foto.imagem.url(:original) %>" title="<%= foto.descricao %>" rel="prettyPhoto" class="mws-gallery-btn"><i class="icon-search"></i></a>
 					</span>
 				</li>
 			<% end %>

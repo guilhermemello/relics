@@ -1,7 +1,7 @@
 # coding: utf-8
 
 class Foto < ActiveRecord::Base
-  attr_accessible :evento_id, :imagem
+  attr_accessible :evento_id, :imagem, :descricao
   belongs_to :evento
 
   has_attached_file :imagem, :styles => { :thumb => "200x150#" }
