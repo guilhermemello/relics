@@ -69,6 +69,10 @@ $(document).ready(function(){
 
 					<span class="mws-gallery-overlay">
 						<a href="<%= foto.imagem.url(:original) %>" title="<%= foto.descricao %>" rel="prettyPhoto" class="mws-gallery-btn"><i class="icon-search"></i></a>
+
+						<% if can? :excluir_fotos, Loja or current_user.has_role?(:admin_master) %>
+							<a href="/evento/remover_foto/<%= foto.id %>/<%= foto.evento.id %>" class="mws-gallery-btn"><i class="icon-trash"></i></a>
+						<% end %>
 					</span>
 				</li>
 			<% end %>
