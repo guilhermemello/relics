@@ -7,9 +7,4 @@ class Bairro < ActiveRecord::Base
     bairros = Bairro.where("cidade_id = ?", cidade_id).all
     bairros.collect { |c| [c.nome, c.id] }
   end
-
-  def self.por_cidade_com_loja(cidade_id)
-    bairros = Bairro.where("cidade_id = ?", cidade_id).joins("INNER JOIN lojas ON lojas.bairro_id = bairros.id").all
-    bairros.collect { |c| [c.nome, c.id] }
-  end
 end
