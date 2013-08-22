@@ -43,7 +43,7 @@ class DashboardController < ApplicationController
     end
 
     eventos.each do |evento|
-      @eventos << Struct::Evento.new(evento.id, gerar_data_evento(evento.data), DateTime.now, "#{evento.hora.strftime("%H:%M")} - #{evento.descricao}", :evento, evento.visibilidades, nil)
+      @eventos << Struct::Evento.new(evento.id, evento.data, DateTime.now, "#{evento.hora.strftime("%H:%M")} - #{evento.descricao}", :evento, evento.visibilidades, nil)
     end
   end
 

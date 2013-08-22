@@ -17,13 +17,14 @@ gem "better_errors", ">= 0.2.0"
 gem "binding_of_caller", ">= 0.6.8"
 gem "meta_search"
 gem "will_paginate"
-gem "paperclip", "~> 3.0"
+gem "paperclip", "~> 3.4.2"
 gem "date_validator"
 gem "webrick", "~> 1.3.1"
 gem "enumerize"
 gem "simple_form"
 gem "watu_table_builder", :require => "table_builder"
 gem "rmagick"
+gem 'aws-sdk'
 
 group :test do
   gem "rspec", "2.11.0"
