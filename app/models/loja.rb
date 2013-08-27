@@ -8,6 +8,8 @@ class Loja < ActiveRecord::Base
   delegate :sigla, :to => :obediencia, :prefix => true
   delegate :sigla, :to => :oriente_estadual, :prefix => true
   delegate :nome, :to => :rito, :prefix => true
+  delegate :uf, :to => :templo, :prefix => true, :allow_nil => true
+  delegate :cidade_nome, :to => :templo, :prefix => true, :allow_nil => true
 
   belongs_to :obediencia
   belongs_to :oriente_estadual
