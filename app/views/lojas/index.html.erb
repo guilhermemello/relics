@@ -32,8 +32,8 @@
 							<td><%= loja.rito_nome %></td>
 
 							<% if loja.possui_templo? %>
-								<td><%= loja.templo_uf %></td>
-								<td><%= loja.templo_cidade_nome %></td>
+								<td><%= loja.templo.estado.uf %></td>
+								<td><%= loja.templo.cidade.nome %></td>
 							<% else %>
 								<td><%= loja.estado.nome %></td>
 								<td><%= loja.cidade.nome %></td>
