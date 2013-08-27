@@ -39,7 +39,7 @@
 				<label class="mws-form-label">Cidade</label>
 				<div class="mws-form-item">
 					<% if params[:search].present? and params[:search][:templo_estado_id_or_estado_id_equals].present? %>
-						<%= f.select :templo_cidade_id_or_cidade_id_equals, Cidade.por_estado_com_loja(params[:search][:templo_estado_id_or_estado_id_equals]), { :include_blank => "Selecione" }, { :class => "large", :id => "cidade_id" } %>
+						<%= f.select :templo_cidade_id_or_cidade_id_equals, Cidade.por_estado_com_loja(params[:search][:templo_estado_id_or_estado_id_equals]), { :include_blank => "Selecione" }, { :class => "large", :id => "cidade_id_com_loja" } %>
 					<% else %>
 						<%= f.select :templo_cidade_id_or_cidade_id_equals, [], { :include_blank => "Selecione" }, { :class => "large", :id => "cidade_id_com_loja" } %>
 					<% end %>
