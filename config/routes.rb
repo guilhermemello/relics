@@ -1,6 +1,10 @@
 Relics::Application.routes.draw do
   match 'combo/cidades/:estado_id' => 'combo#cidades_por_uf'
+  match 'combo/cidades/com_loja/:estado_id' => 'combo#cidades_por_uf_com_loja'
+
   match 'combo/bairros/:cidade_id' => 'combo#bairros_por_cidade'
+  match 'combo/bairros/com_loja/:cidade_id' => 'combo#bairros_por_cidade_com_loja'
+  
   match 'loja/carregar_dados_templo/:templo_id' => 'lojas#carregar_dados_templo'
   match 'loja/carregar_dados_endereco/:loja_id' => 'lojas#carregar_dados_endereco'
   match 'loja/carregar/:loja_id' => 'irmaos#carregar_loja'
