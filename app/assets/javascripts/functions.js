@@ -219,3 +219,53 @@ function desmarcarVisibilidades() {
 		$("#visibilidade_checkboxes #checkbox-3").attr("checked", false);
 	}
 }
+
+function exibirDadosMaconicos(grau) {
+	if (grau == "") {
+		$("#elevacao_em").hide();
+		$("#exaltacao_em").hide();
+		$("#instalacao_em").hide();
+
+		$("#pessoa_iniciacao_em").val("");
+		$("#pessoa_elevacao_em").val("");
+		$("#pessoa_exaltacao_em").val("");
+		$("#pessoa_instalacao_em").val("");
+	}
+
+	// Aprendiz
+	if (grau == 1) {
+		$("#elevacao_em").hide();
+		$("#instalacao_em").hide();
+		$("#exaltacao_em").hide();
+
+		$("#pessoa_elevacao_em").val("");
+		$("#pessoa_instalacao_em").val("");
+		$("#pessoa_exaltacao_em").val("");
+
+		$("#iniciacao_em").show();
+	} // Companheiro
+	if (grau == 2) {
+		$("#exaltacao_em").hide();
+		$("#instalacao_em").hide();
+
+		$("#pessoa_instalacao_em").val("");
+		$("#pessoa_exaltacao_em").val("");
+
+		$("#elevacao_em").show();
+
+	// Mestre
+	} else if (grau == 3) {
+		$("#instalacao_em").hide();
+
+		$("#pessoa_instalacao_em").val("");
+
+		$("#elevacao_em").show();
+		$("#exaltacao_em").show();
+
+	// Mestre instalado
+	}	else if (grau == 4) {
+		$("#elevacao_em").show();
+		$("#exaltacao_em").show();
+		$("#instalacao_em").show();
+	}
+}

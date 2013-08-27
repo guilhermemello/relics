@@ -2,6 +2,10 @@
 	$(document).ready(function() {
 		$("#pessoa_cpf").mask("999.999.999-99");
 		$("#pessoa_data_nascimento").mask("99/99/9999");
+		$("#pessoa_elevacao_em").mask("99/99/9999");
+		$("#pessoa_exaltacao_em").mask("99/99/9999");
+		$("#pessoa_instalacao_em").mask("99/99/9999");
+		$("#pessoa_iniciacao_em").mask("99/99/9999");
 		$("#pessoa_telefone_celular").mask("(99) 9999 - 9999");
 		$("#pessoa_telefone_residencial").mask("(99) 9999 - 9999");
 		$("#pessoa_telefone_comercial").mask("(99) 9999 - 9999");
@@ -14,6 +18,8 @@
 			$("#complemento_form_pessoa").show();
 			$("#botao_cadastrar").show();
 		}
+
+		exibirDadosMaconicos(<%= @irmao.grau.id %>);
 	});
 </script>
 
@@ -76,16 +82,6 @@
 
 					<div class="mws-form-row">
 						<label class="mws-form-label">
-							Grau
-							<span class="required">*</span>
-						</label>
-						<div class="mws-form-item">
-							<%= f.select :grau_id, @grau, { :include_blank => "Selecione" }, { :class => "small" } %>
-						</div>
-					</div>
-
-					<div class="mws-form-row">
-						<label class="mws-form-label">
 							<strong><u>Contatos</u></strong>
 						</label>
 					</div>
@@ -107,35 +103,9 @@
 						</div>
 					</div>
 
-					<div class="mws-form-row">
-						<label class="mws-form-label">
-							<strong><u>Dados Pessoais</u></strong>
-						</label>
-					</div>
+					<%= render "irmaos/partials/dados_maconicos", :f => f %>
 
-					<div class="mws-form-row">
-						<label class="mws-form-label">Nome do Pai</label>
-						<div class="mws-form-item">
-							<%= f.text_field :nome_pai, :class => "small" %>
-						</div>
-					</div>
-
-					<div class="mws-form-row">
-						<label class="mws-form-label">Nome da Mãe</label>
-						<div class="mws-form-item">
-							<%= f.text_field :nome_mae, :class => "small" %>
-						</div>
-					</div>
-
-					<div class="mws-form-row">
-						<label class="mws-form-label">
-							Data de Nascimento
-							<span class="required">*</span>
-						</label>
-						<div class="mws-form-item">
-							<%= f.text_field :data_nascimento, :class => "small" %>
-						</div>
-					</div>
+					<%= render "irmaos/partials/dados_pessoais", :f => f %>
 
 					<div class="mws-form-row">
 						<label class="mws-form-label">

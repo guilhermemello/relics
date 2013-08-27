@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730233115) do
+ActiveRecord::Schema.define(:version => 20130827141621) do
 
   create_table "bairros", :force => true do |t|
     t.string   "uf"
@@ -105,8 +105,12 @@ ActiveRecord::Schema.define(:version => 20130730233115) do
   end
 
   create_table "irmaos", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.date     "iniciacao_em"
+    t.date     "elevacao_em"
+    t.date     "exaltacao_em"
+    t.date     "instalacao_em"
   end
 
   create_table "lojas", :force => true do |t|
@@ -217,6 +221,10 @@ ActiveRecord::Schema.define(:version => 20130730233115) do
     t.string   "foto_content_type"
     t.integer  "foto_file_size"
     t.datetime "foto_updated_at"
+    t.date     "iniciacao_em"
+    t.date     "elevacao_em"
+    t.date     "exaltacao_em"
+    t.date     "instalacao_em"
   end
 
   create_table "profissaos", :force => true do |t|

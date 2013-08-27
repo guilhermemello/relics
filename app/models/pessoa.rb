@@ -4,7 +4,7 @@ class Pessoa < ActiveRecord::Base
   extend Enumerize
 
   attr_accessible :cpf, :nome, :categoria_id, :grau_id, :user_id, :email_particular, :cim, :telefone_celular, :nome_pai, :nome_mae, :data_nascimento, :estado_nascimento_id, :pais_nascimento_id, :endereco,
-    :bairro_id, :cidade_id, :estado_id, :cep, :telefone_residencial, :aposentado, :empresa, :profissao_id, :telefone_comercial, :email_comercial, :ramal, :foto
+    :bairro_id, :cidade_id, :estado_id, :cep, :telefone_residencial, :aposentado, :empresa, :profissao_id, :telefone_comercial, :email_comercial, :ramal, :foto, :iniciacao_em, :elevacao_em, :exaltacao_em, :instalacao_em
 
   belongs_to :categoria
   belongs_to :grau

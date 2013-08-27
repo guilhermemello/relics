@@ -1,0 +1,51 @@
+<div class="mws-form-row">
+	<label class="mws-form-label">
+		<strong><u>Dados Maçonicos</u></strong>
+	</label>
+</div>
+
+<div class="mws-form-row">
+	<label class="mws-form-label">
+		Grau
+		<span class="required">*</span>
+	</label>
+	<div class="mws-form-item">
+		<%= f.select :grau_id, @grau, { :include_blank => "Selecione" }, { :class => "small", :onchange => "exibirDadosMaconicos($('#pessoa_grau_id').val());" } %>
+	</div>
+</div>
+
+<div class="mws-form-row">
+	<label class="mws-form-label">
+		Iniciação em
+	</label>
+	<div class="mws-form-item">
+		<%= f.text_field :iniciacao_em, :class => "small" %>
+	</div>
+</div>
+
+<div class="mws-form-row" style="display: none;" id="elevacao_em">
+	<label class="mws-form-label">
+		Elevação em 
+	</label>
+	<div class="mws-form-item">
+		<%= f.text_field :elevacao_em, :class => "small" %>
+	</div>
+</div>
+
+<div class="mws-form-row" style="display: none;" id="exaltacao_em">
+	<label class="mws-form-label">
+		Exaltação em 
+	</label>
+	<div class="mws-form-item">
+		<%= f.text_field :exaltacao_em, :class => "small" %>
+	</div>
+</div>
+
+<div class="mws-form-row" style="display: none;" id="instalacao_em">
+	<label class="mws-form-label">
+		Instalação em 
+	</label>
+	<div class="mws-form-item">
+		<%= f.text_field :instalacao_em, :class => "small" %>
+	</div>
+</div>
