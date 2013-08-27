@@ -15,8 +15,12 @@ class ComboController < ApplicationController
   end
 
   def bairros_por_cidade_com_loja
-    @bairros = Bairro.select("DISTINCT bairros.id, bairros.nome").joins("LEFT JOIN lojas ON lojas.bairro_id = bairros.id
-            LEFT JOIN templos ON templos.bairro_id =  bairros.id").where("bairros.cidade_id = ?", params[:cidade_id]).order("bairros.nome ASC")
+    @bairros = Bairro.select("DISTINCT bairros.id, bairros.nome")
+                .joins("LEFT JOIN lojas ON lojas.bairro_id = bairros.id
+                        LEFT JOIN templos ON templos.bairro_id =  bairros.id")
+                .where("templos.cidade_id = ?  OR lojas.cidade_id = ?", params[:cidade_id], params[:cidade_id])
+                .order("bairros.nome ASC")
+
     render :json => @bairros.to_json
   end
 end
