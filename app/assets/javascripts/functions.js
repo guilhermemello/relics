@@ -1,7 +1,21 @@
 $(document).ready(function() {
 	// CIDADE POR ESTADO
+	$("#estado_id").change(function() {
+		$.getJSON("/combo/cidades/" + $(this).val(), function(data) {
+			$("#bairro_id").empty();
+			$("#cidade_id").empty();
+			$("<option value=''>Selecione</option>").appendTo("#cidade_id");
+			$("<option value=''>Selecione</option>").appendTo("#bairro_id");
+
+			$.each(data, function(i,item) {
+				$("<option value=\"" + item.id + "\">" + item.nome + "</option>").appendTo("#cidade_id");
+			});
+		})
+	});
+
+	// CIDADE POR ESTADO COM LOJA
 	$("#estado_id_com_loja").change(function() {
-		$.getJSON("/combo/cidades/com_loja" + $(this).val(), function(data) {
+		$.getJSON("/combo/cidades/com_loja/" + $(this).val(), function(data) {
 			$("#bairro_id").empty();
 			$("#cidade_id").empty();
 			$("<option value=''>Selecione</option>").appendTo("#cidade_id");
@@ -14,8 +28,20 @@ $(document).ready(function() {
 	});
 
 	// BAIRRO POR CIDADE
+	$("#cidade_id").change(function() {
+		$.getJSON("/combo/bairros/" + $(this).val(), function(data) {
+			$("#bairro_id").empty();
+			$("<option value=''>Selecione</option>").appendTo("#bairro_id");
+
+			$.each(data, function(i,item) {
+				$("<option value=\"" + item.id + "\">" + item.nome + "</option>").appendTo("#bairro_id");
+			});
+		})
+	});
+
+	// BAIRRO POR CIDADE COM LOJA
 	$("#cidade_id_com_loja").change(function() {
-		$.getJSON("/combo/bairros/com_loja" + $(this).val(), function(data) {
+		$.getJSON("/combo/bairros/com_loja/" + $(this).val(), function(data) {
 			$("#bairro_id").empty();
 			$("<option value=''>Selecione</option>").appendTo("#bairro_id");
 
