@@ -5,7 +5,7 @@ class ComboController < ApplicationController
   end
 
   def cidades_por_uf_com_loja
-    @cidades = Cidade.select("DISTINCT cidades.id, cidades.nome").joins("INNER JOIN lojas ON lojas.cidade_id = cidades.id").where("cidades.estado_id = ?", params[:estado_id])..order("cidades.nome ASC")
+    @cidades = Cidade.select("DISTINCT cidades.id, cidades.nome").joins("INNER JOIN lojas ON lojas.cidade_id = cidades.id").where("cidades.estado_id = ?", params[:estado_id]).order("cidades.nome ASC")
     render :json => @cidades.to_json
   end
 
