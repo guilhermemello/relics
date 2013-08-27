@@ -4,10 +4,10 @@ $(document).ready(function() {
 		$("#bairro_id").empty();
 		$("#cidade_id").empty();
 
-		$.getJSON("/combo/cidades/" + $(this).val(), function(data) {
-			$("<option value=''>Selecione</option>").appendTo("#cidade_id");
-			$("<option value=''>Selecione</option>").appendTo("#bairro_id");
+		$("<option value=''>Selecione</option>").appendTo("#cidade_id");
+		$("<option value=''>Selecione</option>").appendTo("#bairro_id");
 
+		$.getJSON("/combo/cidades/" + $(this).val(), function(data) {
 			$.each(data, function(i,item) {
 				$("<option value=\"" + item.id + "\">" + item.nome + "</option>").appendTo("#cidade_id");
 			});
@@ -19,10 +19,10 @@ $(document).ready(function() {
 		$("#bairro_id").empty();
 		$("#cidade_id_com_loja").empty();
 
-		$.getJSON("/combo/cidades/com_loja/" + $(this).val(), function(data) {
-			$("<option value=''>Selecione</option>").appendTo("#cidade_id");
-			$("<option value=''>Selecione</option>").appendTo("#bairro_id");
+		$("<option value=''>Selecione</option>").appendTo("#cidade_id_com_loja");
+		$("<option value=''>Selecione</option>").appendTo("#bairro_id");
 
+		$.getJSON("/combo/cidades/com_loja/" + $(this).val(), function(data) {
 			$.each(data, function(i,item) {
 				$("<option value=\"" + item.id + "\">" + item.nome + "</option>").appendTo("#cidade_id_com_loja");
 			});
@@ -32,10 +32,9 @@ $(document).ready(function() {
 	// BAIRRO POR CIDADE
 	$("#cidade_id").change(function() {
 		$("#bairro_id").empty();
+		$("<option value=''>Selecione</option>").appendTo("#bairro_id");
 
 		$.getJSON("/combo/bairros/" + $(this).val(), function(data) {
-			$("<option value=''>Selecione</option>").appendTo("#bairro_id");
-
 			$.each(data, function(i,item) {
 				$("<option value=\"" + item.id + "\">" + item.nome + "</option>").appendTo("#bairro_id");
 			});
@@ -45,10 +44,9 @@ $(document).ready(function() {
 	// BAIRRO POR CIDADE COM LOJA
 	$("#cidade_id_com_loja").change(function() {
 		$("#bairro_id").empty();
+		$("<option value=''>Selecione</option>").appendTo("#bairro_id");
 
 		$.getJSON("/combo/bairros/com_loja/" + $(this).val(), function(data) {
-			$("<option value=''>Selecione</option>").appendTo("#bairro_id");
-
 			$.each(data, function(i,item) {
 				$("<option value=\"" + item.id + "\">" + item.nome + "</option>").appendTo("#bairro_id");
 			});
