@@ -9,7 +9,12 @@ class Bairro < ActiveRecord::Base
   end
 
   def self.por_cidade_com_loja(cidade_id)
-    bairros = Bairro.select("DISTINCT bairros.id, bairros.nome").where("bairros.cidade_id = ?", cidade_id).joins("INNER JOIN lojas ON lojas.bairro_id = bairros.id").all
+    bairros = Bairro.select("DISTINCT bairros.id, bairros.nome")
+                .where("bairros.cidade_id = ?", cidade_id)
+                .joins("LEFT JOIN lojas ON lojas.bairro_id = bairros.id
+                        LEFT JOIN templos ON templos.bairro_id =  bairros.id")
+                .order("bairros.nome ASC")
+
     bairros.collect { |c| [c.nome, c.id] }
   end
 end
