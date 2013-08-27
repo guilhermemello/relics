@@ -6,6 +6,7 @@ class LojasController < ApplicationController
 
   def index
     @search = Loja.search(params[:search])
+    @ufs = Estado.todos_com_loja.collect { |r| [r.uf, r.id] }
     @lojas = @search.order("nome ASC").paginate(:page => params[:page])
   end
 
@@ -87,7 +88,7 @@ class LojasController < ApplicationController
     @obediencias = Obediencia.todas.collect { |o| [o.sigla, o.id] }  
     @orientes_estaduais = OrienteEstadual.todos.collect { |oe| [oe.sigla, oe.id] }
     @ritos = Rito.todos.collect { |r| [r.nome, r.id] }
-    @ufs = Estado.todos_com_loja.collect { |r| [r.uf, r.id] }
+    @ufs = Estado.todos.collect { |r| [r.uf, r.id] }
     @templos = Templo.todos.collect { |t| [t.nome, t.id ]}
   end
 end
