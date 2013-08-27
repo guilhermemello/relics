@@ -22,7 +22,7 @@ $(document).ready(function() {
 			$("<option value=''>Selecione</option>").appendTo("#bairro_id");
 
 			$.each(data, function(i,item) {
-				$("<option value=\"" + item.id + "\">" + item.nome + "</option>").appendTo("#cidade_id");
+				$("<option value=\"" + item.id + "\">" + item.nome + "</option>").appendTo("#cidade_id_com_loja");
 			});
 		})
 	});
