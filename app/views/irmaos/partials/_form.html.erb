@@ -19,7 +19,9 @@
 			$("#botao_cadastrar").show();
 		}
 
-		exibirDadosMaconicos(<%= @irmao.grau.id %>);
+		<% if !@irmao.new_record? %>
+			exibirDadosMaconicos(<%= @irmao.grau.id %>);
+		<% end %>
 	});
 </script>
 
