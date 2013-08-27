@@ -19,12 +19,14 @@
 			$("#botao_cadastrar").show();
 		}
 
-		<% if !@irmao.new_record? %>
+		<% if @irmao.new_record? %>
+			exibirDadosMaconicos(<%= params[:pessoa][:grau_id].to_i %>);
+		<% else %>
 			exibirDadosMaconicos(<%= @irmao.grau.id %>);
 		<% end %>
 	});
 </script>
-
+<%= @irmao.new_record? %>
 <div class="mws-panel grid_8">
 	<div class="mws-panel-header">
 		<span><%= @irmao.new_record? ? "#{@loja.nome} - Cadastrar Irmão" : "#{@loja.nome} - #{@irmao.nome}" %></span>

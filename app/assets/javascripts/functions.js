@@ -226,7 +226,6 @@ function exibirDadosMaconicos(grau) {
 		$("#exaltacao_em").hide();
 		$("#instalacao_em").hide();
 
-		$("#pessoa_iniciacao_em").val("");
 		$("#pessoa_elevacao_em").val("");
 		$("#pessoa_exaltacao_em").val("");
 		$("#pessoa_instalacao_em").val("");
