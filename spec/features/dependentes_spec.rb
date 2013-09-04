@@ -3,6 +3,7 @@
 require 'spec_helper'
 
 describe "Loja" do
+=begin
   context "Listagem" do
     before :each do
       logar(:usuario)
@@ -35,4 +36,5 @@ describe "Loja" do
     FactoryGirl.create(:oriente_estadual)
     FactoryGirl.create(:rito)
   end
+=end
 end

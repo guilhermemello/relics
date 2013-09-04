@@ -25,6 +25,7 @@ gem "simple_form"
 gem "watu_table_builder", :require => "table_builder"
 gem "rmagick"
 gem 'aws-sdk'
+gem 'zip'
 
 group :test do
   gem "rspec", "2.11.0"
@@ -32,7 +33,7 @@ group :test do
   gem "factory_girl", "~> 4.2.0"
   gem "capybara", "~> 2.0.2"
   gem "selenium-client"
-  gem "selenium-webdriver", "2.25.0"
+  gem 'selenium-webdriver', '2.35.0'
   gem "database_cleaner", ">= 0.9.1"
   gem "launchy", ">= 2.1.2"
 end
@@ -44,3 +45,4 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
   gem 'execjs'
 end 
+

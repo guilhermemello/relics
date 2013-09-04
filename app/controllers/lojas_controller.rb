@@ -34,7 +34,6 @@ class LojasController < ApplicationController
     if @loja.save
       redirect_to :action => :index
     else
-      p @loja.errors
       render :action => :new
     end
   end

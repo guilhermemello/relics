@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 FactoryGirl.define do
-  factory :templo, :class => Templo do
+  factory :templo_equidade, :class => Templo do
     nome "JPLSJ EQUIDADE"
     endereco "R. DO LAVRADIO, 97 - CP 91042"
     cep "20230-070"

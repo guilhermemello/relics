@@ -6,22 +6,16 @@ require 'rspec/autorun'
 require 'factory_girl'
 require 'capybara/rspec'
 require 'capybara/rails'
-require 'database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-Dir.glob(File.dirname(__FILE__) + "/factories/*").each do |factory|
-  require factory
-end
+FactoryGirl.find_definitions
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
-  
-  #Capybara.default_driver = :selenium
-  Capybara.current_driver = :rack_test
-  Capybara.default_wait_time = 10
+  Capybara.default_driver = :selenium
+  Capybara.default_wait_time = 5
 
   # ## Mock Framework
   #
@@ -30,7 +24,6 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
-  # config.mock_with :rspec
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -52,15 +45,14 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.before(:suite) do
-     DatabaseCleaner.strategy = :truncation
-     DatabaseCleaner.clean_with(:truncation)
-   end
+    DatabaseCleaner.strategy = :truncation
+  end
 
-   config.before(:each) do
-     DatabaseCleaner.start
-   end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
 
-   config.after(:each) do
-     DatabaseCleaner.clean
-   end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
