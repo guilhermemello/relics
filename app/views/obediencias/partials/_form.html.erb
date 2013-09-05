@@ -1,0 +1,105 @@
+<div class="mws-panel grid_6">
+	<div class="mws-panel-header">
+		<span><%= @obediencia.new_record? ? "Cadastrar obediência" : @obediencia.nome %></span>
+	</div>
+	
+	<div class="mws-panel-body no-padding">
+	<%= form_for @obediencia, :html => { :class => "mws-form", :multipart => true } do |f| %>
+	<div class="mws-form-inline">
+		<div class="mws-form-row">
+			<label class="mws-form-label">
+				Nome
+				<span class="required">*</span>	
+			</label>
+			<div class="mws-form-item">
+				<%= f.text_field :nome, :class => "small" %>
+			</div>
+		</div>
+		
+		<div class="mws-form-row">
+			<label class="mws-form-label">
+				Sigla
+				<span class="required">*</span>	
+			</label>
+			<div class="mws-form-item">
+				<%= f.text_field :sigla, :class => "small" %>
+			</div>
+		</div>
+		
+		<div class="mws-form-row">
+			<label class="mws-form-label">
+				URL
+				<span class="required">*</span>	
+			</label>
+			<div class="mws-form-item">
+				<%= f.text_field :url, :class => "small" %>
+			</div>
+		</div>
+		
+		<div class="mws-form-row">
+			<label class="mws-form-label">
+				Email
+				<span class="required">*</span>	
+			</label>
+			<div class="mws-form-item">
+				<%= f.text_field :email, :class => "small" %>
+			</div>
+		</div>
+		
+		<div class="mws-form-row">
+			<label class="mws-form-label">
+				Telefone
+			</label>
+			<div class="mws-form-item">
+				<%= f.text_field :telefone, :class => "small" %>
+			</div>
+		</div>
+		
+		<div class="mws-form-row">
+			<label class="mws-form-label">
+				Grão-mestre
+			</label>
+			<div class="mws-form-item">
+				<%= f.text_field :graomestre, :class => "small" %>
+			</div>
+		</div>
+		
+		<div class="mws-form-row">
+			<label class="mws-form-label">
+				Secretário
+			</label>
+			<div class="mws-form-item">
+				<%= f.text_field :secretario, :class => "small" %>
+			</div>
+		</div>
+		
+		<div class="mws-form-row">
+			<label class="mws-form-label">
+				Jurisdição
+			</label>
+			<div class="mws-form-item">
+				<%= f.text_field :jurisdicao, :class => "small" %>
+			</div>
+		</div>
+		
+		<div class="mws-form-row">
+			<label class="mws-form-label">UF</label>
+			<div class="mws-form-item">
+				<%= f.select :estado_id, @ufs, { :include_blank => "Selecione" }, { :class => "small", :id => "estado_id" } %>
+			</div>
+		</div>
+		
+	
+	<div class="mws-button-row">
+		<% if @obediencia.new_record? %>
+				<input type="submit" value="Cadastrar" class="btn btn-success">
+		<% else %>
+				<input type="submit" value="Atualizar" class="btn btn-success">
+		<% end %>
+
+		<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/obediencias';">
+	</div>
+	</div>
+	<% end %>
+	</div><!-- mws-panel-body no-padding -->
+</div><!-- mws-panel grid_6 -->

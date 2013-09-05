@@ -1,0 +1,32 @@
+<div class="mws-panel grid_6">
+	<div class="mws-panel-header">
+		<span><%= @rito.new_record? ? "Cadastrar rito" : @rito.nome %></span>
+	</div>
+	
+	<div class="mws-panel-body no-padding">
+	<%= form_for @rito, :html => { :class => "mws-form", :multipart => true } do |f| %>
+	<div class="mws-form-inline">
+		<div class="mws-form-row">
+			<label class="mws-form-label">
+				Nome
+				<span class="required">*</span>	
+			</label>
+			<div class="mws-form-item">
+				<%= f.text_field :nome, :class => "small" %>
+			</div>
+		</div>
+		
+	
+	<div class="mws-button-row">
+		<% if @rito.new_record? %>
+				<input type="submit" value="Cadastrar" class="btn btn-success">
+		<% else %>
+				<input type="submit" value="Atualizar" class="btn btn-success">
+		<% end %>
+
+		<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/ritos';">
+	</div>
+	</div>
+	<% end %>
+	</div><!-- mws-panel-body no-padding -->
+</div><!-- mws-panel grid_6 -->

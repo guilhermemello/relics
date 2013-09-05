@@ -32,6 +32,9 @@
 			<li <% if params[:controller] == "ritos" %>class="active" <% end %>>
 				<a href="/ritos"><i class="icon-book"></i> Ritos </a>
 			</li>
+			<li <% if params[:controller] == "obediencias" %>class="active" <% end %>>
+				<a href="/obediencias"><i class="icon-globe"></i> Obediências </a>
+			</li>
 			<% if current_user.has_role?(:admin_master) %>
 				<li <% if params[:controller] == "permissoes" %>class="active" <% end %>>
 					<a href="/permissoes"><i class="icon-key"></i> Permissões</a>

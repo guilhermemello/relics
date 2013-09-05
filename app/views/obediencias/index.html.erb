@@ -1,0 +1,42 @@
+<div class="mws-panel grid_6">
+	<div class="mws-panel-header">
+		<div style="float: right; margin-top: -4px;">
+			<%= link_to "Nova obediência", "/obediencias/new", :class => "btn btn-success" %>
+		</div>
+
+		<span>Obediências</span>
+	</div><!-- mws-panel-header -->
+	
+	<div class="mws-panel-body no-padding">
+		<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
+			<table class="mws-table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Sigla</th>
+						<th>URL</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @obediencias.each do |obediencia| %>
+					<tr>
+						<td><%= obediencia.nome %></td>
+						<td><%= obediencia.sigla %></td>
+						<td><%= obediencia.url %></td>						
+						<td>
+							<span><i class="icon-search"></i><span>
+							<%= link_to "Consultar", edit_obediencia_path(obediencia), :style => "color: black;" %>
+							&nbsp;
+							<span><i class="icon-trash"></i><span>
+							<%= link_to "Excluir", obediencia_path(obediencia), :method => :delete, :confirm => "Confirma a exclusão ?", :style => "color: black;" %>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div><!-- mws-panel-body no-padding -->
+	
+	
+</div><!-- mws-panel grid_6 -->
