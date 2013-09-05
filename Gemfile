@@ -20,7 +20,7 @@ gem "will_paginate"
 gem "paperclip", "~> 3.4.2"
 gem "date_validator"
 gem "webrick", "~> 1.3.1"
-gem "enumerize"
+gem "enumerize", '0.5.1'
 gem "simple_form"
 gem "watu_table_builder", :require => "table_builder"
 gem "rmagick"
