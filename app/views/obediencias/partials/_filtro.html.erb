@@ -1,0 +1,62 @@
+<div class="mws-panel-header">
+	<span><i class="icon-filter"></i> Filtro</span>
+</div>
+
+<div class="mws-panel-body no-padding">
+	<%= form_for @search, :url => obediencias_path, :html => { :method => :get, :class => "mws-form" } do |f| %>
+
+		<div class="mws-form-block">
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">Nome</label>
+				<div class="mws-form-item">
+					<%= f.text_field :nome_contains, :class => "large" %>
+				</div>
+			</div>
+
+
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">Sigla</label>
+				<div class="mws-form-item">
+					<%= f.text_field :sigla_contains, :class => "large" %>
+				</div>
+			</div>
+
+		
+		<div class="mws-form-row bordered">
+			<label class="mws-form-label">UF</label>
+			<div class="mws-form-item">
+				<%= f.select :estado_id_equals, @ufs, { :include_blank => "Selecione" }, { :class => "large", :id => "estado_id" } %>
+			</div>
+		</div>
+		
+		<div class="mws-form-row bordered">
+			<label class="mws-form-label">Cidade</label>
+			<div class="mws-form-item">
+				<% if params[:search].present? and params[:search][:estado_id_equals].present? %>
+					<%= f.select :cidade_id_equals, Cidade.por_estado(params[:search][:estado_id_equals]), { :include_blank => "Selecione" }, { :class => "large", :id => "cidade_id" } %>
+				<% else %>
+					<%= f.select :cidade_id_equals, [], { :include_blank => "Selecione" }, { :class => "large", :id => "cidade_id" } %>
+				<% end %>
+			</div>
+		</div>
+		
+		<div class="mws-form-row">
+			<label class="mws-form-label">Bairro</label>
+			<div class="mws-form-item">
+				<% if params[:search].present? and params[:search][:cidade_id_equals].present? %>
+					<%= f.select :bairro_id_equals, Bairro.por_cidade(params[:search][:cidade_id_equals]), { :include_blank => "Selecione" }, { :class => "large", :id => "bairro_id" } %>
+				<% else %>
+					<%= f.select :bairro_id_equals, [], { :include_blank => "Selecione" }, { :class => "large", :id => "bairro_id" } %>
+				<% end %>
+			</div>
+		</div>
+		
+		<div class="mws-button-row">
+			<input type="submit" value="Filtrar" class="btn btn-success">
+			<input type="reset" value="Limpar" class="btn " onclick="window.location.href='/obediencias';">
+		</div>
+		
+		
+		</div><!-- mws-form-block -->	
+	<% end %>
+</div><!-- mws-panel-body no-padding -->
