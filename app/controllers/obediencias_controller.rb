@@ -1,11 +1,10 @@
 class ObedienciasController < ApplicationController
   layout "interno"
 
-  before_filter :combos, :only => [:new, :create, :edit]
+  before_filter :combos, :only => [:index, :new, :create, :edit]
 
   def index
     @search = Obediencia.search(params[:search])
-    @ufs = Estado.todos.collect { |r| [r.uf, r.id] }
     @obediencias = @search.order("nome ASC")
   end
   
@@ -28,7 +27,7 @@ class ObedienciasController < ApplicationController
   end
   
   def update
-    @obediencia = Obediencia.where("id=?", params[:id]).first
+    @obediencia = Obediencia.where("id = ?", params[:id]).first
     
     if @obediencia.update_attributes(params[:obediencia])
       redirect_to :action => :index
