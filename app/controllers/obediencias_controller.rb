@@ -1,9 +1,12 @@
 class ObedienciasController < ApplicationController
   layout "interno"
-  
+
+  before_filter :combos, :only => [:new, :create, :edit]
+
   def index
     @search = Obediencia.search(params[:search])
-    @obediencias = Obediencia.todas
+    @ufs = Estado.todos.collect { |r| [r.uf, r.id] }
+    @obediencias = @search.order("nome ASC")
   end
   
   def new
@@ -20,4 +23,28 @@ class ObedienciasController < ApplicationController
     end
   end
   
+  def edit
+    @obediencia = Obediencia.where("id = ?", params[:id]).first
+  end
+  
+  def update
+    @obediencia = Obediencia.where("id=?", params[:id]).first
+    
+    if @obediencia.update_attributes(params[:obediencia])
+      redirect_to :action => :index
+    else
+      render :action => :edit
+      end 
+  end
+
+  def destroy
+    @obediencia = Obediencia.where("id = ?", params[:id]).first
+    @obediencia.destroy
+    
+    redirect_to :action => :index
+  end
+
+  def combos
+    @ufs = Estado.todos.collect { |estado| [estado.uf, estado.id] }
+  end
 end

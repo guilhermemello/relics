@@ -1,3 +1,11 @@
+<script>
+	$(document).ready(function() {
+		$("#obediencia_telefone").mask("(99) 9999 - 9999");
+		$("#obediencia_cep").mask("99999-999");
+	});
+</script>
+
+
 <div class="mws-panel grid_6">
 	<div class="mws-panel-header">
 		<span><%= @obediencia.new_record? ? "Cadastrar obediência" : @obediencia.nome %></span>
@@ -89,6 +97,45 @@
 			</div>
 		</div>
 		
+		<div class="mws-form-row">
+			<label class="mws-form-label">Cidade</label>
+			<div class="mws-form-item">
+				<% if @obediencia.cidade.present? %>
+					<%= f.select :cidade_id, Cidade.por_estado(@obediencia.estado.id), { :include_blank => "Selecione" }, { :class => "small", :id => "cidade_id" } %>
+				<% else %>
+					<%= f.select :cidade_id, [], { :include_blank => "Selecione" }, { :class => "small", :id => "cidade_id" } %>
+				<% end %>
+			</div>
+		</div>
+		
+		<div class="mws-form-row">
+			<label class="mws-form-label">Bairro</label>
+			<div class="mws-form-item">
+				<% if @obediencia.cidade.present? %>
+					<%= f.select :bairro_id, Bairro.por_cidade(@obediencia.cidade.id), { :include_blank => "Selecione" }, { :class => "small", :id => "bairro_id" } %>
+				<% else %>
+					<%= f.select :bairro_id, [], { :include_blank => "Selecione" }, { :class => "small", :id => "bairro_id" } %>
+				<% end %>
+			</div>
+		</div>
+		
+		<div class="mws-form-row">
+			<label class="mws-form-label">
+				Endereço
+			</label>
+			<div class="mws-form-item">
+				<%= f.text_field :endereco, :class => "small" %>
+			</div>
+		</div>
+	
+		<div class="mws-form-row">
+			<label class="mws-form-label">
+				CEP
+			</label>
+			<div class="mws-form-item">
+				<%= f.text_field :cep, :class => "small" %>
+			</div>
+		</div>
 	
 	<div class="mws-button-row">
 		<% if @obediencia.new_record? %>
