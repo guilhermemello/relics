@@ -1,0 +1,44 @@
+<div class="mws-panel grid_6">
+	<div class="mws-panel-header">
+		<div style="float: right; margin-top: -4px;">
+			<%= link_to "Novo Oriente", "/ritos/new", :class => "btn btn-success" %>
+		</div>
+
+		<span>Oriente Estadual</span>
+	</div><!-- mws-panel-header -->
+		
+		<div class="mws-panel-body no-padding">
+			<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
+				<table class="mws-table">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @oriente_estadual.each do |oriente_estadual| %>
+						<tr>
+							<td><%= oriente_estadual.nome %></td>
+							<td>
+								<span><i class="icon-search"></i><span>
+								<%= link_to "Consultar", edit_oriente_estadual_path(rito), :style => "color: black;" %>
+								&nbsp;
+								<span><i class="icon-trash"></i><span>
+								<%= link_to "Excluir", oriente_estadual_path(rito), :method => :delete, :confirm => "Confirma a exclusão ?", :style => "color: black;" %>
+							</td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div><!-- mws-panel-body no-padding -->
+		
+	</div><!-- mws-panel-header -->
+
+
+<div class="mws-panel grid_2">
+	<%= render "oriente_estadual/partials/filtro" %>
+</div>
+
+</div><!-- mws-panel grid_6 -->
