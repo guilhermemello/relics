@@ -38,9 +38,9 @@ class Pessoa < ActiveRecord::Base
     errors.add(:foto, "A foto deve possuir menos de 400K") if self.foto_file_size.present? and self.foto_file_size > 400.kilobytes
   end
 
-  scope :possui_filiacaao?, lambda { |cpf|
-    where("cpf = ?", params[:cpf]).first
-  }
+  #scope :possui_filiacaao?, lambda { |cpf|
+  #  where("cpf = ?", params[:cpf]).first
+  #}
 
   scope :dependentes, lambda { |irmao|
     joins("INNER JOIN `dependentes` ON `dependentes`.`dependente_id` = `pessoas`.`id`").where("dependentes.pessoa_id = ?", irmao.id).order("created_at DESC")

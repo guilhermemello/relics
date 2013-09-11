@@ -10,7 +10,11 @@
 		<span class="required">*</span>
 	</label>
 	<div class="mws-form-item">
-		<%= f.select :grau_id, @grau, { :include_blank => "Selecione" }, { :class => "small", :onchange => "exibirDadosMaconicos($('#pessoa_grau_id').val());" } %>
+		<% if can? :editar_irmao, @loja or current_user.has_role?(:admin_master) %>
+			<%= f.select :grau_id, @grau, { :include_blank => "Selecione" }, { :class => "small", :onchange => "exibirDadosMaconicos($('#pessoa_grau_id').val());" } %>
+		<% else %>
+			<%= f.select :grau_id, @grau, { :include_blank => "Selecione" }, { :class => "small", :onchange => "exibirDadosMaconicos($('#pessoa_grau_id').val());", :disabled => true } %>
+		<% end %>
 	</div>
 </div>
 

@@ -25,7 +25,6 @@ class IrmaosController < ApplicationController
   end
 
   def create
-    p params[:pessoa]
     @irmao = Pessoa.new(params[:pessoa])
     @irmao.categoria = Categoria::IRMAO
 
