@@ -20,13 +20,14 @@
 		}
 
 		<% if @irmao.new_record? %>
-			exibirDadosMaconicos(<%= params[:pessoa][:grau_id].to_i %>);
+
+				exibirDadosMaconicos(null);
+
 		<% else %>
 			exibirDadosMaconicos(<%= @irmao.grau.id %>);
 		<% end %>
 	});
 </script>
-
 <div class="mws-panel grid_8">
 	<div class="mws-panel-header">
 		<span><%= @irmao.new_record? ? "#{@loja.nome} - Cadastrar Irmão" : "#{@loja.nome} - #{@irmao.nome}" %></span>
@@ -248,7 +249,7 @@
 					<% if @irmao.new_record? %>
 						<input type="submit" value="Cadastrar" class="btn btn-success" id="botao_cadastrar" style="display: none;">
 					<% else %>
-						<% if @irmao.que_esta_logado?(current_user) or can? :editar, @loja %>
+						<% if @irmao.que_esta_logado?(current_user) or can? :editar_irmao, @loja %>
 							<input type="submit" value="Atualizar" class="btn btn-success">
 						<% end %>
 

@@ -41,6 +41,7 @@ Relics::Application.routes.draw do
   resources :permissoes
   resources :dependentes
   resources :eventos
+  resources :pecas
 
   put 'update_password' => 'users#update_password'
 end
