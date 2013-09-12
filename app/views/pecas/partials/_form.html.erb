@@ -1,3 +1,15 @@
+<script>
+	$(document).ready(function() {
+		exibirDocumento(<%= @peca.tipo_documento or Peca::TEXTO %>);
+
+		<% if @peca.autor_nome.nil? or @peca.autor.present? %>
+			exibirAutoria(<%= Peca::AUTOR_IRMAO %>);
+		<% else %>
+			exibirAutoria(<%= Peca::AUTOR_OUTRO %>);
+		<% end %>
+	});
+</script>
+
 <div class="mws-panel grid_6">
 	<div class="mws-panel-header">
 		<span><%= @peca.new_record? ? "Cadastrar Peça de Arquitetura" : "Peça de Arquitetura" %></span>
@@ -40,8 +52,8 @@
 					<div class="mws-form-item">
 						<ul class="mws-form-list inline">
 							<li>
-								<input type="radio" onclick="exibirAutoria('irmao');" name="autor_opcao" checked="true"> <label>Irmão</label>
-								<input type="radio" onclick="exibirAutoria('outro');" name="autor_opcao"> <label>Outro</label>
+								<input type="radio" onclick="exibirAutoria(<%= Peca::AUTOR_IRMAO %>);" name="autor_opcao" id="autor_irmao" checked="true"> <label>Irmão</label>
+								<input type="radio" onclick="exibirAutoria(<%= Peca::AUTOR_OUTRO %>);" name="autor_opcao" id="autor_outro"> <label>Outro</label>
 							</li>
 						</ul>
 
@@ -82,8 +94,8 @@
 					<div class="mws-form-item">
 						<ul class="mws-form-list inline">
 							<li>
-								<input type="radio" onclick="exibirDocumento('texto');" value="1" name="peca[tipo_documento]" checked="true"> <label>Texto</label>
-								<input type="radio" onclick="exibirDocumento('arquivo');" value="2" name="peca[tipo_documento]"> <label>Arquivo</label>
+								<input type="radio" onclick="exibirDocumento(<%= Peca::TEXTO %>);" value="1" name="peca[tipo_documento]" <% if @peca.tipo_documento.nil? or @peca.tipo_documento == Peca::TEXTO %>checked="true"<% end %>> <label>Texto</label>
+								<input type="radio" onclick="exibirDocumento(<%= Peca::ARQUIVO %>);" value="2" name="peca[tipo_documento]" <% if @peca.tipo_documento == Peca::ARQUIVO %>checked="true"<% end %> > <label>Arquivo</label>
 							</li>
 						</ul>
 

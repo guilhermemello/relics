@@ -4,13 +4,17 @@ class Peca < ActiveRecord::Base
   TEXTO = 1
   ARQUIVO = 2
 
+  AUTOR_IRMAO = 1
+  AUTOR_OUTRO = 2
+
   belongs_to :autor, :class_name => "Pessoa", :foreign_key => "autor_id"
   belongs_to :responsavel, :class_name => "Pessoa", :foreign_key => "responsavel_id"
-  belongs_to :tipo_evento
+  belongs_to :categoria, :class_name => "TipoPeca", :foreign_key => "tipo_peca_id"
+  belongs_to :grau
   has_and_belongs_to_many :visibilidades
 
   has_attached_file :arquivo
 
-  validates_presence_of :tema, :grau_id, :responsavel_id
+  validates_presence_of :tema, :grau_id
   validates_length_of :tema, :maximum => 100
 end

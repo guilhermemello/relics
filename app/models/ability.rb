@@ -68,6 +68,9 @@ class Ability
       can :criar_evento, Loja
       can :editar_evento, Loja
       can :excluir_evento, Loja
+
+      can :criar_peca, Loja
+      can :excluir_peca, Loja
     end
   end
 end

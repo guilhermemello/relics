@@ -63,6 +63,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    colored (1.2)
     database_cleaner (1.1.1)
     date_validator (0.7.0)
       activemodel (>= 3)
@@ -214,6 +215,7 @@ DEPENDENCIES
   cancan (>= 1.6.8)
   capybara (~> 2.0.2)
   coffee-rails (~> 3.2.1)
+  colored
   database_cleaner (>= 0.9.1)
   date_validator
   devise (>= 2.1.2)

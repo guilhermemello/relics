@@ -26,6 +26,7 @@ gem "watu_table_builder", :require => "table_builder"
 gem "rmagick"
 gem 'aws-sdk'
 gem 'zip'
+gem 'colored'
 
 group :test do
   gem "rspec", "2.11.0"
