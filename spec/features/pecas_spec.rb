@@ -23,22 +23,6 @@ describe "Peças de Arquitetura" do
       click_button "Cadastrar"
       expect(page).to have_content("Os Três Filósofos")
     end
-
-    it "Deve cadastrar uma peça com arquivo anexado" do
-      visit "/pecas"
-      click_link("Nova Peça")
-
-      fill_in "peca_tema", :with => "Os Três Filósofos"
-      select "Ritual", :from => "peca_tipo_peca_id"
-      select "Aprendiz", :from => "peca_grau_id"
-      select "Mary Doe", :from => "peca_autor_id"
-      select "Mary Doe", :from => "peca_responsavel_id"
-      check("checkbox-4")
-      choose("arquivo")
-      attach_file('peca_arquivo', "#{Rails.root}" '/spec/fixtures/files/peca.pdf')
-      click_button "Cadastrar"
-      expect(page).to have_content("Os Três Filósofos")
-    end
   end
 
   context "Atualização" do

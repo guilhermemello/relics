@@ -15,6 +15,14 @@
 		$("#texto").click(function() {
 			exibirDocumento(<%= Peca::TEXTO %>);
 		});
+
+		$("#autor_irmao").click(function() {
+			exibirAutoria(<%= Peca::AUTOR_IRMAO %>);
+		});
+
+		$("#autor_outro").click(function() {
+			exibirAutoria(<%= Peca::AUTOR_OUTRO %>);
+		});
 	});
 </script>
 
@@ -60,8 +68,8 @@
 					<div class="mws-form-item">
 						<ul class="mws-form-list inline">
 							<li>
-								<input type="radio" onclick="exibirAutoria(<%= Peca::AUTOR_IRMAO %>);" name="autor_opcao" id="autor_irmao" checked="true"> <label>Irmão</label>
-								<input type="radio" onclick="exibirAutoria(<%= Peca::AUTOR_OUTRO %>);" name="autor_opcao" id="autor_outro"> <label>Outro</label>
+								<input type="radio" name="autor_opcao" id="autor_irmao" checked="true"> <label>Irmão</label>
+								<input type="radio" name="autor_opcao" id="autor_outro"> <label>Outro</label>
 							</li>
 						</ul>
 
