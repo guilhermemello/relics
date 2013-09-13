@@ -8,6 +8,9 @@ class Ability
       can :criar, Loja
       can :excluir, Loja
       can :editar, Loja
+
+      can :criar, Rito
+      can :criar, Obediencia
     elsif user.has_role? :admin_loja
       can :editar, Loja do |loja|
         loja.users.include?(user)
@@ -71,6 +74,9 @@ class Ability
 
       can :criar_peca, Loja
       can :excluir_peca, Loja
+
+      can :criar, Rito
+      can :criar, Obediencia
     end
   end
 end

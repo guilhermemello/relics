@@ -63,7 +63,7 @@ class PecasController < ApplicationController
     if current_user.has_role?(:admin_master)
       @graus = Grau.todos.collect { |grau| [grau.nome, grau.id] }
     else
-      @graus = Grau.todos.where("id <= ?", current_user.pessoa.grau.id).collect { |grau| [grau.nome, grau.id] }
+      @graus = Grau.hierarquia(current_user).collect { |grau| [grau.nome, grau.id] }
     end
 
     @irmaos = Pessoa.todos.collect { |pessoa| [pessoa.nome, pessoa.id] }
