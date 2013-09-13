@@ -9,7 +9,7 @@ describe "Peças de Arquitetura" do
 	end
 
   context "Cadastro" do
-    it "Deve cadastrar uma peça" do
+    it "Deve cadastrar uma peça com texto livre" do
       visit "/pecas"
       click_link("Nova Peça")
 
@@ -23,22 +23,51 @@ describe "Peças de Arquitetura" do
       click_button "Cadastrar"
       expect(page).to have_content("Os Três Filósofos")
     end
+
+    it "Deve cadastrar uma peça com arquivo anexado" do
+      visit "/pecas"
+      click_link("Nova Peça")
+
+      fill_in "peca_tema", :with => "Os Três Filósofos"
+      select "Ritual", :from => "peca_tipo_peca_id"
+      select "Aprendiz", :from => "peca_grau_id"
+      select "Mary Doe", :from => "peca_autor_id"
+      select "Mary Doe", :from => "peca_responsavel_id"
+      check("checkbox-4")
+      choose("arquivo")
+      attach_file('peca_arquivo', "#{Rails.root}" '/spec/fixtures/files/peca.pdf')
+      click_button "Cadastrar"
+      expect(page).to have_content("Os Três Filósofos")
+    end
   end
 
-  it "deve atualizar uma peça" do
-    FactoryGirl.create(:peca)
+  context "Atualização" do
+    it "deve atualizar uma peça" do
+      FactoryGirl.create(:peca)
 
-    visit "/pecas"
-    click_link("Consultar")
-    fill_in "peca_tema", :with => "Os Dois Filósofos"
-    select "Símbolos", :from => "peca_tipo_peca_id"
-    select "Companheiro", :from => "peca_grau_id"
-    select "Mary Doe", :from => "peca_autor_id"
-    select "Mary Doe", :from => "peca_responsavel_id"
-    check("checkbox-3")
-    fill_in "peca_texto", :with => "conteúdo de uma peça de arquitetura atualizado"
-    click_button "Atualizar"
-    expect(page).to have_content("Os Dois Filósofos")
+      visit "/pecas"
+      click_link("Consultar")
+      fill_in "peca_tema", :with => "Os Dois Filósofos"
+      select "Símbolos", :from => "peca_tipo_peca_id"
+      select "Companheiro", :from => "peca_grau_id"
+      select "Mary Doe", :from => "peca_autor_id"
+      select "Mary Doe", :from => "peca_responsavel_id"
+      check("checkbox-3")
+      fill_in "peca_texto", :with => "conteúdo de uma peça de arquitetura atualizado"
+      click_button "Atualizar"
+      expect(page).to have_content("Os Dois Filósofos")
+    end
+  end
+
+  context "Exclusão" do
+    it "deve excluir uma peça" do
+      FactoryGirl.create(:peca)
+
+      visit "/pecas"
+      click_link("Excluir")
+      page.driver.browser.switch_to.alert.accept
+      expect(page).not_to have_content("Os Três Filósofos")
+    end
   end
 
   def logar(rolename)

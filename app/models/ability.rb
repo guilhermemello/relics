@@ -12,9 +12,9 @@ class Ability
       can :criar, Rito
       can :criar, Obediencia
 
-      can :criar_peca, Peca
-      can :excluir_peca, Peca
-      can :atualizar_peca, Peca
+      can :criar, Peca
+      can :excluir, Peca
+      can :atualizar, Peca
     elsif user.has_role? :admin_loja
       can :editar, Loja do |loja|
         loja.users.include?(user)
@@ -76,9 +76,9 @@ class Ability
       can :editar_evento, Loja
       can :excluir_evento, Loja
 
-      can :criar_peca, Peca
-      can :excluir_peca, Peca
-      can :atualizar_peca, Peca
+      can :criar, Peca
+      can :excluir, Peca
+      can :atualizar, Peca
 
       can :criar, Rito
       can :criar, Obediencia

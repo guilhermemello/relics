@@ -7,6 +7,14 @@
 		<% else %>
 			exibirAutoria(<%= Peca::AUTOR_OUTRO %>);
 		<% end %>
+
+		$("#arquivo").click(function() {
+			exibirDocumento(<%= Peca::ARQUIVO %>);
+		});
+
+		$("#texto").click(function() {
+			exibirDocumento(<%= Peca::TEXTO %>);
+		});
 	});
 </script>
 
@@ -94,8 +102,8 @@
 					<div class="mws-form-item">
 						<ul class="mws-form-list inline">
 							<li>
-								<input type="radio" onclick="exibirDocumento(<%= Peca::TEXTO %>);" value="1" name="peca[tipo_documento]" <% if @peca.tipo_documento.nil? or @peca.tipo_documento == Peca::TEXTO %>checked="true"<% end %>> <label>Texto</label>
-								<input type="radio" onclick="exibirDocumento(<%= Peca::ARQUIVO %>);" value="2" name="peca[tipo_documento]" <% if @peca.tipo_documento == Peca::ARQUIVO %>checked="true"<% end %> > <label>Arquivo</label>
+								<input id="texto" type="radio" value="1" name="peca[tipo_documento]" <% if @peca.tipo_documento.nil? or @peca.tipo_documento == Peca::TEXTO %>checked="true"<% end %>> <label>Texto</label>
+								<input id="arquivo" type="radio" value="2" name="peca[tipo_documento]" <% if @peca.tipo_documento == Peca::ARQUIVO %>checked="true"<% end %> > <label>Arquivo</label>
 							</li>
 						</ul>
 
