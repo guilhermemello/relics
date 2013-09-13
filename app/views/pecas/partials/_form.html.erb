@@ -79,7 +79,7 @@
 						<ul class="mws-form-list inline" id="visibilidade_checkboxes">
 							<% Visibilidade.todas.each do |visibilidade| %>
 								<li>
-									<input type="checkbox" id="checkbox-<%= visibilidade.id %>" name="peca[visibilidade_ids][]" value="<%= visibilidade.id %>" <% if @peca.visibilidades.include?(visibilidade) %> checked="checked" <% end %> <% if visibilidade.id == Visibilidade::PUBLICO.id %>onclick="desmarcarVisibilidades();"<% end %>>
+									<input type="checkbox" id="checkbox-<%= visibilidade.id %>" name="peca[visibilidade_ids][]" value="<%= visibilidade.id %>" <% if @peca.visibilidades.include?(visibilidade) %> checked="checked" <% end %> <% if visibilidade.id == Visibilidade::PUBLICO %>onclick="desmarcarVisibilidades();"<% end %>>
 									<label><%= visibilidade.nome %></label>
 								</li>
 							<% end %>
@@ -107,7 +107,7 @@
 				</div>
 
 				<div class="mws-button-row">
-					<input type="submit" value="Cadastrar" class="btn btn-success">
+					<input type="submit" value="<% if @peca.new_record? %>Cadastrar<% else %>Atualizar<% end %>" class="btn btn-success">
 
 					<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/pecas';">
 				</div>

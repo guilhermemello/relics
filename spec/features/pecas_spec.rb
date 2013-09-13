@@ -3,24 +3,42 @@
 require 'spec_helper'
 
 describe "Peças de Arquitetura" do
-  context "Cadastro" do
-    before :each do
-      logar(:admin_ambiente)
-      carregar_dependencias
-  	end
+  before :each do
+    logar(:admin_ambiente)
+    carregar_dependencias
+	end
 
+  context "Cadastro" do
     it "Deve cadastrar uma peça" do
       visit "/pecas"
       click_link("Nova Peça")
 
-      fill_in "peca_tema", :with => "mary@gmail.com"
+      fill_in "peca_tema", :with => "Os Três Filósofos"
       select "Ritual", :from => "peca_tipo_peca_id"
       select "Aprendiz", :from => "peca_grau_id"
       select "Mary Doe", :from => "peca_autor_id"
       select "Mary Doe", :from => "peca_responsavel_id"
       check("checkbox-4")
       fill_in "peca_texto", :with => "conteúdo de uma peça de arquitetura"
+      click_button "Cadastrar"
+      expect(page).to have_content("Os Três Filósofos")
     end
+  end
+
+  it "deve atualizar uma peça" do
+    FactoryGirl.create(:peca)
+
+    visit "/pecas"
+    click_link("Consultar")
+    fill_in "peca_tema", :with => "Os Dois Filósofos"
+    select "Símbolos", :from => "peca_tipo_peca_id"
+    select "Companheiro", :from => "peca_grau_id"
+    select "Mary Doe", :from => "peca_autor_id"
+    select "Mary Doe", :from => "peca_responsavel_id"
+    check("checkbox-3")
+    fill_in "peca_texto", :with => "conteúdo de uma peça de arquitetura atualizado"
+    click_button "Atualizar"
+    expect(page).to have_content("Os Dois Filósofos")
   end
 
   def logar(rolename)
@@ -50,6 +68,7 @@ describe "Peças de Arquitetura" do
     FactoryGirl.create(:mestre)
     FactoryGirl.create(:mestre_instalado)
     FactoryGirl.create(:ritual)
+    FactoryGirl.create(:simbolos)
     FactoryGirl.create(:mary_pessoa)
     FactoryGirl.create(:membros_da_loja)
     FactoryGirl.create(:macons)
