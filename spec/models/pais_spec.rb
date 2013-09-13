@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe Pais do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before :each do
+    FactoryGirl.create(:brasil)
+	end
+
+  it "Deve listar todos os paises" do
+  	expect(Pais.todos.size).to be > 0
+  end
 end

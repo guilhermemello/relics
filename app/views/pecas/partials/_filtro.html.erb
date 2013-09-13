@@ -15,9 +15,6 @@
 			<div class="mws-form-row bordered">
 				<label class="mws-form-label">Grau</label>
 				<div class="mws-form-item">
-					<%#= f.select :grau_id_less_than_or_equal_to, @graus, { :include_blank => "Selecione" }, { :class => "large" } %>
-					<%#= select_tag "grau_id", options_for_select(@graus, "id", "nome"), :selected => params[:grau_id], prompt: "Selecione", class: "large" %>
-
 					<%= select_tag(:grau_id, options_for_select(@graus, :selected => params[:grau_id]), prompt: "Selecione", class: "large") %>
 				</div>
 			</div>

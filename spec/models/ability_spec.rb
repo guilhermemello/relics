@@ -25,7 +25,7 @@ describe "Permissões" do
       mary = FactoryGirl.create(:mary, :roles => [role])
       @ability = Ability.new(mary)
 
-      loja = FactoryGirl.create(:equidade, :users => [mary])
+      loja = FactoryGirl.create(:equidade, :users => [mary], :created_at => Time.now)
     	expect(@ability).to be_able_to(:editar, loja)
     end
 

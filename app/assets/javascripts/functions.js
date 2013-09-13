@@ -270,6 +270,7 @@ function exibirDadosMaconicos(grau) {
 function exibirAutoria(opcao) {
 	if (opcao == 1) {
 		$("#autor_irmao").attr("checked", true);
+		$("#peca_autor_nome").val("");
 
 		$("#peca_autor_nome").hide();
 		$("#peca_autor_id").show();

@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
   has_one :pessoa
 
   MASTER_ID = 1
+
+  def to_s
+    self.email
+  end
 end
