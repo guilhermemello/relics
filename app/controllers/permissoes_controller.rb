@@ -4,8 +4,6 @@ class PermissoesController < ApplicationController
   before_filter :carregar_loja, :only => [:index, :show, :update]
 
   def index
-    @loja = Loja.where("id = ?", session[:loja_id]).first
-
     @search = Filiacao.search(params[:search])
     @irmaos_filiados = @search.where("loja_id = ?", @loja.id).filiados.joins(:loja, :pessoa).paginate(:page => params[:page])
   end

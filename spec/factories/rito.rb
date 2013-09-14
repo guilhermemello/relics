@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 FactoryGirl.define do
   factory :schoder, :class => Rito do
     nome "Schoder"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130827141621) do
+ActiveRecord::Schema.define(:version => 20130913125804) do
 
   create_table "bairros", :force => true do |t|
     t.string   "uf"
@@ -140,10 +140,8 @@ ActiveRecord::Schema.define(:version => 20130827141621) do
   end
 
   create_table "lojas_users", :id => false, :force => true do |t|
-    t.integer  "loja_id"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer "loja_id"
+    t.integer "user_id"
   end
 
   create_table "obediencias", :force => true do |t|
@@ -187,6 +185,28 @@ ActiveRecord::Schema.define(:version => 20130827141621) do
     t.string   "nome"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "pecas", :force => true do |t|
+    t.text     "tema",                 :limit => 255
+    t.string   "autor_nome"
+    t.integer  "tipo_peca_id"
+    t.integer  "grau_id"
+    t.integer  "autor_id"
+    t.integer  "responsavel_id"
+    t.integer  "tipo_documento"
+    t.text     "texto"
+    t.string   "arquivo_file_name"
+    t.string   "arquivo_content_type"
+    t.integer  "arquivo_file_size"
+    t.datetime "arquivo_updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
+
+  create_table "pecas_visibilidades", :id => false, :force => true do |t|
+    t.integer "peca_id"
+    t.integer "visibilidade_id"
   end
 
   create_table "pessoas", :force => true do |t|
@@ -265,6 +285,10 @@ ActiveRecord::Schema.define(:version => 20130827141621) do
     t.string   "nome"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "tipo_pecas", :force => true do |t|
+    t.string "nome"
   end
 
   create_table "users", :force => true do |t|

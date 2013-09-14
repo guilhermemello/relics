@@ -1,0 +1,133 @@
+<script>
+	$(document).ready(function() {
+		exibirDocumento(<%= @peca.tipo_documento or Peca::TEXTO %>);
+
+		<% if @peca.autor_nome.nil? or @peca.autor.present? %>
+			exibirAutoria(<%= Peca::AUTOR_IRMAO %>);
+		<% else %>
+			exibirAutoria(<%= Peca::AUTOR_OUTRO %>);
+		<% end %>
+
+		$("#arquivo").click(function() {
+			exibirDocumento(<%= Peca::ARQUIVO %>);
+		});
+
+		$("#texto").click(function() {
+			exibirDocumento(<%= Peca::TEXTO %>);
+		});
+
+		$("#autor_irmao").click(function() {
+			exibirAutoria(<%= Peca::AUTOR_IRMAO %>);
+		});
+
+		$("#autor_outro").click(function() {
+			exibirAutoria(<%= Peca::AUTOR_OUTRO %>);
+		});
+	});
+</script>
+
+<div class="mws-panel grid_6">
+	<div class="mws-panel-header">
+		<span><%= @peca.new_record? ? "Cadastrar Peça de Arquitetura" : "Peça de Arquitetura" %></span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<%= form_for @peca, :html => { :class => "mws-form", :multipart => true } do |f| %>
+			<div class="mws-form-inline">
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Tema
+					</label>
+					<div class="mws-form-item">
+						<%= f.text_field :tema, :class => "small" %>
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Categoria
+					</label>
+					<div class="mws-form-item">
+						<%= f.select :tipo_peca_id, @tipos_pecas, { :include_blank => "Selecione" }, { :class => "small" } %>
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Grau
+					</label>
+					<div class="mws-form-item">
+						<%= f.select :grau_id, @graus, { :include_blank => "Selecione" }, { :class => "small" } %>
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Autor
+					</label>
+					<div class="mws-form-item">
+						<ul class="mws-form-list inline">
+							<li>
+								<input type="radio" name="autor_opcao" id="autor_irmao" checked="true"> <label>Irmão</label>
+								<input type="radio" name="autor_opcao" id="autor_outro"> <label>Outro</label>
+							</li>
+						</ul>
+
+						<br />
+
+						<%= f.select :autor_id, @irmaos, { :include_blank => "Selecione" }, { :class => "small" } %>
+						<%= f.text_field :autor_nome, :class => "small", :style => "display: none;" %>
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Responsável
+					</label>
+					<div class="mws-form-item">
+						<%= f.select :responsavel_id, @irmaos, { :include_blank => "Selecione" }, { :class => "small" } %>
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">Visibilidade</label>
+					<div class="mws-form-item clearfix">
+						<ul class="mws-form-list inline" id="visibilidade_checkboxes">
+							<% Visibilidade.todas.each do |visibilidade| %>
+								<li>
+									<input type="checkbox" id="checkbox-<%= visibilidade.id %>" name="peca[visibilidade_ids][]" value="<%= visibilidade.id %>" <% if @peca.visibilidades.include?(visibilidade) %> checked="checked" <% end %> <% if visibilidade.id == Visibilidade::PUBLICO %>onclick="desmarcarVisibilidades();"<% end %>>
+									<label><%= visibilidade.nome %></label>
+								</li>
+							<% end %>
+						</ul>
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						Documento
+					</label>
+					<div class="mws-form-item">
+						<ul class="mws-form-list inline">
+							<li>
+								<input id="texto" type="radio" value="1" name="peca[tipo_documento]" <% if @peca.tipo_documento.nil? or @peca.tipo_documento == Peca::TEXTO %>checked="true"<% end %>> <label>Texto</label>
+								<input id="arquivo" type="radio" value="2" name="peca[tipo_documento]" <% if @peca.tipo_documento == Peca::ARQUIVO %>checked="true"<% end %> > <label>Arquivo</label>
+							</li>
+						</ul>
+
+						<br />
+
+						<%= f.text_area :texto %>
+						<%= f.file_field :arquivo, :style => "display: none;" %>
+					</div>
+				</div>
+
+				<div class="mws-button-row">
+					<input type="submit" value="<% if @peca.new_record? %>Cadastrar<% else %>Atualizar<% end %>" class="btn btn-success">
+
+					<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/pecas';">
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

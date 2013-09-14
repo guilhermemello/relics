@@ -25,10 +25,12 @@ gem "simple_form"
 gem "watu_table_builder", :require => "table_builder"
 gem "rmagick"
 gem 'aws-sdk'
+gem 'zip'
+gem 'colored'
 
 group :test do
-  gem "rspec", "2.11.0"
-  gem "rspec-rails", "2.11.4"
+  gem "rspec"
+  gem "rspec-rails"
   gem "factory_girl", "~> 4.2.0"
   gem "capybara", "~> 2.0.2"
   gem "selenium-client"

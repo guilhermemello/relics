@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe "Templo" do
 	before :each do
-    FactoryGirl.create(:templo)
+    FactoryGirl.create(:templo_equidade)
 	end
 
   it "Deve listar todos os templos" do

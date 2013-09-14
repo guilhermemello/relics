@@ -19,6 +19,7 @@ end
 
 FactoryGirl.define do
   factory :suse, :class => User do
+    id 3
     name "Suse Doe"
     email "suse@gmail.com"
     password "123456"

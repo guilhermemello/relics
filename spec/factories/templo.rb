@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 FactoryGirl.define do
   factory :templo_equidade, :class => Templo do
     nome "JPLSJ EQUIDADE"

@@ -1,0 +1,55 @@
+<div class="mws-panel grid_6">
+	<div class="mws-panel-header">
+		<div style="float: right; margin-top: -4px;">
+			<%= link_to "Nova Peça", "/pecas/new", :class => "btn btn-success" if can? :criar, Peca %>
+		</div>
+
+		<span>Peças de Arquitetura</span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
+			<table class="mws-table">
+				<thead>
+					<tr>
+						<th>Tema</th>
+						<th>Grau</th>
+						<th>Categoria</th>
+						<!--<th>Autor</th>-->
+						<th>Responsável</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @pecas.each do |peca| %>
+					<tr>
+						<td><%= truncate(peca.tema, length: 50) %></td>
+						<td><%= peca.grau %></td>
+						<td><%= peca.categoria %></td>
+						<!--<td><%#= peca.autor.try(:nome) or peca.autor_nome %></td>-->
+						<td><%= peca.responsavel.try(:nome) %></td>
+						<td>
+							<span><i class="icon-search"></i><span>
+							<%= link_to "Consultar", edit_peca_path(peca), :style => "color: black;" %>
+
+							<% if can? :excluir, Peca %>
+								&nbsp;
+								<span><i class="icon-trash"></i><span>
+								<%= link_to "Excluir", peca_path(peca), :method => :delete, :confirm => "Confirma a exclusão ?", :style => "color: black;" %>
+							<% end %>	
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<%= page_entries_info(@pecas) %>
+
+			<%= will_paginate(@pecas, :renderer => WillPaginate::ActionView::RelicsLinkRenderer) %>
+		</div>
+	</div>
+</div>
+
+<div class="mws-panel grid_2">
+	<%= render "pecas/partials/filtro" %>
+</div>
