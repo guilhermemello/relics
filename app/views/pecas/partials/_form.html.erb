@@ -1,19 +1,32 @@
+<script type="text/javascript" src="http://premiumsoftware.net/Bundles/cleditor?v=MbEeBt0liF4uPkKWaNNKxbYwi2sAxh69SJjAx74nQcw1"></script> 
+
+<script type="text/javascript">
+  $(document).ready(function () {
+		$("textarea").cleditor({
+	 		controls:     // controls to add to the toolbar
+				"bold italic underline | font size " +
+				"| color highlight removeformat " +
+				"| alignleft center alignright justify | undo redo | "
+			});
+		});
+</script>
+
 <script>
 	$(document).ready(function() {
 		exibirDocumento(<%= @peca.tipo_documento or Peca::TEXTO %>);
 
-		<% if @peca.autor_nome.nil? or @peca.autor.present? %>
+		<% if @peca.autor_nome.nil? or @peca.autor_nome.blank? or @peca.autor.present? %>
 			exibirAutoria(<%= Peca::AUTOR_IRMAO %>);
 		<% else %>
 			exibirAutoria(<%= Peca::AUTOR_OUTRO %>);
 		<% end %>
 
 		$("#arquivo").click(function() {
-			exibirDocumento(<%= Peca::ARQUIVO %>);
+			exibirDocumento('<%= Peca::ARQUIVO %>');
 		});
 
 		$("#texto").click(function() {
-			exibirDocumento(<%= Peca::TEXTO %>);
+			exibirDocumento('<%= Peca::TEXTO %>');
 		});
 
 		$("#autor_irmao").click(function() {
@@ -75,7 +88,7 @@
 
 						<br />
 
-						<%= f.select :autor_id, @irmaos, { :include_blank => "Selecione" }, { :class => "small" } %>
+						<%= f.select :autor_id, @autores, { :include_blank => "Selecione" }, { :class => "small" } %>
 						<%= f.text_field :autor_nome, :class => "small", :style => "display: none;" %>
 					</div>
 				</div>
@@ -85,7 +98,7 @@
 						Responsável
 					</label>
 					<div class="mws-form-item">
-						<%= f.select :responsavel_id, @irmaos, { :include_blank => "Selecione" }, { :class => "small" } %>
+						<%= f.select :responsavel_id, @responsaveis, { :include_blank => "Selecione" }, { :class => "small" } %>
 					</div>
 				</div>
 
@@ -99,6 +112,8 @@
 									<label><%= visibilidade.nome %></label>
 								</li>
 							<% end %>
+
+							<%= f.error_message_on :visibilidades, { :css_class => "mws-error" } %>
 						</ul>
 					</div>
 				</div>
@@ -117,7 +132,16 @@
 
 						<br />
 
-						<%= f.text_area :texto %>
+						<% if @peca.arquivo_file_name.present? #and unless @peca.arquivo_file_name.nil? %>
+							<%= link_to "Documento", @peca.arquivo.url, target: "blank" %>
+
+							<br /><br />
+						<% end %>
+
+						<%= f.text_area :texto, id: "wysiwyg" %>
+
+						<br />
+
 						<%= f.file_field :arquivo, :style => "display: none;" %>
 					</div>
 				</div>

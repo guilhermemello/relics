@@ -17,6 +17,7 @@
 						<th>Categoria</th>
 						<!--<th>Autor</th>-->
 						<th>Responsável</th>
+						<th>Documento</th>
 						<th>Ações</th>
 					</tr>
 				</thead>
@@ -28,6 +29,15 @@
 						<td><%= peca.categoria %></td>
 						<!--<td><%#= peca.autor.try(:nome) or peca.autor_nome %></td>-->
 						<td><%= peca.responsavel.try(:nome) %></td>
+						<td>
+							<% unless peca.arquivo_file_name.nil? %>
+								<%= link_to "Documento", peca.arquivo.url, target: "blank" %>
+							<% end %>
+
+							<% if peca.texto.present? %>
+								<%= truncate(peca.texto, :length => 15) %>
+							<% end %>
+						</td>
 						<td>
 							<span><i class="icon-search"></i><span>
 							<%= link_to "Consultar", edit_peca_path(peca), :style => "color: black;" %>

@@ -76,6 +76,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.4)
+    dynamic_form (1.1.4)
     enumerize (0.5.1)
       activesupport (>= 3.2)
     erubis (2.7.0)
@@ -225,6 +226,7 @@ DEPENDENCIES
   database_cleaner (>= 0.9.1)
   date_validator
   devise (>= 2.1.2)
+  dynamic_form
   enumerize (= 0.5.1)
   execjs
   factory_girl (~> 4.2.0)

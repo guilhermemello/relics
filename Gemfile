@@ -27,6 +27,7 @@ gem "rmagick"
 gem 'aws-sdk'
 gem 'zip'
 gem 'colored'
+gem 'dynamic_form'
 
 group :test do
   gem "rspec"

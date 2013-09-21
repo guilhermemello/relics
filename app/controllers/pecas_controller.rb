@@ -1,6 +1,7 @@
 class PecasController < ApplicationController
   layout "interno"
 
+  before_filter :carregar_loja, :only => [:index, :new, :create, :edit, :update]
   before_filter :combos, :only => [:new, :index, :create, :edit, :update]
 
   def index
@@ -44,6 +45,14 @@ class PecasController < ApplicationController
     end
 
     if @peca.update_attributes(params[:peca])
+      if @peca.tipo_documento == 1
+        @peca.arquivo = nil
+        @peca.save
+      elsif @peca.tipo_documento == 2
+        @peca.texto = nil
+        @peca.save
+      end
+
       redirect_to :action => :index
     else
       render :action => :edit
@@ -59,6 +68,10 @@ class PecasController < ApplicationController
 
   private
 
+  def carregar_loja
+    @loja = Loja.where("id = ?", session[:loja_id]).first
+  end
+
   def combos
     if current_user.has_role?(:admin_master)
       @graus = Grau.todos.collect { |grau| [grau.nome, grau.id] }
@@ -66,7 +79,10 @@ class PecasController < ApplicationController
       @graus = Grau.hierarquia(current_user).collect { |grau| [grau.nome, grau.id] }
     end
 
-    @irmaos = Pessoa.todos.collect { |pessoa| [pessoa.nome, pessoa.id] }
+    # TODO => VERIFICAR Acho que inicialmente os da loja, e com alguma opção em que ele possa pesquisar os demais cadastrados.
+    @autores = @loja.membros.collect { |membro| [membro.pessoa.nome, membro.pessoa.id] }
+    @responsaveis = @loja.membros.collect { |membro| [membro.pessoa.nome, membro.pessoa.id] }
+
     @tipos_pecas = TipoPeca.todos.collect { |tipo| [tipo.nome, tipo.id] }
   end
 end
