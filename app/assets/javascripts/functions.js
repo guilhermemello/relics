@@ -283,11 +283,14 @@ function exibirAutoria(opcao) {
 	}
 }
 
-function exibirDocumento(opcao) {
+function documento(opcao) {
 	if (opcao == 1) {
+		$(".cleditorMain").show();
+		
 		$("#peca_texto").show();
 		$("#peca_arquivo").hide();
 	} else {
+		$(".cleditorMain").hide();
 		$("#peca_texto").val("");
 
 		$("#peca_texto").hide();

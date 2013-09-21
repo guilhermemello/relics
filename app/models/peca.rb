@@ -18,18 +18,11 @@ class Peca < ActiveRecord::Base
   has_attached_file :arquivo
 
   validates_presence_of :tema, :grau_id, :tipo_peca_id, :responsavel_id
+  validates_presence_of :visibilidades, :message => "Selecione a visibilidade"
   validates_length_of :tema, :maximum => 100
   validate :attachment_content_type
   validate :autoria
   validate :documento
-  validate :visibilidade
-
-
-  def visibilidade
-    if visibilidades.count == 0
-      errors.add(:visibilidades, "Selecione a visibilidade")
-    end
-  end
 
   def attachment_content_type
     if self.arquivo_file_name.present?

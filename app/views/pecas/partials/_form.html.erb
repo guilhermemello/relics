@@ -1,19 +1,16 @@
 <script type="text/javascript" src="http://premiumsoftware.net/Bundles/cleditor?v=MbEeBt0liF4uPkKWaNNKxbYwi2sAxh69SJjAx74nQcw1"></script> 
 
-<script type="text/javascript">
-  $(document).ready(function () {
+
+<script>
+	$(document).ready(function() {
 		$("textarea").cleditor({
 	 		controls:     // controls to add to the toolbar
 				"bold italic underline | font size " +
 				"| color highlight removeformat " +
 				"| alignleft center alignright justify | undo redo | "
 			});
-		});
-</script>
 
-<script>
-	$(document).ready(function() {
-		exibirDocumento(<%= @peca.tipo_documento or Peca::TEXTO %>);
+		documento(<%= @peca.tipo_documento or Peca::TEXTO %>);
 
 		<% if @peca.autor_nome.nil? or @peca.autor_nome.blank? or @peca.autor.present? %>
 			exibirAutoria(<%= Peca::AUTOR_IRMAO %>);
@@ -22,11 +19,13 @@
 		<% end %>
 
 		$("#arquivo").click(function() {
-			exibirDocumento('<%= Peca::ARQUIVO %>');
+			exibirDocumento(<%= Peca::ARQUIVO %>);
+			$(".cleditorMain").hide();
 		});
 
 		$("#texto").click(function() {
-			exibirDocumento('<%= Peca::TEXTO %>');
+			exibirDocumento(<%= Peca::TEXTO %>);
+			$(".cleditorMain").show();
 		});
 
 		$("#autor_irmao").click(function() {
@@ -132,15 +131,7 @@
 
 						<br />
 
-						<% if @peca.arquivo_file_name.present? #and unless @peca.arquivo_file_name.nil? %>
-							<%= link_to "Documento", @peca.arquivo.url, target: "blank" %>
-
-							<br /><br />
-						<% end %>
-
 						<%= f.text_area :texto, id: "wysiwyg" %>
-
-						<br />
 
 						<%= f.file_field :arquivo, :style => "display: none;" %>
 					</div>
