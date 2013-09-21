@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class Peca < ActiveRecord::Base
   attr_accessible :tema, :grau_id, :autor_id, :autor, :responsavel_id, :texto, :tipo_documento, :autor_nome, :arquivo, :tipo_peca_id, :visibilidade_ids
 
