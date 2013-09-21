@@ -19,12 +19,12 @@
 		<% end %>
 
 		$("#arquivo").click(function() {
-			exibirDocumento(<%= Peca::ARQUIVO %>);
+			documento(<%= Peca::ARQUIVO %>);
 			$(".cleditorMain").hide();
 		});
 
 		$("#texto").click(function() {
-			exibirDocumento(<%= Peca::TEXTO %>);
+			documento(<%= Peca::TEXTO %>);
 			$(".cleditorMain").show();
 		});
 
