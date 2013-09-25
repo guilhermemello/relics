@@ -11,9 +11,9 @@ class RitosController < ApplicationController
   end
   
   def create
-    @ritos = Rito.new(params[:rito])
+    @rito = Rito.new(params[:rito])
     
-    if @ritos.save
+    if @rito.save
       redirect_to :action => :index
     else
       render :action => :new

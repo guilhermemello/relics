@@ -32,7 +32,6 @@ class OrientesEstaduaisController < ApplicationController
     if @oriente_estadual.update_attributes(params[:oriente_estadual])
       redirect_to :action => :index
     else
-      p @oriente_estadual.errors
       redirect_to :action => :edit
     end
   end

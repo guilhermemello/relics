@@ -10,8 +10,5 @@ class OrienteEstadual < ActiveRecord::Base
   validates_presence_of :url
   validates_presence_of :email
 
-  validates_uniqueness_of :nome
-  validates_uniqueness_of :sigla
-
   scope :todos, lambda { all }
 end

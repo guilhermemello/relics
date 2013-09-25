@@ -1,0 +1,24 @@
+<div class="mws-panel-header">
+	<span><i class="icon-filter"></i> Filtro</span>
+</div>
+
+<div class="mws-panel-body no-padding">
+	<%= form_for @search, :url => orientes_estaduais_path, :html => { :method => :get, :class => "mws-form" } do |f| %>
+
+		<div class="mws-form-block">
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">Nome</label>
+				<div class="mws-form-item">
+					<%= f.text_field :nome_contains, :class => "large" %>
+				</div>
+			</div>
+		
+		<div class="mws-button-row">
+			<input type="submit" value="Filtrar" class="btn btn-success">
+			<input type="reset" value="Limpar" class="btn " onclick="window.location.href='/orientes_estaduais';">
+		</div>
+		
+		
+		</div><!-- mws-form-block -->	
+	<% end %>
+</div><!-- mws-panel-body no-padding -->
