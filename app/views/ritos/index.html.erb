@@ -31,6 +31,10 @@
 						<% end %>
 					</tbody>
 				</table>
+				
+				<%= page_entries_info(@ritos) %>
+
+				<%= will_paginate(@ritos, :renderer => WillPaginate::ActionView::RelicsLinkRenderer) %>
 			</div>
 		</div><!-- mws-panel-body no-padding -->
 							

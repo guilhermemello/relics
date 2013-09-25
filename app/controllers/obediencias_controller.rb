@@ -1,11 +1,11 @@
 class ObedienciasController < ApplicationController
   layout "interno"
 
-  before_filter :combos, :only => [:index, :new, :create, :edit]
+  before_filter :combos, :only => [:index, :new, :create, :edit, :update]
 
   def index
     @search = Obediencia.search(params[:search])
-    @obediencias = @search.order("nome ASC")
+    @obediencias = @search.order("nome ASC").paginate(:page => params[:page])
   end
   
   def new

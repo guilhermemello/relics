@@ -3,7 +3,7 @@ class RitosController < ApplicationController
   
   def index
    @search = Rito.search(params[:search])
-   @ritos = @search
+   @ritos = @search.paginate(:page => params[:page])
   end
   
   def new

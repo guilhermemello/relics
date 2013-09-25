@@ -7,7 +7,7 @@
    #inflect.singular /^(ox)en/i, '\1'
    #inflect.irregular 'person', 'people'
    #inflect.uncountable %w( fish sheep )
-   inflect.irregular 'oriente_estadual', 'oriente_estaduais'
+   inflect.irregular 'oriente_estadual', 'orientes_estaduais'
    inflect.irregular 'obediencia', 'obediencias'
    inflect.irregular 'situacao', 'situacoes'
    inflect.irregular 'irmao', 'irmaos'

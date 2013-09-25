@@ -35,6 +35,10 @@
 					<% end %>
 				</tbody>
 			</table>
+		
+		<%= page_entries_info(@obediencias) %>
+
+		<%= will_paginate(@obediencias, :renderer => WillPaginate::ActionView::RelicsLinkRenderer) %>
 		</div>
 	</div><!-- mws-panel-body no-padding -->
 </div><!-- mws-panel grid_6 -->

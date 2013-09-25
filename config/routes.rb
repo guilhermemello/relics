@@ -36,7 +36,7 @@ Relics::Application.routes.draw do
   resources :lojas
   resources :ritos
   resources :obediencias
-  resources :oriente_estadual
+  resources :orientes_estaduais
   resources :dashboard
   resources :permissoes
   resources :dependentes

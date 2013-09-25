@@ -38,8 +38,8 @@
 			<li <% if params[:controller] == "obediencias" %>class="active" <% end %>>
 				<a href="/obediencias"><i class="icon-globe"></i> Obediências </a>
 			</li>
-			<li <% if params[:controller] == "oriente_estadual" %>class="active" <% end %>>
-				<a href="/oriente_estadual"><i class="icon-screenshot"></i> Oriente Estadual </a>
+			<li <% if params[:controller] == "orientes_estaduais" %>class="active" <% end %>>
+				<a href="/orientes_estaduais"><i class="icon-screenshot"></i> Orientes Estaduais </a>
 			</li>			
 			<% if current_user.has_role?(:admin_master) %>
 				<li <% if params[:controller] == "permissoes" %>class="active" <% end %>>
