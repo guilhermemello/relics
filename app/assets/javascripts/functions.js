@@ -161,8 +161,6 @@ function desfiliar(opcao, identificador, loja_id) {
 }
 
 function validarCPFSubmit(cpf) {
-	console.log(cpf);
-
 	if (cpf != "" && cpf != undefined) {
 		if (!validarCPF(cpf)) {
 			alert("CPF Inválido");
@@ -270,22 +268,29 @@ function exibirDadosMaconicos(grau) {
 }
 
 function exibirAutoria(opcao) {
-	if (opcao == "irmao") {
+	if (opcao == 1) {
+		$("#autor_irmao").attr("checked", true);
+		$("#peca_autor_nome").val("");
+
 		$("#peca_autor_nome").hide();
 		$("#peca_autor_id").show();
 	} else {
-		$("#peca_autor_id").val(0);
+		$("#autor_outro").attr("checked", true);
 
+		$("#peca_autor_id").val(0);
 		$("#peca_autor_nome").show();
 		$("#peca_autor_id").hide();
 	}
 }
 
-function exibirDocumento(opcao) {
-	if (opcao == "texto") {
+function documento(opcao) {
+	if (opcao == 1) {
+		$(".cleditorMain").show();
+		
 		$("#peca_texto").show();
 		$("#peca_arquivo").hide();
 	} else {
+		$(".cleditorMain").hide();
 		$("#peca_texto").val("");
 
 		$("#peca_texto").hide();

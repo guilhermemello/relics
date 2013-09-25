@@ -26,7 +26,6 @@ describe "Loja" do
       expect(page).to have_content("informe um oriente estadual")
       expect(page).to have_content("informe um nome")
       expect(page).to have_content("informe um rito")
-      expect(page).to have_content("informe um templo")
     end
 
     it "Não deve exibir o link para edição para administrador do ambiente" do
@@ -45,6 +44,7 @@ describe "Loja" do
     it "Deve editar uma loja" do
       role = FactoryGirl.create(:admin_loja)
       mary = FactoryGirl.create(:mary, :roles => [role])
+      mary_pessoa = FactoryGirl.create(:mary_pessoa)
       FactoryGirl.create(:equidade, :users => [mary])
 
       visit "/login"
@@ -80,6 +80,7 @@ describe "Loja" do
   def logar(rolename)
     role = FactoryGirl.create(rolename)
     mary = FactoryGirl.create(:mary, :roles => [role])
+    mary_pessoa = FactoryGirl.create(:mary_pessoa)
 
     visit "/login"
     fill_in "user_email", :with => "mary@gmail.com"
@@ -92,9 +93,10 @@ describe "Loja" do
     FactoryGirl.create(:rj)
     FactoryGirl.create(:duque_de_caxias)
     FactoryGirl.create(:centro)
-    FactoryGirl.create(:templo)
+    FactoryGirl.create(:templo_equidade)
     FactoryGirl.create(:obediencia)
     FactoryGirl.create(:oriente_estadual)
-    FactoryGirl.create(:rito)
+    FactoryGirl.create(:schoder)
+    FactoryGirl.create(:filiacao)
   end
 end

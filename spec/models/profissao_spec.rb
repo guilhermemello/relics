@@ -1,5 +1,14 @@
+# -*- encoding : utf-8 -*-
+
 require 'spec_helper'
 
 describe Profissao do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before :each do
+    FactoryGirl.create(:advogado)
+    FactoryGirl.create(:alergista)
+	end
+
+  it "Deve listar todas as profissoes" do
+  	expect(Profissao.todas.size).to be == 2
+  end
 end

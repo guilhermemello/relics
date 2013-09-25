@@ -5,7 +5,7 @@ FactoryGirl.define do
     nome "Equidade"
     fundacao Date.parse("01-01-2010")
     curriculo "Loja mais antiga do Brasil"
-    templo_id 1
+    association :templo, factory: :templo_equidade
     obediencia_id 1
     oriente_estadual_id 1
     rito_id 1

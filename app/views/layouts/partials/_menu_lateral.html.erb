@@ -41,6 +41,7 @@
 			<li <% if params[:controller] == "orientes_estaduais" %>class="active" <% end %>>
 				<a href="/orientes_estaduais"><i class="icon-screenshot"></i> Orientes Estaduais </a>
 			</li>			
+
 			<% if current_user.has_role?(:admin_master) %>
 				<li <% if params[:controller] == "permissoes" %>class="active" <% end %>>
 					<a href="/permissoes"><i class="icon-key"></i> Permissões</a>

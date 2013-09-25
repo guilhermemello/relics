@@ -20,22 +20,25 @@ gem "will_paginate"
 gem "paperclip", "~> 3.4.2"
 gem "date_validator"
 gem "webrick", "~> 1.3.1"
-gem "enumerize"
+gem "enumerize", '0.5.1'
 gem "simple_form"
 gem "watu_table_builder", :require => "table_builder"
 gem "rmagick"
 gem 'aws-sdk'
 gem 'zip'
+gem 'colored'
+gem 'dynamic_form'
 
 group :test do
-  gem "rspec", "2.11.0"
-  gem "rspec-rails", "2.11.4"
+  gem "rspec"
+  gem "rspec-rails"
   gem "factory_girl", "~> 4.2.0"
   gem "capybara", "~> 2.0.2"
   gem "selenium-client"
   gem 'selenium-webdriver', '2.35.0'
   gem "database_cleaner", ">= 0.9.1"
   gem "launchy", ">= 2.1.2"
+  gem 'zip'
 end
 
 group :assets do

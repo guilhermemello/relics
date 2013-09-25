@@ -46,6 +46,8 @@ class Pessoa < ActiveRecord::Base
     joins("INNER JOIN `dependentes` ON `dependentes`.`dependente_id` = `pessoas`.`id`").where("dependentes.pessoa_id = ?", irmao.id).order("created_at DESC")
   }
 
+  scope :todos, where("id NOT IN (?)", "#{User::MASTER_ID}").order("nome ASC")
+
   def filiar_a_loja(loja)
     Filiacao.create(:pessoa_id => self.id, :loja_id=> loja.id, :filiado_em => DateTime.now)
   end

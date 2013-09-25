@@ -8,6 +8,11 @@ class Ability
       can :criar, Loja
       can :excluir, Loja
       can :editar, Loja
+
+      can :criar, Rito
+      can :criar, Obediencia
+
+      can :excluir, Peca
     elsif user.has_role? :admin_loja
       can :editar, Loja do |loja|
         loja.users.include?(user)
@@ -52,6 +57,8 @@ class Ability
       can :excluir_fotos, Loja do |loja|
         loja.users.include?(user)
       end
+
+      can :excluir, Peca
     elsif user.has_role? :admin_master
       can :criar, Loja
       can :excluir, Loja
@@ -68,6 +75,11 @@ class Ability
       can :criar_evento, Loja
       can :editar_evento, Loja
       can :excluir_evento, Loja
+
+      can :excluir, Peca
+
+      can :criar, Rito
+      can :criar, Obediencia
     end
   end
 end

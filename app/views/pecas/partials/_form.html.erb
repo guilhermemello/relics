@@ -1,3 +1,43 @@
+<script type="text/javascript" src="http://premiumsoftware.net/Bundles/cleditor?v=MbEeBt0liF4uPkKWaNNKxbYwi2sAxh69SJjAx74nQcw1"></script> 
+
+
+<script>
+	$(document).ready(function() {
+		$("textarea").cleditor({
+	 		controls:     // controls to add to the toolbar
+				"bold italic underline | font size " +
+				"| color highlight removeformat " +
+				"| alignleft center alignright justify | undo redo | "
+			});
+
+		documento(<%= @peca.tipo_documento or Peca::TEXTO %>);
+
+		<% if @peca.autor_nome.nil? or @peca.autor_nome.blank? or @peca.autor.present? %>
+			exibirAutoria(<%= Peca::AUTOR_IRMAO %>);
+		<% else %>
+			exibirAutoria(<%= Peca::AUTOR_OUTRO %>);
+		<% end %>
+
+		$("#arquivo").click(function() {
+			documento(<%= Peca::ARQUIVO %>);
+			$(".cleditorMain").hide();
+		});
+
+		$("#texto").click(function() {
+			documento(<%= Peca::TEXTO %>);
+			$(".cleditorMain").show();
+		});
+
+		$("#autor_irmao").click(function() {
+			exibirAutoria(<%= Peca::AUTOR_IRMAO %>);
+		});
+
+		$("#autor_outro").click(function() {
+			exibirAutoria(<%= Peca::AUTOR_OUTRO %>);
+		});
+	});
+</script>
+
 <div class="mws-panel grid_6">
 	<div class="mws-panel-header">
 		<span><%= @peca.new_record? ? "Cadastrar Peça de Arquitetura" : "Peça de Arquitetura" %></span>
@@ -40,14 +80,14 @@
 					<div class="mws-form-item">
 						<ul class="mws-form-list inline">
 							<li>
-								<input type="radio" onclick="exibirAutoria('irmao');" name="autor_opcao" checked="true"> <label>Irmão</label>
-								<input type="radio" onclick="exibirAutoria('outro');" name="autor_opcao"> <label>Outro</label>
+								<input type="radio" name="autor_opcao" id="autor_irmao" checked="true"> <label>Irmão</label>
+								<input type="radio" name="autor_opcao" id="autor_outro"> <label>Outro</label>
 							</li>
 						</ul>
 
 						<br />
 
-						<%= f.select :autor_id, @irmaos, { :include_blank => "Selecione" }, { :class => "small" } %>
+						<%= f.select :autor_id, @autores, { :include_blank => "Selecione" }, { :class => "small" } %>
 						<%= f.text_field :autor_nome, :class => "small", :style => "display: none;" %>
 					</div>
 				</div>
@@ -57,7 +97,7 @@
 						Responsável
 					</label>
 					<div class="mws-form-item">
-						<%= f.select :responsavel_id, @irmaos, { :include_blank => "Selecione" }, { :class => "small" } %>
+						<%= f.select :responsavel_id, @responsaveis, { :include_blank => "Selecione" }, { :class => "small" } %>
 					</div>
 				</div>
 
@@ -67,10 +107,12 @@
 						<ul class="mws-form-list inline" id="visibilidade_checkboxes">
 							<% Visibilidade.todas.each do |visibilidade| %>
 								<li>
-									<input type="checkbox" id="checkbox-<%= visibilidade.id %>" name="peca[visibilidade_ids][]" value="<%= visibilidade.id %>" <% if @peca.visibilidades.include?(visibilidade) %> checked="checked" <% end %> <% if visibilidade.id == Visibilidade::PUBLICO.id %>onclick="desmarcarVisibilidades();"<% end %>>
+									<input type="checkbox" id="checkbox-<%= visibilidade.id %>" name="peca[visibilidade_ids][]" value="<%= visibilidade.id %>" <% if @peca.visibilidades.include?(visibilidade) %> checked="checked" <% end %> <% if visibilidade.id == Visibilidade::PUBLICO %>onclick="desmarcarVisibilidades();"<% end %>>
 									<label><%= visibilidade.nome %></label>
 								</li>
 							<% end %>
+
+							<%= f.error_message_on :visibilidades, { :css_class => "mws-error" } %>
 						</ul>
 					</div>
 				</div>
@@ -82,20 +124,21 @@
 					<div class="mws-form-item">
 						<ul class="mws-form-list inline">
 							<li>
-								<input type="radio" onclick="exibirDocumento('texto');" value="1" name="peca[tipo_documento]" checked="true"> <label>Texto</label>
-								<input type="radio" onclick="exibirDocumento('arquivo');" value="2" name="peca[tipo_documento]"> <label>Arquivo</label>
+								<input id="texto" type="radio" value="1" name="peca[tipo_documento]" <% if @peca.tipo_documento.nil? or @peca.tipo_documento == Peca::TEXTO %>checked="true"<% end %>> <label>Texto</label>
+								<input id="arquivo" type="radio" value="2" name="peca[tipo_documento]" <% if @peca.tipo_documento == Peca::ARQUIVO %>checked="true"<% end %> > <label>Arquivo</label>
 							</li>
 						</ul>
 
 						<br />
 
-						<%= f.text_area :texto %>
+						<%= f.text_area :texto, id: "wysiwyg" %>
+
 						<%= f.file_field :arquivo, :style => "display: none;" %>
 					</div>
 				</div>
 
 				<div class="mws-button-row">
-					<input type="submit" value="Cadastrar" class="btn btn-success">
+					<input type="submit" value="<% if @peca.new_record? %>Cadastrar<% else %>Atualizar<% end %>" class="btn btn-success">
 
 					<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/pecas';">
 				</div>

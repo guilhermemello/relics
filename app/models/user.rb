@@ -12,4 +12,10 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :lojas
   has_one :pessoa
+
+  MASTER_ID = 1
+
+  def to_s
+    self.email
+  end
 end

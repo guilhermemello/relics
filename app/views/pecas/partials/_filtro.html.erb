@@ -15,14 +15,21 @@
 			<div class="mws-form-row bordered">
 				<label class="mws-form-label">Grau</label>
 				<div class="mws-form-item">
-					<%= f.select :grau_id_equals, @graus, { :include_blank => "Selecione" }, { :class => "large" } %>
+					<%= select_tag(:grau_id, options_for_select(@graus, :selected => params[:grau_id]), prompt: "Selecione", class: "large") %>
 				</div>
 			</div>
 
 			<div class="mws-form-row bordered">
-				<label class="mws-form-label">Autor</label>
+				<label class="mws-form-label">Categoria</label>
 				<div class="mws-form-item">
-					<%= f.select :responsavel_id_equals, @irmaos, { :include_blank => "Selecione" }, { :class => "large" } %>
+					<%= f.select :tipo_peca_id_equals, @tipos_pecas, { :include_blank => "Selecione" }, { :class => "large" } %>
+				</div>
+			</div>
+
+			<div class="mws-form-row bordered">
+				<label class="mws-form-label">Responsável</label>
+				<div class="mws-form-item">
+					<%= f.select :responsavel_id_equals, @responsaveis, { :include_blank => "Selecione" }, { :class => "large" } %>
 				</div>
 			</div>
 

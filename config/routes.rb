@@ -20,8 +20,8 @@ Relics::Application.routes.draw do
     root :to => 'dashboard#index'
   end
 
-  devise_for :users do
-    root :to => "devise/sessions#new"
+  devise_scope :user do
+    root :to => "devise/sessions#new", :as => :new_user_session
   end
 
   as :user do
@@ -29,6 +29,8 @@ Relics::Application.routes.draw do
     get "cadastro" => "devise/registrations#new", :as => :new_user
     delete 'sair' => 'devise/sessions#destroy', :as => :destroy_user_session
   end
+  
+  devise_for :users
 
   resources :users
   resources :irmaos, :as => "pessoas"
