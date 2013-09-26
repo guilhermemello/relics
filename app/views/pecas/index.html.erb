@@ -6,6 +6,8 @@
 
 		<span>Peças de Arquitetura</span>
 	</div>
+	
+	<%= current_user.pessoa.id %>
 
 	<div class="mws-panel-body no-padding">
 		<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
@@ -15,7 +17,6 @@
 						<th>Tema</th>
 						<th>Grau</th>
 						<th>Categoria</th>
-						<!--<th>Autor</th>-->
 						<th>Responsável</th>
 						<th></th>
 						<th>Ações</th>
@@ -27,7 +28,6 @@
 						<td><%= truncate(peca.tema, length: 50) %></td>
 						<td><%= peca.grau %></td>
 						<td><%= peca.categoria %></td>
-						<!--<td><%#= peca.autor.try(:nome) or peca.autor_nome %></td>-->
 						<td><%= peca.responsavel.try(:nome) %></td>
 						<td>
 							<% unless peca.arquivo_file_name.nil? %>
@@ -38,9 +38,10 @@
 								<%= truncate(peca.texto, :length => 15) %>
 							<% end %>
 						</td>
-						<td>
 							<span><i class="icon-search"></i><span>
 							<%= link_to "Consultar", edit_peca_path(peca), :style => "color: black;" %>
+
+
 
 							<% if can? :excluir, @loja or current_user.pessoa.criou_a_peca?(peca.criador) %>
 								&nbsp;

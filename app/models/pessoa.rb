@@ -93,6 +93,6 @@ class Pessoa < ActiveRecord::Base
   end
 
   def criou_a_peca?(criador)
-    true if self.user.id == criador.id
+    self.id == criador.id
   end
 end
