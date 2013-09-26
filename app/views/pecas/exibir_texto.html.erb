@@ -1,16 +1,8 @@
 <div class="mws-panel grid_8">
 	<div class="mws-panel-header">
-		<span><i class="icon-bold"></i> Texto</span>
+		<span>Texto</span>
 	</div>
-	<div class="mws-panel-body no-padding">
-		<form class="mws-form" action="#">
-			<p>
-				<%= raw @peca.texto %>
-			</p>
-
-			<div class="mws-button-row">
-				<input type="reset" value="Voltar" class="btn" onclick="window.location.href='/pecas';">
-			</div>
-		</form>
+	<div class="mws-panel-body" style="background-color: white;">
+		<%= raw @peca.texto %>
 	</div>
 </div>
