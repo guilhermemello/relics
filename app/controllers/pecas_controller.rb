@@ -25,6 +25,7 @@ class PecasController < ApplicationController
 
   def create
     @peca = Peca.new(params[:peca])
+    @peca.criador = current_user.pessoa
 
     if @peca.save
       redirect_to :action => :index
@@ -45,13 +46,15 @@ class PecasController < ApplicationController
     end
 
     if @peca.update_attributes(params[:peca])
+      @peca.criador = current_user.pessoa
+
       if @peca.tipo_documento == 1
         @peca.arquivo = nil
-        @peca.save
       elsif @peca.tipo_documento == 2
         @peca.texto = nil
-        @peca.save
       end
+
+      @peca.save
 
       redirect_to :action => :index
     else

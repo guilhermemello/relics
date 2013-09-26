@@ -91,4 +91,8 @@ class Pessoa < ActiveRecord::Base
   def possui_data_de_nascimento?
     true if data_nascimento.present?
   end
+
+  def criou_a_peca?(criador)
+    true if self.id == criador.id
+  end
 end

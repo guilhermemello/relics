@@ -14,6 +14,7 @@ class Peca < ActiveRecord::Base
   belongs_to :autor, :class_name => "Pessoa", :foreign_key => "autor_id"
   belongs_to :responsavel, :class_name => "Pessoa", :foreign_key => "responsavel_id"
   belongs_to :categoria, :class_name => "TipoPeca", :foreign_key => "tipo_peca_id"
+  belongs_to :criador, :class_name => "Pessoa", :foreign_key => "pessoa_id"
   belongs_to :grau
   has_and_belongs_to_many :visibilidades
 

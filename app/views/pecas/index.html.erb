@@ -42,7 +42,7 @@
 							<span><i class="icon-search"></i><span>
 							<%= link_to "Consultar", edit_peca_path(peca), :style => "color: black;" %>
 
-							<% if can? :excluir, @loja %>
+							<% if can? :excluir, @loja or current_user.criou_a_peca?(peca.criador) %>
 								&nbsp;
 								<span><i class="icon-trash"></i><span>
 								<%= link_to "Excluir", peca_path(peca), :method => :delete, :confirm => "Confirma a exclusão ?", :style => "color: black;" %>
