@@ -5,7 +5,7 @@ class PermissoesController < ApplicationController
 
   def index
     @search = Filiacao.search(params[:search])
-    @irmaos_filiados = @search.where("loja_id = ?", @loja.id).filiados.joins(:loja, :pessoa).paginate(:page => params[:page])
+    @irmaos_filiados = @search.where("loja_id = ?", @loja.id).filiados.joins(:loja, :pessoa).order("pessoas.nome ASC").paginate(:page => params[:page])
   end
  
   def show
