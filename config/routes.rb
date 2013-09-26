@@ -44,6 +44,8 @@ Relics::Application.routes.draw do
   resources :dependentes
   resources :eventos
   resources :pecas
+  
+  match 'pecas/:id/texto' => 'pecas#exibir_texto'
 
   put 'update_password' => 'users#update_password'
 end

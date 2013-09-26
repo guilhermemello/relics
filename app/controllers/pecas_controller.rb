@@ -69,6 +69,10 @@ class PecasController < ApplicationController
     redirect_to :action => :index
   end
 
+  def exibir_texto
+    @peca = Peca.where("id = ?", params[:id]).first
+  end
+
   private
 
   def carregar_loja

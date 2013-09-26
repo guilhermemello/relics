@@ -6,8 +6,6 @@
 
 		<span>Peças de Arquitetura</span>
 	</div>
-	
-	<%= current_user.pessoa.id %>
 
 	<div class="mws-panel-body no-padding">
 		<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
@@ -18,7 +16,7 @@
 						<th>Grau</th>
 						<th>Categoria</th>
 						<th>Responsável</th>
-						<th></th>
+						<th>Documento</th>
 						<th>Ações</th>
 					</tr>
 				</thead>
@@ -31,11 +29,11 @@
 						<td><%= peca.responsavel.try(:nome) %></td>
 						<td>
 							<% unless peca.arquivo_file_name.nil? %>
-								<%= link_to "Documento", peca.arquivo.url, target: "blank" %>
+								<%= link_to "Exibir", peca.arquivo.url, target: "blank" %>
 							<% end %>
 
 							<% if peca.texto.present? %>
-								<%= truncate(peca.texto, :length => 15) %>
+								<%= link_to "Exibir", "/pecas/#{peca.id}/texto" %>
 							<% end %>
 						</td>
 						<td>
