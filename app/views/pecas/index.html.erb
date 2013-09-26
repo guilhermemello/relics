@@ -27,7 +27,7 @@
 						<td><%= peca.grau %></td>
 						<td><%= peca.categoria %></td>
 						<td><%= peca.responsavel.try(:nome) %></td>
-						<td>
+						<td style="text-align: center;">
 							<% unless peca.arquivo_file_name.nil? %>
 								<%= link_to "Exibir", peca.arquivo.url, target: "blank" %>
 							<% end %>
