@@ -1,0 +1,30 @@
+<div class="mws-panel grid_8">
+	<div class="mws-panel-header">
+
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<%#= form_for @irmao, :html => { :class => "mws-form", :multipart => true, :onsubmit => "return validarCPFSubmit($('#pessoa_cpf').val());" } do |f| %>
+		<%= form_for @fundador, :html => { :class => "mws-form", :multipart => true } do |f| %>
+			<%= hidden_field_tag "loja_id", @loja.id %>
+
+			<div class="mws-form-inline">
+				<div class="mws-form-row">
+					<label class="mws-form-label">CPF</label>
+					<div class="mws-form-item">
+						<%= f.text_field :cpf, :class => "small" %>
+					</div>
+				</div>
+				<div class="mws-form-row">
+					<label class="mws-form-label">CIM</label>
+					<div class="mws-form-item">
+						<%= f.text_field :cim, :class => "small" %>
+					</div>
+				</div>	
+
+
+					<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/irmaos';">
+				</div>
+		<% end %>
+	</div>    	
+</div>
