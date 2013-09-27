@@ -59,6 +59,10 @@ class Ability
       end
 
       can :excluir, Peca
+
+      can :excluir_fundador, Loja do |loja|
+        loja.users.include?(user)
+      end
     elsif user.has_role? :admin_master
       can :criar, Loja
       can :excluir, Loja
@@ -80,6 +84,8 @@ class Ability
 
       can :criar, Rito
       can :criar, Obediencia
+
+      can :excluir_fundador, Loja
     end
   end
 end

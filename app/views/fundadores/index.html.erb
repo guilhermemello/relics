@@ -17,12 +17,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% @fundadores.each do |irmao| %>
+					<% @fundadores.each do |fundador| %>
 						<tr>
-							<td style="text-align: center;"><%= irmao.nome %></td>
+							<td style="text-align: center;"><%= fundador.nome %></td>
 							<td style="text-align: center;">
-								<span><i class="icon-search"></i><span>
-								<%#= link_to "Consultar", edit_pessoa_path(irmao.pessoa, :loja_id => session[:loja_id]), :style => "color: black;" %>
+								<%= link_to "Consultar", edit_pessoa_path(fundador), :style => "color: black;" %>
+								&nbsp;
+								<% if can? :excluir_fundador, @loja %>
+									<span><i class="icon-trash"></i><span>
+									<%= link_to "Excluir", fundador_path(fundador), :method => :delete, :confirm => "Confirma a exclusão ?", :style => "color: black;" %>
+								<% end %>
 							</td>
 						</tr>
 					<% end %>

@@ -3,7 +3,7 @@
 class FundadoresController < ApplicationController
   layout "interno"
 
-  before_filter :carregar_loja, :only => [:index, :new, :create]
+  before_filter :carregar_loja, :only => [:index, :new, :create, :destroy]
 
   def new
     @fundador = Fundador.new
@@ -11,7 +11,7 @@ class FundadoresController < ApplicationController
 
   def index
     @search = Fundador.search(params[:search])
-    @fundadores = @loja.fundadores.search(params[:search]).paginate(:page => params[:page])
+    @fundadores = @loja.fundadores.order("nome ASC").search(params[:search]).paginate(:page => params[:page])
   end
 
   def create
@@ -27,6 +27,16 @@ class FundadoresController < ApplicationController
 
       render action: :new
     end
+  end
+
+  def destroy
+    fundador = Fundador.where("id = ?", params[:id]).first
+
+    if @loja.fundadores.size > 0 and fundador.present?
+      @loja.fundadores.delete(fundador)
+    end
+
+    redirect_to :action => :index
   end
 
   private
