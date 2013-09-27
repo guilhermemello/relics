@@ -45,5 +45,8 @@ Relics::Application.routes.draw do
   resources :eventos
   resources :pecas
 
+  resources :fundadores
+  post 'fundadores/adicionar' => 'fundadores#adicionar'
+
   put 'update_password' => 'users#update_password'
 end

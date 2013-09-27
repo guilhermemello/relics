@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130913125804) do
+ActiveRecord::Schema.define(:version => 20130927120613) do
 
   create_table "bairros", :force => true do |t|
     t.string   "uf"
@@ -70,9 +70,9 @@ ActiveRecord::Schema.define(:version => 20130913125804) do
     t.time     "hora"
     t.text     "observacao"
     t.integer  "visibilidade"
+    t.integer  "loja_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-    t.integer  "loja_id"
   end
 
   create_table "eventos_visibilidades", :id => false, :force => true do |t|
@@ -104,15 +104,6 @@ ActiveRecord::Schema.define(:version => 20130913125804) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "irmaos", :force => true do |t|
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.date     "iniciacao_em"
-    t.date     "elevacao_em"
-    t.date     "exaltacao_em"
-    t.date     "instalacao_em"
-  end
-
   create_table "lojas", :force => true do |t|
     t.string   "nome"
     t.string   "numero"
@@ -126,17 +117,22 @@ ActiveRecord::Schema.define(:version => 20130913125804) do
     t.text     "curriculo"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
-    t.string   "dia"
-    t.string   "hora"
     t.string   "estandarte_file_name"
     t.string   "estandarte_content_type"
     t.integer  "estandarte_file_size"
     t.datetime "estandarte_updated_at"
+    t.string   "dia"
+    t.string   "hora"
     t.string   "endereco"
     t.string   "cep"
     t.integer  "estado_id"
     t.integer  "cidade_id"
     t.integer  "bairro_id"
+  end
+
+  create_table "lojas_fundadores", :force => true do |t|
+    t.integer "pessoa_id_id"
+    t.integer "loja_id_id"
   end
 
   create_table "lojas_users", :id => false, :force => true do |t|

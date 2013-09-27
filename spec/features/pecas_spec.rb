@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe "Peças de Arquitetura" do
   before :each do
-    logar(:admin_ambiente)
+    logar(:usuario)
     carregar_dependencias
 	end
 
