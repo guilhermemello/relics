@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="mws-panel-body no-padding">
-		<%= form_for @fundador, html: { :class => "mws-form" } do |f| %>
+		<%= form_for @fundador, html: { :class => "mws-form", onSubmit: "return verificar_irmao($('#fundador_cim').val());" } do |f| %>
 			<%= hidden_field_tag "loja_id", @loja.id %>
 
 			<% if flash.present? %>

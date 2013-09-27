@@ -21,12 +21,13 @@ class FundadoresController < ApplicationController
       @loja.fundadores << @fundador
 
       redirect_to action: :index
-    else
-      @fundador = Fundador.new
-      flash[:notice] = "CIM inválido"
-
-      render action: :new
     end
+  end
+
+  def verificar_irmao
+    fundador = Fundador.where("cim = ?", params[:cim]).exists?
+
+    render json: { :irmao_existe => fundador, :cim => params[:cim] }
   end
 
   def destroy

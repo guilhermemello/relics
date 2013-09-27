@@ -297,3 +297,15 @@ function documento(opcao) {
 		$("#peca_arquivo").show();
 	}	
 }
+
+function verificar_irmao(cim) {
+	jQuery.ajax({
+		type: "GET",
+		url: "/verificar_irmao/" + cim,
+		success: function(data) {
+			if (data.irmao_existe == false) {
+				alert("nao existe");
+			}
+		}
+	});
+}
