@@ -1,7 +1,9 @@
 <div class="mws-panel grid_6">
 	<div class="mws-panel-header">
 		<div style="float: right; margin-top: -4px;">
-			<%= link_to "Adicionar fundador", new_fundador_path, :class => "btn btn-success" %>
+			<% if can? :adicionar_fundador, @loja %>
+				<%= link_to "Adicionar fundador", new_fundador_path, :class => "btn btn-success" %>
+			<% end %>
 		</div>
 
 		<span>Quadro de irmãos fundadores da loja <%= @loja.nome %></span>

@@ -59,7 +59,12 @@ class Ability
 
       can :excluir, Peca
 
+      # FUNDADOR
       can :excluir_fundador, Loja do |loja|
+        loja.users.include?(user)
+      end
+
+      can :adicionar_fundador, Loja do |loja|
         loja.users.include?(user)
       end
     elsif user.has_role? :admin_master
@@ -85,6 +90,7 @@ class Ability
       can :criar, Obediencia
 
       can :excluir_fundador, Loja
+      can :adicionar_fundador, Loja
     end
   end
 end
