@@ -17,6 +17,12 @@ class FundadoresController < ApplicationController
   def create
     @fundador = Fundador.where("cim = ?", params[:fundador][:cim]).first
 
+    if verificar_fundador_ja_adicionado(params[:fundador][:cim])
+      flash[:notice] = "Fundador já adicionado ao quadro de fundadores da loja"
+      redirect_to action: :new
+      return
+    end
+
     # cria irmao
     if params[:nome].present? and params[:email].present?
      criar_irmao_usuario_e_fundador(params)
@@ -58,6 +64,16 @@ class FundadoresController < ApplicationController
     existe = Fundador.where("cim = ?", params[:cim]).exists?
 
     render json: { :irmao_existe => existe }
+  end
+
+  def verificar_fundador_ja_adicionado(cim)
+    existe = false
+
+    @loja.fundadores.each do |fundador|
+      existe = true if fundador.cim == cim
+    end
+
+    existe
   end
 
   def destroy

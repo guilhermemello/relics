@@ -304,6 +304,8 @@ function verificar_irmao(cim) {
 		return false;
 	}
 
+
+
 	var irmao_existe = false;
 	var nome = $("#nome").val();
 	var email = $("#email").val();
@@ -329,4 +331,5 @@ function verificar_irmao(cim) {
 			return false;
 		}
 	}
+
 }
