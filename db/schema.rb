@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130927001611) do
+ActiveRecord::Schema.define(:version => 20130927120613) do
 
   create_table "bairros", :force => true do |t|
     t.string   "uf"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20130927001611) do
   end
 
   create_table "fundadores_lojas", :force => true do |t|
-    t.integer "pessoa_id"
+    t.integer "fundador_id"
     t.integer "loja_id"
   end
 

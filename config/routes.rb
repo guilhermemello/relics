@@ -49,5 +49,9 @@ Relics::Application.routes.draw do
 
   resources :fundadores
 
+  resources :fundadores
+  post 'fundadores/adicionar' => 'fundadores#adicionar'
+  get 'verificar_irmao/:cim' => 'fundadores#verificar_irmao'
+
   put 'update_password' => 'users#update_password'
 end

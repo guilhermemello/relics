@@ -297,3 +297,36 @@ function documento(opcao) {
 		$("#peca_arquivo").show();
 	}	
 }
+
+function verificar_irmao(cim) {
+	if (cim == "") {
+		alert("Informe o CIM");
+		return false;
+	}
+
+	var irmao_existe = false;
+	var nome = $("#nome").val();
+	var email = $("#email").val();
+
+	if (nome == "" && email == "") {
+		jQuery.ajax({
+			type: "GET",
+			url: "/verificar_irmao/" + cim,
+			async: false,
+			success: function(data) {
+				if (data.irmao_existe == true) {
+					irmao_existe = true;
+				} else {
+					irmao_existe = false;
+				}
+			}
+		});
+
+		if (irmao_existe == true) {
+			return true;
+		} else {
+			$("#dados_pessoa").show();
+			return false;
+		}
+	}
+}

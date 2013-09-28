@@ -1,29 +1,56 @@
 <div class="mws-panel grid_8">
 	<div class="mws-panel-header">
-
+		<span>Adicionar fundadores da loja <%= @loja.nome %></span>
 	</div>
 
 	<div class="mws-panel-body no-padding">
-		<%#= form_for @irmao, :html => { :class => "mws-form", :multipart => true, :onsubmit => "return validarCPFSubmit($('#pessoa_cpf').val());" } do |f| %>
-		<%= form_for @fundador, :html => { :class => "mws-form", :multipart => true } do |f| %>
+		<%= form_for @fundador, html: { :class => "mws-form", onSubmit: "return verificar_irmao($('#fundador_cim').val());" } do |f| %>
 			<%= hidden_field_tag "loja_id", @loja.id %>
+
+			<% if flash.present? %>
+				<div class="mws-form-message error">
+					Ocorreu um erro
+
+	        <ul>
+	        	<li><%= flash[:notice] %></li>
+	        </ul>
+				</div>
+			<% end %>
 
 			<div class="mws-form-inline">
 				<div class="mws-form-row">
-					<label class="mws-form-label">CPF</label>
-					<div class="mws-form-item">
-						<%= f.text_field :cpf, :class => "small" %>
-					</div>
-				</div>
-				<div class="mws-form-row">
-					<label class="mws-form-label">CIM</label>
+					<label class="mws-form-label">
+						CIM
+						<span class="required">*</span>
+					</label>
 					<div class="mws-form-item">
 						<%= f.text_field :cim, :class => "small" %>
 					</div>
-				</div>	
+				</div>
 
+				<div id="dados_pessoa" style="display: none;">
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							Nome
+						</label>
+						<div class="mws-form-item">
+							<%= text_field_tag :nome, nil, { :class => "small" } %>
+						</div>
+					</div>
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							Email
+						</label>
+						<div class="mws-form-item">
+							<%= text_field_tag :email, nil, { :class => "small" } %>
+						</div>
+					</div>
+				</div>
+			</div>
 
-					<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/irmaos';">
+				<div class="mws-button-row">
+					<input type="submit" value="Adicionar" class="btn btn-success">
+					<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/fundadores';">
 				</div>
 		<% end %>
 	</div>    	

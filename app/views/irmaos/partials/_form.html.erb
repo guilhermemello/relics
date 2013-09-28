@@ -20,11 +20,13 @@
 		}
 
 		<% if @irmao.new_record? %>
-
 				exibirDadosMaconicos(null);
-
 		<% else %>
-			exibirDadosMaconicos(<%= @irmao.grau.id %>);
+			<% if @irmao.grau.present? %>
+				exibirDadosMaconicos(<%= @irmao.grau.id %>);
+			<% else %>
+				exibirDadosMaconicos(null);
+			<% end %>
 		<% end %>
 	});
 </script>
