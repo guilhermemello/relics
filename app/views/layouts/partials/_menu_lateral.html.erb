@@ -35,17 +35,17 @@
 			<li <% if params[:controller] == "fundadores" %>class="active" <% end %>>
 				<a href="/fundadores"><i class="icon-official"></i> Fundadores</a>
 			</li>
-			<li <% if params[:controller] == "ritos" %>class="active" <% end %>>
-				<a href="/ritos"><i class="icon-book"></i> Ritos</a>
-			</li>
-			<li <% if params[:controller] == "obediencias" %>class="active" <% end %>>
-				<a href="/obediencias"><i class="icon-globe"></i> Obediências </a>
-			</li>
-			<li <% if params[:controller] == "orientes_estaduais" %>class="active" <% end %>>
-				<a href="/orientes_estaduais"><i class="icon-screenshot"></i> Orientes Estaduais </a>
-			</li>			
 
 			<% if current_user.has_role?(:admin_master) %>
+				<li <% if params[:controller] == "ritos" %>class="active" <% end %>>
+					<a href="/ritos"><i class="icon-book"></i> Ritos</a>
+				</li>
+				<li <% if params[:controller] == "obediencias" %>class="active" <% end %>>
+					<a href="/obediencias"><i class="icon-globe"></i> Obediências </a>
+				</li>
+				<li <% if params[:controller] == "orientes_estaduais" %>class="active" <% end %>>
+					<a href="/orientes_estaduais"><i class="icon-screenshot"></i> Orientes Estaduais </a>
+				</li>
 				<li <% if params[:controller] == "permissoes" %>class="active" <% end %>>
 					<a href="/permissoes"><i class="icon-key"></i> Permissões</a>
 				</li>
