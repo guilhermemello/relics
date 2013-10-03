@@ -1,6 +1,5 @@
 <script type="text/javascript" src="http://premiumsoftware.net/Bundles/cleditor?v=MbEeBt0liF4uPkKWaNNKxbYwi2sAxh69SJjAx74nQcw1"></script> 
 
-
 <script>
 	$(document).ready(function() {
 		$("textarea").cleditor({
@@ -49,6 +48,7 @@
 				<div class="mws-form-row">
 					<label class="mws-form-label">
 						Tema
+						<span class="required">*</span>	
 					</label>
 					<div class="mws-form-item">
 						<%= f.text_field :tema, :class => "small" %>
@@ -58,6 +58,7 @@
 				<div class="mws-form-row">
 					<label class="mws-form-label">
 						Categoria
+						<span class="required">*</span>	
 					</label>
 					<div class="mws-form-item">
 						<%= f.select :tipo_peca_id, @tipos_pecas, { :include_blank => "Selecione" }, { :class => "small" } %>
@@ -67,6 +68,7 @@
 				<div class="mws-form-row">
 					<label class="mws-form-label">
 						Grau
+						<span class="required">*</span>	
 					</label>
 					<div class="mws-form-item">
 						<%= f.select :grau_id, @graus, { :include_blank => "Selecione" }, { :class => "small" } %>
@@ -76,6 +78,7 @@
 				<div class="mws-form-row">
 					<label class="mws-form-label">
 						Autor
+						<span class="required">*</span>	
 					</label>
 					<div class="mws-form-item">
 						<ul class="mws-form-list inline">
@@ -95,6 +98,7 @@
 				<div class="mws-form-row">
 					<label class="mws-form-label">
 						Responsável
+						<span class="required">*</span>	
 					</label>
 					<div class="mws-form-item">
 						<%= f.select :responsavel_id, @responsaveis, { :include_blank => "Selecione" }, { :class => "small" } %>
@@ -102,7 +106,10 @@
 				</div>
 
 				<div class="mws-form-row">
-					<label class="mws-form-label">Visibilidade</label>
+					<label class="mws-form-label">
+						Visibilidade
+						<span class="required">*</span>	
+					</label>
 					<div class="mws-form-item clearfix">
 						<ul class="mws-form-list inline" id="visibilidade_checkboxes">
 							<% Visibilidade.todas.each do |visibilidade| %>
@@ -120,6 +127,7 @@
 				<div class="mws-form-row">
 					<label class="mws-form-label">
 						Documento
+						<span class="required">*</span>	
 					</label>
 					<div class="mws-form-item">
 						<ul class="mws-form-list inline">
