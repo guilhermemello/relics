@@ -23,6 +23,7 @@ class Loja < ActiveRecord::Base
   belongs_to :bairro
   has_many :eventos
   has_and_belongs_to_many :fundadores
+  has_many :pecas
 
   validates_presence_of :obediencia_id, :message => "informe uma obediência"
   validates_presence_of :oriente_estadual_id, :message => "informe um oriente estadual"

@@ -16,7 +16,6 @@ class Ability
       can :editar, Loja do |loja|
         loja.users.include?(user)
       end
-
       can :criar, Loja do |loja|
         loja.users.include?(user)
       end
@@ -24,7 +23,6 @@ class Ability
       can :criar_irmao, Loja do |loja|
         loja.users.include?(user)
       end
-
       can :editar_irmao, Loja do |loja|
         loja.users.include?(user)
       end
@@ -33,31 +31,37 @@ class Ability
         loja.users.include?(user)
       end
 
+      # EVENTOS
       can :criar_evento, Loja do |loja|
         loja.users.include?(user)
       end
-
       can :editar_evento, Loja do |loja|
         loja.users.include?(user)
       end
-
       can :excluir_evento, Loja do |loja|
         loja.users.include?(user)
       end
 
+      # DEPENDENTES
       can :criar_dependente, Loja do |loja|
         loja.users.include?(user)
       end
-
       can :editar_dependente, Loja do |loja|
         loja.users.include?(user)
       end
 
+      # FOTOS
       can :excluir_fotos, Loja do |loja|
         loja.users.include?(user)
       end
 
-      can :excluir, Peca
+      # PEÇAS
+      can :excluir_peca, Loja do |loja|
+        loja.users.include?(user)
+      end
+      can :editar_peca, Loja do |loja|
+        loja.users.include?(user)
+      end
 
       # FUNDADOR
       can :excluir_fundador, Loja do |loja|
@@ -84,11 +88,14 @@ class Ability
       can :editar_evento, Loja
       can :excluir_evento, Loja
 
-      can :excluir, Peca
+      # PEÇAS
+      can :excluir_peca, Loja
+      can :editar_peca, Loja
 
       can :criar, Rito
       can :criar, Obediencia
 
+      # FUNDADOR
       can :excluir_fundador, Loja
       can :adicionar_fundador, Loja
     end

@@ -138,7 +138,13 @@
 				</div>
 
 				<div class="mws-button-row">
-					<input type="submit" value="<% if @peca.new_record? %>Cadastrar<% else %>Atualizar<% end %>" class="btn btn-success">
+					<% if @peca.new_record? %>
+							<input type="submit" value="Cadastrar" class="btn btn-success">
+					<% else %>
+						<% if can? :editar_peca, @loja or current_user.pessoa.criou_a_peca?(@peca.criador) %>
+							<input type="submit" value="Atualizar" class="btn btn-success">
+						<% end %>
+					<% end %>
 
 					<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/pecas';">
 				</div>

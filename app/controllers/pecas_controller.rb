@@ -16,7 +16,7 @@ class PecasController < ApplicationController
     end
 
     @search = Peca.search(search)
-    @pecas = @search.order("created_at DESC").paginate(:page => params[:page])
+    @pecas = @search.where("loja_id = ?", @loja.id).order("created_at DESC").paginate(:page => params[:page])
   end
 
   def new
@@ -28,6 +28,8 @@ class PecasController < ApplicationController
     @peca.criador = current_user.pessoa
 
     if @peca.save
+      @loja.pecas << @peca
+
       redirect_to :action => :index
     else
       render :action => :new
@@ -86,10 +88,8 @@ class PecasController < ApplicationController
       @graus = Grau.hierarquia(current_user).collect { |grau| [grau.nome, grau.id] }
     end
 
-    # TODO => VERIFICAR Acho que inicialmente os da loja, e com alguma opção em que ele possa pesquisar os demais cadastrados.
     @autores = @loja.membros.collect { |membro| [membro.pessoa.nome, membro.pessoa.id] }
     @responsaveis = @loja.membros.collect { |membro| [membro.pessoa.nome, membro.pessoa.id] }
-
     @tipos_pecas = TipoPeca.todos.collect { |tipo| [tipo.nome, tipo.id] }
   end
 end
