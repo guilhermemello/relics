@@ -22,7 +22,7 @@
 					<% @irmaos_filiados.each do |irmao| %>
 						<tr>
 							<td style="text-align: center;"><%= irmao.pessoa.nome %></td>
-							<td style="text-align: center;"><%= irmao.pessoa.grau.nome %></td>
+							<td style="text-align: center;"><%= irmao.pessoa.try(:grau) %></td>
 							<td style="text-align: center;"><%= irmao.situacao %></td>
 							<td style="text-align: center;">
 								<span><i class="icon-search"></i><span>

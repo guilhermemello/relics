@@ -45,6 +45,7 @@ class IrmaosController < ApplicationController
 
   def update
     @irmao = Pessoa.where("id = ?", params[:id]).first
+    @dependentes = Pessoa.dependentes(@irmao)
 
     if @irmao.update_attributes(params[:pessoa])
       redirect_to :action => :index

@@ -22,10 +22,10 @@ class Pessoa < ActiveRecord::Base
 
   validates_presence_of :cpf, :message => "informe um CPF", :if => Proc.new { |pessoa| pessoa.categoria == Categoria::IRMAO and pessoa.cim == nil }
   validates_presence_of :nome, :message => "informe um nome"
-  validates_presence_of :categoria_id, :message => "informe um grau de parentesco"
-  validates_presence_of :grau_id, :message => "informe um grau", :if => Proc.new { |pessoa| pessoa.categoria == Categoria::IRMAO }
+  #validates_presence_of :categoria_id, :message => "informe um grau de parentesco"
+  #validates_presence_of :grau_id, :message => "informe um grau", :if => Proc.new { |pessoa| pessoa.categoria == Categoria::IRMAO }
   validates_presence_of :email_particular, :message => "informe um e-mail particular", :if => Proc.new { |pessoa| pessoa.categoria == Categoria::IRMAO }
-  validates_presence_of :data_nascimento, :message => "informe uma data de nascimento"#, :if => Proc.new { |pessoa| pessoa.categoria != Categoria::IRMAO }
+  #validates_presence_of :data_nascimento, :message => "informe uma data de nascimento"#, :if => Proc.new { |pessoa| pessoa.categoria != Categoria::IRMAO }
   validates :email_particular, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, :if => Proc.new { |pessoa| pessoa.categoria == Categoria::IRMAO }
 
   has_attached_file :foto, :styles => { :medium => "200x200>", :thumb => "28x50" }, :default_url => "/assets/:style/missing.png"
