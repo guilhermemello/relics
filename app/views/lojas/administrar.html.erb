@@ -1,0 +1,39 @@
+<div class="mws-panel grid_8">
+	<div class="mws-panel-header">
+		<span>Administração da loja <%= @loja.nome %></span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<%= form_tag "", :class => "mws-form" do |f| %>
+			<%= hidden_field_tag "loja_id", @loja.id %>
+
+			<% if flash.present? %>
+				<div class="mws-form-message error">
+					Ocorreu um erro
+
+	        <ul>
+	        	<li><%= flash[:notice] %></li>
+	        </ul>
+				</div>
+			<% end %>
+
+			<div class="mws-form-inline">
+				<% @cargos.each do |cargo| %>
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							<%= cargo.nome %>
+						</label>
+						<div class="mws-form-item">
+							<select></select>
+						</div>
+					</div>
+				<% end %>
+			</div>
+
+			<div class="mws-button-row">
+				<input type="submit" value="Salvar" class="btn btn-success">
+				<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/lojas';">
+			</div>
+		<% end %>
+	</div>    	
+</div>

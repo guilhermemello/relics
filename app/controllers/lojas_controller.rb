@@ -3,6 +3,7 @@ class LojasController < ApplicationController
 
   #load_and_authorize_resource
   before_filter :combos, :only => [:index, :new, :create, :edit, :update]
+  before_filter :carregar_loja, :only => [:administrar]
 
   def index
     @search = Loja.search(params[:search])
@@ -81,6 +82,10 @@ class LojasController < ApplicationController
     @loja = Loja.where("id = ?", params[:loja_id]).first
   end
 
+  def administrar
+    @cargos = @loja.rito.cargos
+  end
+
   private
 
   def combos
@@ -89,5 +94,9 @@ class LojasController < ApplicationController
     @ritos = Rito.todos.collect { |r| [r.nome, r.id] }
     @ufs = Estado.todos.collect { |r| [r.uf, r.id] }
     @templos = Templo.todos.collect { |t| [t.nome, t.id ]}
+  end
+
+  def carregar_loja
+    @loja = Loja.where("id = ?", session[:loja_id]).first
   end
 end

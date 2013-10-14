@@ -7,7 +7,10 @@ Relics::Application.routes.draw do
   
   match 'loja/carregar_dados_templo/:templo_id' => 'lojas#carregar_dados_templo'
   match 'loja/carregar_dados_endereco/:loja_id' => 'lojas#carregar_dados_endereco'
+  get 'loja/administrar' => 'lojas#administrar'
+
   match 'loja/carregar/:loja_id' => 'irmaos#carregar_loja'
+  
   match 'verificar_pessoa/:identificador/em/:loja_id' => 'irmaos#verificar_pessoa'
   match 'irmaos/:identificador/filiar/:loja_id' => 'irmaos#filiar_a_loja'
   match 'irmaos/:identificador/desfiliar/:loja_id' => 'irmaos#desfiliar_de_loja'
@@ -44,6 +47,7 @@ Relics::Application.routes.draw do
   resources :dependentes
   resources :eventos
   resources :pecas
+  resources :administracao
   
   match 'pecas/:id/texto' => 'pecas#exibir_texto'
 

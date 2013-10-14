@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131003222908) do
+ActiveRecord::Schema.define(:version => 20131014170127) do
 
   create_table "bairros", :force => true do |t|
     t.string   "uf"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(:version => 20131003222908) do
     t.string   "nome"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "cargos", :force => true do |t|
+    t.string "nome"
+  end
+
+  create_table "cargos_ritos", :force => true do |t|
+    t.integer "rito_id"
+    t.integer "cargo_id"
   end
 
   create_table "categoria", :force => true do |t|
@@ -70,9 +79,9 @@ ActiveRecord::Schema.define(:version => 20131003222908) do
     t.time     "hora"
     t.text     "observacao"
     t.integer  "visibilidade"
+    t.integer  "loja_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-    t.integer  "loja_id"
   end
 
   create_table "eventos_visibilidades", :id => false, :force => true do |t|
@@ -99,7 +108,7 @@ ActiveRecord::Schema.define(:version => 20131003222908) do
   end
 
   create_table "fundadores_lojas", :force => true do |t|
-    t.integer "fundador_id"
+    t.integer "pessoa_id"
     t.integer "loja_id"
   end
 
@@ -107,15 +116,6 @@ ActiveRecord::Schema.define(:version => 20131003222908) do
     t.string   "nome"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "irmaos", :force => true do |t|
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.date     "iniciacao_em"
-    t.date     "elevacao_em"
-    t.date     "exaltacao_em"
-    t.date     "instalacao_em"
   end
 
   create_table "lojas", :force => true do |t|
@@ -131,12 +131,12 @@ ActiveRecord::Schema.define(:version => 20131003222908) do
     t.text     "curriculo"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
-    t.string   "dia"
-    t.string   "hora"
     t.string   "estandarte_file_name"
     t.string   "estandarte_content_type"
     t.integer  "estandarte_file_size"
     t.datetime "estandarte_updated_at"
+    t.string   "dia"
+    t.string   "hora"
     t.string   "endereco"
     t.string   "cep"
     t.integer  "estado_id"
@@ -168,7 +168,7 @@ ActiveRecord::Schema.define(:version => 20131003222908) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "orientes_estaduais", :force => true do |t|
+  create_table "oriente_estaduais", :force => true do |t|
     t.integer  "obediencia_id"
     t.string   "nome"
     t.string   "sigla"
