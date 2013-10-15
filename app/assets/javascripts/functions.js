@@ -330,3 +330,44 @@ function verificar_irmao(cim) {
 		}
 	}
 }
+
+function verificar_irmao_eleicao(cim) {
+	if (cim == "") {
+		alert("Informe o CIM");
+		return false;
+	}
+
+	var irmao_existe = false;
+	var irmao_nome = "";
+	var irmao_id = "";
+	var cargo = $("#eleicao_cargo_id").val();
+	var periodo = $("#eleicao_periodo").val();
+
+	if (cargo == "" && periodo == "") {
+		jQuery.ajax({
+			type: "GET",
+			url: "/eleicoes/verificar_irmao/" + cim,
+			async: false,
+			success: function(data) {
+				if (data.irmao_existe == true) {
+					irmao_existe = true;
+					irmao_nome = data.irmao_nome;
+					irmao_id = data.irmao_id
+				} else {
+					irmao_existe = false;
+				}
+			}
+		});
+
+		if (irmao_existe == true) {
+			$("#eleicao_pessoa_id").val(irmao_id);
+			$("#nome_irmao").html("<strong>" + irmao_nome + "</strong>");
+			$("#dados_eleicoes").show();
+			return false;
+		} else {
+			$("#dados_pessoa").show();
+			$("#dados_eleicoes").show();
+			return false;
+		}
+	}
+}

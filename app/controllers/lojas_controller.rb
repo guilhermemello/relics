@@ -3,7 +3,6 @@ class LojasController < ApplicationController
 
   #load_and_authorize_resource
   before_filter :combos, :only => [:index, :new, :create, :edit, :update]
-  before_filter :carregar_loja, :only => [:administrar]
 
   def index
     @search = Loja.search(params[:search])
@@ -80,10 +79,6 @@ class LojasController < ApplicationController
 
   def carregar_dados_endereco
     @loja = Loja.where("id = ?", params[:loja_id]).first
-  end
-
-  def administrar
-    @cargos = @loja.rito.cargos
   end
 
   private

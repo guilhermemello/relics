@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131014170127) do
+ActiveRecord::Schema.define(:version => 20131015114628) do
 
   create_table "bairros", :force => true do |t|
     t.string   "uf"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20131014170127) do
     t.string "nome"
   end
 
-  create_table "cargos_ritos", :force => true do |t|
+  create_table "cargos_ritos", :id => false, :force => true do |t|
     t.integer "rito_id"
     t.integer "cargo_id"
   end
@@ -49,6 +49,14 @@ ActiveRecord::Schema.define(:version => 20131014170127) do
   create_table "dependentes", :force => true do |t|
     t.integer "pessoa_id"
     t.integer "dependente_id"
+  end
+
+  create_table "eleicoes", :force => true do |t|
+    t.integer  "pessoa_id"
+    t.integer  "cargo_id"
+    t.string   "periodo"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "enderecos", :force => true do |t|
@@ -108,7 +116,7 @@ ActiveRecord::Schema.define(:version => 20131014170127) do
   end
 
   create_table "fundadores_lojas", :force => true do |t|
-    t.integer "pessoa_id"
+    t.integer "fundador_id"
     t.integer "loja_id"
   end
 
@@ -168,7 +176,7 @@ ActiveRecord::Schema.define(:version => 20131014170127) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "oriente_estaduais", :force => true do |t|
+  create_table "orientes_estaduais", :force => true do |t|
     t.integer  "obediencia_id"
     t.string   "nome"
     t.string   "sigla"

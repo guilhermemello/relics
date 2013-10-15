@@ -1,0 +1,47 @@
+<div class="mws-panel grid_6">
+	<div class="mws-panel-header">
+		<div style="float: right; margin-top: -4px;">
+			<% if can? :administrar, @loja %>
+				<%= link_to "Adicionar", new_eleicao_path, :class => "btn btn-success" %>
+			<% end %>
+		</div>
+
+		<span>Administração da loja <%= @loja.nome %></span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
+			<table class="mws-table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Cargo</th>
+						<th>Período</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @eleicoes.each do |eleicao| %>
+						<tr>
+							<td><%= eleicao.pessoa.nome %></td>
+							<td><%= eleicao.cargo.nome %></td>
+							<td><%= eleicao.periodo %></td>
+							<td>
+								<span><i class="icon-search"></i><span>
+								<%= link_to "Consultar", edit_eleicao_path(eleicao.id, :irmao_id => eleicao.pessoa.id), :style => "color: black;" %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<%= page_entries_info(@eleicoes) %>
+
+			<%= will_paginate(@eleicoes, :renderer => WillPaginate::ActionView::RelicsLinkRenderer) %>
+		</div>
+	</div>
+</div>
+
+<div class="mws-panel grid_2">
+	<%#= render "lojas/partials/filtro" %>
+</div>

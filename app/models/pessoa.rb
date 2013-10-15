@@ -17,6 +17,9 @@ class Pessoa < ActiveRecord::Base
   belongs_to :profissao
   has_many :filiacoes, :class_name => Loja, :finder_sql => Proc.new { "SELECT lojas.id, lojas.nome FROM filiacoes INNER JOIN lojas ON lojas.id = filiacoes.loja_id AND filiacoes.pessoa_id = #{id} ORDER BY lojas.nome ASC" }
 
+  has_many :eleicoes
+  has_many :cargos, :through => :eleicoes
+
   delegate :nome, :to => :profissao, :prefix => true, :allow_nil => true
   delegate :nome, :to => :categoria, :prefix => true, :allow_nil => true
 

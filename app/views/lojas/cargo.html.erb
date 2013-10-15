@@ -1,0 +1,46 @@
+<div class="mws-panel grid_8">
+	<div class="mws-panel-header">
+		<span>Administração da loja <%= @loja.nome %></span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<%#= form_for @eleicao, "/loja/administracao/#{@irmao.id}/adicionar_cargo", :class => "mws-form" do |f| %>
+			<%= form_for @eleicao, url: { action: "create" }, :class => "mws-form" do |f| %>
+			<% if flash.present? %>
+				<div class="mws-form-message error">
+					Ocorreu um erro
+
+	        <ul>
+	        	<li><%= flash[:notice] %></li>
+	        </ul>
+				</div>
+			<% end %>
+
+			<div class="mws-form-inline">
+				<div class="mws-form-row">
+					<label class="mws-form-label" style="width: 180px;">
+						<strong><%= @irmao.nome %></strong>
+					</label>
+					<div class="mws-form-item">
+						<%= @eleicao.inspect %>
+						<%= f.select :cargo_id, @cargos, { :include_blank => "Selecione o cargo" }, { :class => "small" } %>
+					</div>
+				</div>
+
+				<div class="mws-form-row">
+					<label class="mws-form-label" style="width: 180px;">
+						Período
+					</label>
+					<div class="mws-form-item">
+						<%= text_field_tag :periodo, nil, maxlength: 10, class: "small" %>
+					</div>
+				</div>
+			</div>
+
+			<div class="mws-button-row">
+				<input type="submit" value="Salvar" class="btn btn-success">
+				<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/lojas';">
+			</div>
+		<% end %>
+	</div>    	
+</div>

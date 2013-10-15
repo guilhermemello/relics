@@ -13,6 +13,7 @@
    inflect.irregular 'irmao', 'irmaos'
    inflect.irregular 'filiacao', 'filiacoes'
    inflect.irregular 'fundador', 'fundadores'
+   inflect.irregular 'eleicao', 'eleicoes'
  end
 #
 # These inflection rules are supported but not enabled by default:

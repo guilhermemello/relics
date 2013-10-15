@@ -1,0 +1,75 @@
+<div class="mws-panel grid_8">
+	<div class="mws-panel-header">
+		<span>Administração da loja <%= @loja.nome %></span>
+	</div>
+
+	<div class="mws-panel-body no-padding">
+		<%= form_for @eleicao, html: { :class => "mws-form", onSubmit: "return verificar_irmao_eleicao($('#cim').val());" } do |f| %>
+			<%= hidden_field_tag "eleicao[pessoa_id]", "" %>
+
+			<% if flash.present? %>
+				<div class="mws-form-message error">
+					Ocorreu um erro
+
+	        <ul>
+	        	<li><%= flash[:notice] %></li>
+	        </ul>
+				</div>
+			<% end %>
+
+			<div class="mws-form-inline">
+				<div class="mws-form-row">
+					<label class="mws-form-label">
+						CIM
+						<span class="required">*</span>
+					</label>
+					<div class="mws-form-item">
+						<%= text_field_tag :cim, nil, :class => "small" %>
+					</div>
+				</div>
+
+				<div id="dados_pessoa" style="display: none;">
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							Nome
+						</label>
+						<div class="mws-form-item">
+							<%= text_field_tag :nome, nil, { :class => "small" } %>
+						</div>
+					</div>
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							Email
+						</label>
+						<div class="mws-form-item">
+							<%= text_field_tag :email, nil, { :class => "small" } %>
+						</div>
+					</div>
+				</div>
+
+				<div id="dados_eleicoes" style="display: none;">
+					<div class="mws-form-row">
+						<label class="mws-form-label" id="nome_irmao"></label>
+						<div class="mws-form-item">
+							<%= f.select :cargo_id, @cargos, { :include_blank => "Selecione o cargo" }, { :class => "small" } %>
+						</div>
+					</div>
+
+					<div class="mws-form-row">
+						<label class="mws-form-label">
+							Período
+						</label>
+						<div class="mws-form-item">
+							<%= f.text_field :periodo, maxlength: 10, class: "small" %>
+						</div>
+					</div>
+				</div>
+			</div>
+
+				<div class="mws-button-row">
+					<input type="submit" value="Adicionar" class="btn btn-success">
+					<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/fundadores';">
+				</div>
+		<% end %>
+	</div>    	
+</div>

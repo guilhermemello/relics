@@ -1,12 +1,10 @@
 <div class="mws-panel grid_6">
 	<div class="mws-panel-header">
 		<div style="float: right; margin-top: -4px;">
-			<%# if can? :adicionar_fundador, @loja %>
-				<%#= link_to "Adicionar fundador", new_fundador_path, :class => "btn btn-success" %>
-			<%# end %>
+
 		</div>
 
-		<span>Quadro de irmãos fundadores da loja <%= @loja.nome %></span>
+		<span>Irmãos da loja <%= @loja.nome %></span>
 	</div>
 
 	<div class="mws-panel-body no-padding">
@@ -21,10 +19,15 @@
 				<tbody>
 					<% @irmaos_filiados.each do |irmao| %>
 						<tr>
-							<td style="text-align: center;"><%= irmao.pessoa.nome %></td>
-							<td style="text-align: center;">
+							<td><%= irmao.pessoa.nome %></td>
+							<td>
 								<span><i class="icon-search"></i><span>
-								<%= link_to "Consultar", edit_pessoa_path(irmao.pessoa, :loja_id => session[:loja_id]), :style => "color: black;" %>
+								<%= link_to "Consultar", edit_pessoa_path(irmao), :style => "color: black;" %>
+
+								&nbsp;
+
+								<span><i class="icon-tools"></i><span>
+								<%= link_to "Cargo", "/loja/administracao/#{irmao.pessoa.id}/cargo", :style => "color: black;" %>
 							</td>
 						</tr>
 					<% end %>
@@ -39,5 +42,5 @@
 </div>
 
 <div class="mws-panel grid_2">
-	<%#= render "fundadores/partials/filtro" %>
+	<%#= render "lojas/partials/filtro" %>
 </div>
