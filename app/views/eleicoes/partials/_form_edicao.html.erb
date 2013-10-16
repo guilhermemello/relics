@@ -28,6 +28,7 @@
 				<div class="mws-form-row">
 					<label class="mws-form-label">
 						Período
+						<span class="required">*</span>
 					</label>
 					<div class="mws-form-item">
 						<%= f.text_field :periodo, maxlength: 10, class: "small" %>
@@ -37,7 +38,7 @@
 
 			<div class="mws-button-row">
 				<input type="submit" value="Salvar" class="btn btn-success">
-				<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/eleicoes';">
+				<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/administracao';">
 			</div>
 		<% end %>
 	</div>    	

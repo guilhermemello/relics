@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="mws-panel-body no-padding">
-		<%= form_for @eleicao, html: { :class => "mws-form", onSubmit: "return verificar_irmao_eleicao($('#cim').val());" } do |f| %>
+		<%= form_for @eleicao, html: { :class => "mws-form", :id => "form_eleicao_cadastro" } do |f| %>
 			<%= hidden_field_tag "eleicao[pessoa_id]", "" %>
 
 			<% if flash.present? %>
@@ -28,10 +28,17 @@
 					</div>
 				</div>
 
+				<div class="mws-form-row">
+					<div class="mws-form-item">
+						<button type="button" class="btn btn-danger btn-small" onclick="verificarCIMEleicao($('#cim').val());">Buscar</button>
+					</div>
+				</div>
+
 				<div id="dados_pessoa" style="display: none;">
 					<div class="mws-form-row">
 						<label class="mws-form-label">
 							Nome
+							<span class="required">*</span>
 						</label>
 						<div class="mws-form-item">
 							<%= text_field_tag :nome, nil, { :class => "small" } %>
@@ -40,6 +47,7 @@
 					<div class="mws-form-row">
 						<label class="mws-form-label">
 							Email
+							<span class="required">*</span>
 						</label>
 						<div class="mws-form-item">
 							<%= text_field_tag :email, nil, { :class => "small" } %>
@@ -49,7 +57,8 @@
 
 				<div id="dados_eleicoes" style="display: none;">
 					<div class="mws-form-row">
-						<label class="mws-form-label" id="nome_irmao"></label>
+						<label class="mws-form-label" id="nome_irmao">
+						</label>
 						<div class="mws-form-item">
 							<%= f.select :cargo_id, @cargos, { :include_blank => "Selecione o cargo" }, { :class => "small" } %>
 						</div>
@@ -58,6 +67,7 @@
 					<div class="mws-form-row">
 						<label class="mws-form-label">
 							Período
+							<span class="required">*</span>
 						</label>
 						<div class="mws-form-item">
 							<%= f.text_field :periodo, maxlength: 10, class: "small" %>
@@ -67,8 +77,8 @@
 			</div>
 
 				<div class="mws-button-row">
-					<input type="submit" value="Adicionar" class="btn btn-success">
-					<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/fundadores';">
+					<input type="submit" value="Adicionar" class="btn btn-success" style="display: none;" id="botao_adicionar">
+					<input type="reset" value="Cancelar" class="btn" onclick="window.location.href='/administracao';">
 				</div>
 		<% end %>
 	</div>    	

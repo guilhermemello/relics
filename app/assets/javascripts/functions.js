@@ -331,7 +331,7 @@ function verificar_irmao(cim) {
 	}
 }
 
-function verificar_irmao_eleicao(cim) {
+function verificarCIMEleicao(cim) {
 	if (cim == "") {
 		alert("Informe o CIM");
 		return false;
@@ -340,34 +340,77 @@ function verificar_irmao_eleicao(cim) {
 	var irmao_existe = false;
 	var irmao_nome = "";
 	var irmao_id = "";
+
+	jQuery.ajax({
+		type: "GET",
+		url: "/eleicoes/verificar_irmao/" + cim,
+		async: false,
+		success: function(data) {
+			if (data.irmao_existe == true) {
+				irmao_existe = true;
+				irmao_nome = data.irmao_nome;
+				irmao_id = data.irmao_id
+			} else {
+				irmao_existe = false;
+			}
+		}
+	});
+
+	if (irmao_existe == true) {
+		$("#form_eleicao_cadastro").attr('onsubmit', 'return validarEleicaoIrmaoExistente();');
+
+		$("#eleicao_pessoa_id").val(irmao_id);
+		$("#nome_irmao").html("<strong>" + irmao_nome + "</strong>");
+		$("#dados_eleicoes").show();
+		$("#botao_adicionar").show();
+
+		return false;
+	} else {
+		$("#form_eleicao_cadastro").attr('onsubmit', 'return validarEleicaoIrmaoInexistente();');
+
+		$("#nome_irmao").html("Cargo <span class='required'>*</span>");
+		$("#dados_pessoa").show();
+		$("#dados_eleicoes").show();
+		$("#botao_adicionar").show();
+
+		return false;
+	}
+}
+
+function validarEleicaoIrmaoExistente() {
 	var cargo = $("#eleicao_cargo_id").val();
 	var periodo = $("#eleicao_periodo").val();
 
-	if (cargo == "" && periodo == "") {
-		jQuery.ajax({
-			type: "GET",
-			url: "/eleicoes/verificar_irmao/" + cim,
-			async: false,
-			success: function(data) {
-				if (data.irmao_existe == true) {
-					irmao_existe = true;
-					irmao_nome = data.irmao_nome;
-					irmao_id = data.irmao_id
-				} else {
-					irmao_existe = false;
-				}
-			}
-		});
-
-		if (irmao_existe == true) {
-			$("#eleicao_pessoa_id").val(irmao_id);
-			$("#nome_irmao").html("<strong>" + irmao_nome + "</strong>");
-			$("#dados_eleicoes").show();
-			return false;
-		} else {
-			$("#dados_pessoa").show();
-			$("#dados_eleicoes").show();
-			return false;
-		}
+	if (cargo == "" || cargo == null) {
+		alert("Informe o cargo");
+		return false;
+	} else if (periodo == "" || periodo == null) {
+		alert("Informe o período");
+		return false;
 	}
+
+	return true;
+}
+
+function validarEleicaoIrmaoInexistente() {
+	var nome = $("#nome").val();
+	var email = $("#email").val();
+	var cargo = $("#eleicao_cargo_id").val();
+	var periodo = $("#eleicao_periodo").val();
+
+	if (nome == "" || nome == null) {
+		alert("Informe um nome");
+		return false;
+	} else if (email == "" || email == null) {
+		alert("informe um email");
+		return false;
+	} else if (cargo == "" || cargo == null) {
+		alert("Informe o cargo");
+		return false;
+	} else if (periodo == "" || periodo == null) {
+		alert("Informe o período");
+		return false;
+	}
+
+	return true;
 }
