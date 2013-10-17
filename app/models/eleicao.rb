@@ -1,8 +1,9 @@
 class Eleicao < ActiveRecord::Base
-  attr_accessible :cargo_id, :periodo, :pessoa_id
+  attr_accessible :cargo_id, :periodo, :pessoa_id, :loja_id
 
   belongs_to :pessoa
   belongs_to :cargo
+  belongs_to :loja
 
   def eleger(irmao, cargo, periodo)
     self.pessoa = irmao

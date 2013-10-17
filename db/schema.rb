@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20131015114628) do
   create_table "eleicoes", :force => true do |t|
     t.integer  "pessoa_id"
     t.integer  "cargo_id"
+    t.integer  "loja_id"
     t.string   "periodo"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

@@ -5,7 +5,7 @@ class EleicoesController < ApplicationController
 
   def index
     @search = Eleicao.search(params[:search])
-    @eleicoes = @search.paginate(:page => params[:page])
+    @eleicoes = @search.where(:loja_id => @loja.id).paginate(:page => params[:page])
   end
 
   def new
@@ -14,6 +14,7 @@ class EleicoesController < ApplicationController
 
   def create
     @eleicao = Eleicao.new(params[:eleicao])
+    @eleicao.loja = @loja
 
     pessoa = Pessoa.where("cim = ?", params[:cim]).first
 
@@ -62,6 +63,7 @@ class EleicoesController < ApplicationController
 
   def update
     @eleicao = Eleicao.where(id: params[:id]).first
+    @eleicao.loja = @loja
 
     if @eleicao.update_attributes(params[:eleicao])
       redirect_to :action => :index
