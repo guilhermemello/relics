@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(:version => 20131015114628) do
     t.string "nome"
   end
 
+  create_table "cargos_pessoas", :id => false, :force => true do |t|
+    t.integer "pessoa_id"
+    t.integer "cargo_id"
+    t.string  "periodo"
+    t.integer "ordem"
+  end
+
   create_table "cargos_ritos", :id => false, :force => true do |t|
     t.integer "rito_id"
     t.integer "cargo_id"
@@ -87,9 +94,9 @@ ActiveRecord::Schema.define(:version => 20131015114628) do
     t.time     "hora"
     t.text     "observacao"
     t.integer  "visibilidade"
-    t.integer  "loja_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "loja_id"
   end
 
   create_table "eventos_visibilidades", :id => false, :force => true do |t|
@@ -126,6 +133,15 @@ ActiveRecord::Schema.define(:version => 20131015114628) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "irmaos", :force => true do |t|
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.date     "iniciacao_em"
+    t.date     "elevacao_em"
+    t.date     "exaltacao_em"
+    t.date     "instalacao_em"
+  end
+
   create_table "lojas", :force => true do |t|
     t.string   "nome"
     t.string   "numero"
@@ -139,12 +155,12 @@ ActiveRecord::Schema.define(:version => 20131015114628) do
     t.text     "curriculo"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
+    t.string   "dia"
+    t.string   "hora"
     t.string   "estandarte_file_name"
     t.string   "estandarte_content_type"
     t.integer  "estandarte_file_size"
     t.datetime "estandarte_updated_at"
-    t.string   "dia"
-    t.string   "hora"
     t.string   "endereco"
     t.string   "cep"
     t.integer  "estado_id"

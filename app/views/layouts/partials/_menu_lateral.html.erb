@@ -36,10 +36,6 @@
 				<a href="/fundadores"><i class="icon-official"></i> Fundadores</a>
 			</li>
 
-			<li <% if params[:controller] == "eleicoes" %>class="active" <% end %>>
-				<a href="/administracao"><i class="icon-wrench"></i> Administração</a>
-			</li>
-
 			<% if current_user.has_role?(:admin_master) %>
 				<li <% if params[:controller] == "ritos" %>class="active" <% end %>>
 					<a href="/ritos"><i class="icon-book"></i> Ritos</a>
@@ -52,6 +48,12 @@
 				</li>
 				<li <% if params[:controller] == "permissoes" %>class="active" <% end %>>
 					<a href="/permissoes"><i class="icon-key"></i> Permissões</a>
+				</li>
+			<% end %>
+
+			<% if current_user.has_role?(:admin_master) or current_user.has_role?(:admin_loja) %>
+				<li <% if params[:controller] == "eleicoes" %>class="active" <% end %>>
+					<a href="/administracao"><i class="icon-wrench"></i> Administração</a>
 				</li>
 			<% end %>
 		</ul>
