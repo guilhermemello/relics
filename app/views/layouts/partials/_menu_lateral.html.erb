@@ -51,7 +51,7 @@
 				</li>
 			<% end %>
 
-			<% if current_user.has_role?(:admin_master) or current_user.has_role?(:admin_loja) %>
+			<% if can? :administrar, @loja %>
 				<li <% if params[:controller] == "eleicoes" %>class="active" <% end %>>
 					<a href="/administracao"><i class="icon-wrench"></i> Administração</a>
 				</li>
