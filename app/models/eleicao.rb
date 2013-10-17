@@ -1,6 +1,6 @@
 class Eleicao < ActiveRecord::Base
   attr_accessible :cargo_id, :periodo, :pessoa_id
-  
+
   belongs_to :pessoa
   belongs_to :cargo
 
