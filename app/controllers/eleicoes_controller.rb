@@ -65,6 +65,8 @@ class EleicoesController < ApplicationController
     @eleicao = Eleicao.where(id: params[:id]).first
     @eleicao.loja = @loja
 
+    @irmao = Pessoa.where(id: params[:irmao_id]).first
+
     if @eleicao.update_attributes(params[:eleicao])
       redirect_to :action => :index
     else

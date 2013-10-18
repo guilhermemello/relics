@@ -5,6 +5,9 @@ class Eleicao < ActiveRecord::Base
   belongs_to :cargo
   belongs_to :loja
 
+  validates_presence_of :cargo_id
+  validates_presence_of :periodo
+
   def eleger(irmao, cargo, periodo)
     self.pessoa = irmao
     self.cargo = cargo

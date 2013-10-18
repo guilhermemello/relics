@@ -5,6 +5,8 @@
 
 	<div class="mws-panel-body no-padding">
 		<%= form_for @eleicao, html: { class: "mws-form" } do |f| %>
+			<%= hidden_field_tag "irmao_id", params[:irmao_id] %>
+		
 			<% if flash.present? %>
 				<div class="mws-form-message error">
 					Ocorreu um erro
