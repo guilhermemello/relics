@@ -29,6 +29,11 @@
 							<td>
 								<span><i class="icon-search"></i><span>
 								<%= link_to "Consultar", edit_eleicao_path(eleicao.id, :irmao_id => eleicao.pessoa.id), :style => "color: black;" %>
+								&nbsp;
+								<% if can? :excluir_administrador, @loja %>
+									<span><i class="icon-trash"></i><span>
+									<%= link_to "Excluir", eleicao_path(eleicao), :method => :delete, :confirm => "Confirma a exclusão ?", :style => "color: black;" %>
+								<% end %>
 							</td>
 						</tr>
 					<% end %>

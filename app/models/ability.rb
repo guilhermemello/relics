@@ -19,7 +19,13 @@ class Ability
       can :criar, Loja do |loja|
         loja.users.include?(user)
       end
+
+      # ADMINISTRAR
       can :administrar, Loja do |loja|
+        loja.users.include?(user)
+      end
+
+      can :excluir_administrador, Loja do |loja|
         loja.users.include?(user)
       end
 
@@ -78,7 +84,9 @@ class Ability
       can :criar, Loja
       can :excluir, Loja
       can :editar, Loja
+
       can :administrar, Loja
+      can :excluir_administrador, Loja
 
       can :criar_irmao, Loja
       can :editar_irmao, Loja

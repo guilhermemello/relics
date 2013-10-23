@@ -5,7 +5,7 @@ class EleicoesController < ApplicationController
 
   def index
     @search = Eleicao.search(params[:search])
-    @eleicoes = @search.where(:loja_id => @loja.id).paginate(:page => params[:page])
+    @eleicoes = @search.select("DISTINCT eleicoes.*").where(:loja_id => @loja.id).joins("INNER JOIN cargos_ritos ON cargos_ritos.cargo_id = eleicoes.cargo_id").order("eleicoes.periodo DESC, cargos_ritos.ordem ASC").paginate(:page => params[:page])
   end
 
   def new
@@ -72,6 +72,16 @@ class EleicoesController < ApplicationController
     else
       render :action => :edit
     end
+  end
+
+  def destroy
+    @eleicao = Eleicao.where(id: params[:id]).first
+
+    if @eleicao.present?
+      @eleicao.destroy
+    end
+
+    redirect_to action: :index
   end
 
   def verificar_irmao

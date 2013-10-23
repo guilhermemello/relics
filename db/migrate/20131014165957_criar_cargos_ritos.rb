@@ -3,6 +3,7 @@ class CriarCargosRitos < ActiveRecord::Migration
     create_table :cargos_ritos, :id => false do |t|
       t.integer :rito_id
       t.integer :cargo_id
+      t.integer :ordem
     end
   end
 end
